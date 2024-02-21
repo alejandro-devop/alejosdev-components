@@ -1,0 +1,124 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.button {
+    align-items: center;
+    border-color: $button-border-color;
+    box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;
+    box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
+    border-radius: $button-default-radius;
+    display: inline-flex;
+    font-size: 0.9rem;
+    margin: 0 .2rem .2rem;
+    height: $button-height;
+    flex-grow: 0;
+    flex-shrink: 0;
+    padding: 0;
+    transition: background-color .6s;
+
+    span {
+        text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+    &:disabled {
+        &, &:hover {
+            background-color: rgba(0,0,0,0.6);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.buttonContent {
+    padding: 0px 0.7rem;
+    font-weight: 400;
+}
+
+
+.default {
+    background-color: $button-bg;
+    &:hover {
+        background-color: darken($button-bg, 15%);
+    }
+    span {
+        @include text-contrast($button-bg);
+    }
+    .iconWrapper {
+        background-color: darken($button-bg, 15%);
+        @include text-contrast($button-bg);
+    }
+}
+
+.rounded {
+    border-radius: $button-rounded-radius;
+}
+
+.iconWrapper {
+    align-items: center;
+    border-radius: $button-default-radius;
+    display: flex;
+    justify-content: center;
+    @include size($button-height);
+}
+
+.rounded .iconWrapper {
+    border-radius: $button-rounded-radius;
+}
+
+@mixin apply-to-button ($color, $percentaje: 10%) {
+    background-color: $color;
+    box-shadow: 0px 3px 0px 0px darken($color, $percentaje);
+    &:hover {
+        background-color: darken($color, 15%);
+    }
+    span {
+        @include text-contrast($color);
+    }
+    .iconWrapper {
+        background-color: darken($color, $percentaje);
+        @include text-contrast($color);
+    }
+    .icon {
+        @include text-contrast($color);
+    }
+}
+
+.primary {
+    @include apply-to-button($primary);
+}
+
+.secondary {
+    @include apply-to-button($secondary);
+}
+
+.success {
+    @include apply-to-button($success);
+}
+
+.danger {
+    @include apply-to-button($error);
+}
+
+.info {
+    @include apply-to-button($info);
+}
+
+.warning {
+    @include apply-to-button($warning, 30%);
+}
+
+.dark {
+    @include apply-to-button($dark-color);
+}
+.light {
+    @include apply-to-button($light-color);
+    color: $text-color-light;
+}
+
+.block {
+    flex: 1;
+    width: 100%;
+    & > span.buttonContent {
+        flex: 1;
+        text-align: center;
+    }
+}

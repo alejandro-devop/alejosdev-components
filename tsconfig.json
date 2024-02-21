@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "rootDir": "./src",
         "outDir": "dist",
         "module": "ES2022",
         "target": "ES2022",
@@ -16,7 +17,8 @@
         "strictNullChecks": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "typeRoots": ["src/types"]
     },
     "include": ["src"],
     "exclude": ["node_modules", "dist", "example", "rollup.config.js"]

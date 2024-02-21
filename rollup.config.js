@@ -1,5 +1,6 @@
 import typescript from 'rollup-plugin-typescript2';
 import pkg from './package.json' assert { type: 'json' };
+import postcss from 'rollup-plugin-postcss';
 
 export default {
     input: 'src/index.ts',
@@ -17,11 +18,17 @@ export default {
                 exclude: ["**/__test__/", "**/*.test.ts"]
             }
         }),
+        postcss({
+            extract: false,
+            modules: true,
+            use: ['sass']
+        })
     ],
     external: [
         'react', 
         'react-dom',
         'lodash',
-        'moment'
+        'moment',
+        'classnames'
     ]
 };
