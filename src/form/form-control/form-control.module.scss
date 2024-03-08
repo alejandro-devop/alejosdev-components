@@ -1,0 +1,18 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    flex: 0 0 auto;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.error {
+    color: $error;
+    font-size: 0.8rem;
+    font-weight: 400;
+    position: absolute;
+    text-align: center;
+    top: 100%;
+    width: 100%;
+}

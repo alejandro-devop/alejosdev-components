@@ -4,24 +4,26 @@
     align-items: center;
     border-color: $button-border-color;
     box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;
-    box-shadow: 0px 3px 0px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: $button-default-radius;
+    cursor: pointer;
     display: inline-flex;
-    font-size: 0.9rem;
-    margin: 0 .2rem .2rem;
-    height: $button-height;
     flex-grow: 0;
     flex-shrink: 0;
+    font-size: 0.9rem;
+    height: $button-height;
+    margin: 0 0.2rem 0.2rem;
     padding: 0;
-    transition: background-color .6s;
+    transition: background-color 0.6s;
 
     span {
         text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     &:disabled {
-        &, &:hover {
-            background-color: rgba(0,0,0,0.6);
+        &,
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.6);
             opacity: 0.5;
             cursor: not-allowed;
         }
@@ -32,7 +34,6 @@
     padding: 0px 0.7rem;
     font-weight: 400;
 }
-
 
 .default {
     background-color: $button-bg;
@@ -64,7 +65,7 @@
     border-radius: $button-rounded-radius;
 }
 
-@mixin apply-to-button ($color, $percentaje: 10%) {
+@mixin apply-to-button($color, $percentaje: 10%) {
     background-color: $color;
     box-shadow: 0px 3px 0px 0px darken($color, $percentaje);
     &:hover {

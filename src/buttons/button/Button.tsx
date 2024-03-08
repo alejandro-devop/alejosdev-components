@@ -2,8 +2,9 @@ import React from 'react'
 import ButtonBase from '../button-base'
 import classNames from 'classnames'
 import styles from './button.module.scss'
-import Icon from '../../icon'
+import Icon from 'misc/icon'
 import { ButtonProps } from '../button-commons.types'
+import { applyButtonVariantStyles } from '../button-utils'
 
 /**
  * Button component which allows to include an icon inside it
@@ -26,15 +27,10 @@ const Button: React.FC<ButtonProps> = ({
             className={classNames(
                 styles.button,
                 {
-                    [styles.default]: variant === 'default',
-                    [styles.primary]: variant === 'primary',
-                    [styles.secondary]: variant === 'secondary',
-                    [styles.danger]: variant === 'danger',
-                    [styles.info]: variant === 'info',
-                    [styles.warning]: variant === 'warning',
-                    [styles.success]: variant === 'success',
-                    [styles.light]: variant === 'light',
-                    [styles.dark]: variant === 'dark',
+                    ...applyButtonVariantStyles({
+                        styles,
+                        variant
+                    }),
                     [styles.rounded]: rounded,
                     [styles.block]: block
                 },

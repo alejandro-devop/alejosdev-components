@@ -1,3 +1,4 @@
+/// <reference types="react" />
 import { ActionItemVariantsType, IconNameType } from '../types/common.types';
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     rounded?: boolean;

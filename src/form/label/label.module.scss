@@ -1,0 +1,10 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    color: darken($secondary, 20%);
+    font-weight: 400;
+
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-light;
+    }
+}
