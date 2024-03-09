@@ -19,6 +19,8 @@
     "preversion": "npm test",
     "version": "npm run build && git add -A dist",
     "rebuild": "yarn test && yarn build",
+    "prepare:test": "node scripts/prepare-for-tests.cjs",
+    "prepare:dev": "node scripts/prepare-for-dev.cjs",
     "start": "rollup -c -w",
     "test": "jest",
     "test:w": "jest --watch"
