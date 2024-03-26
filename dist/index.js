@@ -90,7 +90,8 @@ const Button = ({ children, className, icon, rounded, block, variant, loading, .
         React.createElement("span", { className: styles$4.buttonContent }, loading ? 'loading ... ' : children)));
 };
 Button.defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
+    rounded: true
 };
 
 var css_248z$3 = "";
@@ -139,7 +140,7 @@ const useInputId = (config) => {
     return !id && !name ? `input-${generateRandom().toString()}` : id || name;
 };
 
-var css_248z$2 = "@use \"sass:math\";\n.input-module_root__xcWOB {\n  align-items: flex-end;\n  display: flex;\n  margin: 0.5rem 0.25rem;\n  margin-bottom: 1rem; }\n\n.input-module_input__9x0t6 {\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0.2rem 1rem;\n  width: 100%; }\n  .input-module_input__9x0t6::placeholder {\n    color: #b3b3b3;\n    opacity: 0;\n    transition: opacity 0.2s ease-in-out; }\n  .input-module_input__9x0t6.input-module_withLabel__m6cZE {\n    margin-top: 1.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6 {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; }\n      .input-module_input__9x0t6::placeholder {\n        color: #5c5c5c; } }\n\n.input-module_inputWrapper__qSGvA {\n  flex: 1;\n  position: relative; }\n\n.input-module_label__sQuAx {\n  bottom: 0.35rem;\n  display: block;\n  font-weight: 800;\n  left: 1rem;\n  position: absolute;\n  transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out; }\n\n.input-module_input__9x0t6:focus + .input-module_label__sQuAx,\n.input-module_withValue__wYYkt + .input-module_label__sQuAx {\n  bottom: calc(100% - 1.25rem);\n  font-size: 0.9rem;\n  font-weight: 500;\n  left: 0.2rem; }\n\n.input-module_input__9x0t6:focus::placeholder {\n  opacity: 1; }\n\n.input-module_maxDisplay__2ajTW {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n  font-size: 0.7rem;\n  color: rgba(0, 0, 0, 0.5); }\n";
+var css_248z$2 = "@use \"sass:math\";\n.input-module_root__xcWOB {\n  align-items: flex-end;\n  display: flex;\n  margin: 0.5rem 0.25rem;\n  margin-bottom: 1rem; }\n\n.input-module_input__9x0t6 {\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0.2rem 1rem;\n  width: 100%; }\n  .input-module_input__9x0t6::placeholder {\n    color: #b3b3b3;\n    opacity: 0;\n    transition: opacity 0.2s ease-in-out; }\n  .input-module_input__9x0t6.input-module_withLabel__m6cZE {\n    margin-top: 1.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6 {\n      color: #fff;\n      background-color: #292929;\n      border-color: #8f8f8f; }\n      .input-module_input__9x0t6::placeholder {\n        color: #5c5c5c; } }\n\n.input-module_inputWrapper__qSGvA {\n  flex: 1;\n  position: relative; }\n\n.input-module_label__sQuAx {\n  /* need this to apply only on chrome */\n  -webkit-bottom: 0.25rem;\n  bottom: 0.3rem;\n  display: block;\n  left: 1rem;\n  position: absolute;\n  transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_label__sQuAx.input-module_label__sQuAx {\n      color: #fff; } }\n\n.input-module_input__9x0t6:focus + .input-module_label__sQuAx,\n.input-module_withValue__wYYkt + .input-module_label__sQuAx {\n  bottom: calc(100% - 1.25rem);\n  font-size: 0.9rem;\n  font-weight: 500;\n  left: 0.2rem; }\n\n.input-module_input__9x0t6:focus {\n  outline: none;\n  border-color: #8d6b94; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6:focus {\n      border-color: #fff; } }\n  .input-module_input__9x0t6:focus::placeholder {\n    opacity: 1; }\n\n.input-module_maxDisplay__2ajTW {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.7rem;\n  position: absolute;\n  right: 0.5rem;\n  top: 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_maxDisplay__2ajTW {\n      color: rgba(255, 255, 255, 0.4); } }\n";
 var styles$2 = {"root":"input-module_root__xcWOB","input":"input-module_input__9x0t6","withLabel":"input-module_withLabel__m6cZE","inputWrapper":"input-module_inputWrapper__qSGvA","label":"input-module_label__sQuAx","withValue":"input-module_withValue__wYYkt","maxDisplay":"input-module_maxDisplay__2ajTW"};
 styleInject(css_248z$2);
 
@@ -175,9 +176,10 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
          */
         onChange?.(event);
     }, [onChange]);
+    const hasValue = useMemo(() => value?.length > 0, [value]);
     const inputRender = useMemo(() => {
         return (React.createElement("input", { className: cs(styles$2.input, className, {
-                [styles$2.withValue]: value?.length > 0,
+                [styles$2.withValue]: hasValue,
                 [styles$2.withLabel]: Boolean(label),
                 [styles$2.withLeadingIcon]: Boolean(leadingIcon),
                 [styles$2.withTrailingIcon]: Boolean(trailingIcon)
@@ -196,7 +198,7 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
                     [styles$2.labelWithLeadingIcon]: Boolean(leadingIcon)
                 }) }, label)),
             trailingIcon && (React.createElement(Icon, { icon: trailingIcon, className: (styles$2.trailingIcon) })),
-            !hideMax && React.createElement("span", { className: styles$2.maxDisplay }, `${length}/${max}`)),
+            !hideMax && hasValue && (React.createElement("span", { className: styles$2.maxDisplay }, `${length}/${max}`))),
         Boolean(action) && (React.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$2.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
 });
 InputBase.defaultProps = {

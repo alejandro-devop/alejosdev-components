@@ -50,7 +50,8 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 Button.defaultProps = {
-    tabIndex: 0
+    tabIndex: 0,
+    rounded: true
 }
 
 export default Button

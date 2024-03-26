@@ -110,6 +110,7 @@
 .dark {
     @include apply-to-button($dark-color);
 }
+
 .light {
     @include apply-to-button($light-color);
     color: $text-color-light;

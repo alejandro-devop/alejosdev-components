@@ -49,11 +49,13 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
             [onChange]
         )
 
+        const hasValue = useMemo(() => (value as string)?.length > 0, [value])
+
         const inputRender = useMemo(() => {
             return (
                 <input
                     className={cs(styles.input, className, {
-                        [styles.withValue]: (value as string)?.length > 0,
+                        [styles.withValue]: hasValue,
                         [styles.withLabel]: Boolean(label),
                         [styles.withLeadingIcon]: Boolean(leadingIcon),
                         [styles.withTrailingIcon]: Boolean(trailingIcon)
@@ -94,7 +96,9 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
                     {trailingIcon && (
                         <Icon icon={trailingIcon} className={(styles.icon, styles.trailingIcon)} />
                     )}
-                    {!hideMax && <span className={styles.maxDisplay}>{`${length}/${max}`}</span>}
+                    {!hideMax && hasValue && (
+                        <span className={styles.maxDisplay}>{`${length}/${max}`}</span>
+                    )}
                 </div>
                 {Boolean(action) && (
                     <IconButton
