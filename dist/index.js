@@ -139,8 +139,8 @@ const useInputId = (config) => {
     return !id && !name ? `input-${generateRandom().toString()}` : id || name;
 };
 
-var css_248z$2 = "@use \"sass:math\";\n";
-var styles$2 = {};
+var css_248z$2 = "@use \"sass:math\";\n.input-module_root__xcWOB {\n  align-items: flex-end;\n  display: flex;\n  margin: 0.5rem 0.25rem;\n  margin-bottom: 1rem; }\n\n.input-module_input__9x0t6 {\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0.2rem 1rem;\n  width: 100%; }\n  .input-module_input__9x0t6::placeholder {\n    color: #b3b3b3;\n    opacity: 0;\n    transition: opacity 0.2s ease-in-out; }\n  .input-module_input__9x0t6.input-module_withLabel__m6cZE {\n    margin-top: 1.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6 {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; }\n      .input-module_input__9x0t6::placeholder {\n        color: #5c5c5c; } }\n\n.input-module_inputWrapper__qSGvA {\n  flex: 1;\n  position: relative; }\n\n.input-module_label__sQuAx {\n  bottom: 0.35rem;\n  display: block;\n  font-weight: 800;\n  left: 1rem;\n  position: absolute;\n  transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out; }\n\n.input-module_input__9x0t6:focus + .input-module_label__sQuAx,\n.input-module_withValue__wYYkt + .input-module_label__sQuAx {\n  bottom: calc(100% - 1.25rem);\n  font-size: 0.9rem;\n  font-weight: 500;\n  left: 0.2rem; }\n\n.input-module_input__9x0t6:focus::placeholder {\n  opacity: 1; }\n\n.input-module_maxDisplay__2ajTW {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n  font-size: 0.7rem;\n  color: rgba(0, 0, 0, 0.5); }\n";
+var styles$2 = {"root":"input-module_root__xcWOB","input":"input-module_input__9x0t6","withLabel":"input-module_withLabel__m6cZE","inputWrapper":"input-module_inputWrapper__qSGvA","label":"input-module_label__sQuAx","withValue":"input-module_withValue__wYYkt","maxDisplay":"input-module_maxDisplay__2ajTW"};
 styleInject(css_248z$2);
 
 var css_248z$1 = "@use \"sass:math\";\n.form-control-module_root__DeA9S {\n  flex: 0 0 auto;\n  max-width: 100%;\n  position: relative;\n  width: 100%; }\n\n.form-control-module_error__dWO81 {\n  color: #ef476f;\n  font-size: 0.8rem;\n  font-weight: 400;\n  position: absolute;\n  text-align: center;\n  top: 100%;\n  width: 100%; }\n";
@@ -168,12 +168,13 @@ const Label = ({ children, className, ...props }) => {
 
 const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, className, disableAction, error, hideMax, id, isNumeric, label, leadingIcon, leadingComponent, max, maxEndingSpaces, name, onChange, onlyInput, trailingIcon, trailingComponent, trimSpaces, value, ...props }, ref) => {
     const htmlId = useInputId({ id, name });
-    const handleChangeProxy = useCallback(() => {
+    const handleChangeProxy = useCallback((event) => {
         /**
          * Todo: Implement trim spaces from the event
          * Todo: Implement string, number, email validations.
          */
-    }, []);
+        onChange?.(event);
+    }, [onChange]);
     const inputRender = useMemo(() => {
         return (React.createElement("input", { className: cs(styles$2.input, className, {
                 [styles$2.withValue]: value?.length > 0,
@@ -199,7 +200,7 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
         Boolean(action) && (React.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$2.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
 });
 InputBase.defaultProps = {
-    max: 255,
+    max: 100,
     trimSpaces: true
 };
 

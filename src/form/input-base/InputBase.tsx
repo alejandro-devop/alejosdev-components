@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useMemo } from 'react'
 import { useInputId } from 'hooks'
-import { InputBaseProps } from 'types/input.types'
+import { InputBaseProps } from './input.types'
 import cs from 'classnames'
 import styles from './input.module.scss'
 import FormControl from 'form/form-control'
@@ -38,12 +38,16 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         ref
     ) => {
         const htmlId = useInputId({ id, name })
-        const handleChangeProxy = useCallback(() => {
-            /**
-             * Todo: Implement trim spaces from the event
-             * Todo: Implement string, number, email validations.
-             */
-        }, [])
+        const handleChangeProxy = useCallback(
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+                /**
+                 * Todo: Implement trim spaces from the event
+                 * Todo: Implement string, number, email validations.
+                 */
+                onChange?.(event)
+            },
+            [onChange]
+        )
 
         const inputRender = useMemo(() => {
             return (
@@ -108,7 +112,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
 )
 
 InputBase.defaultProps = {
-    max: 255,
+    max: 100,
     trimSpaces: true
 }
 

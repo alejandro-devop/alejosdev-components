@@ -1,4 +1,75 @@
 @import '~@alejosdev/theme-provider/dist/styles/shared.scss';
 
+.root {
+    align-items: flex-end;
+    display: flex;
+    margin: 0.5rem 0.25rem;
+    margin-bottom: 1rem;
+}
+
 .input {
+    background-color: $default-bg;
+    border: 1px solid darken($default-bg, 30%);
+    border-radius: 20px;
+    color: $text-color-light;
+    max-width: 100%;
+    min-height: 1.5rem;
+    padding: 0.2rem 1rem;
+    width: 100%;
+
+    &::placeholder {
+        color: darken($color: $default-bg, $amount: 30%);
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    &.withLabel {
+        margin-top: 1.5rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-dark;
+        background-color: $default-bg-dark;
+        border-color: darken($default-bg-dark, 30%);
+
+        &::placeholder {
+            color: lighten($color: $default-bg-dark, $amount: 20%);
+        }
+    }
+}
+
+.inputWrapper {
+    flex: 1;
+    position: relative;
+}
+
+.label {
+    bottom: 0.35rem;
+    display: block;
+    font-weight: 800;
+    left: 1rem;
+    position: absolute;
+    transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out;
+}
+
+.input:focus + .label,
+.withValue + .label {
+    bottom: calc(100% - 1.25rem);
+    font-size: 0.9rem;
+    font-weight: 500;
+    left: 0.2rem;
+}
+
+.input:focus {
+    &::placeholder {
+        opacity: 1;
+    }
+}
+
+.maxDisplay {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
 }

@@ -5,3 +5,4 @@
 -   [added]: Label component
 -   [setup]: Unit tests
 -   [added]: Scripts to mount evirontments
+-   [added]: Input base component.
