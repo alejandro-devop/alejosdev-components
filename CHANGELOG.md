@@ -7,3 +7,4 @@
 -   [added]: Scripts to mount evirontments
 -   [added]: Input base component.
 -   [fixed]: Dark and light mode for input
+-   [added]: Size to buttons

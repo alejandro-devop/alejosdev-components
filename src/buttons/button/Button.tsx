@@ -20,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
     block,
     variant,
     loading,
+    size,
     ...props
 }) => {
     return (
@@ -32,7 +33,10 @@ const Button: React.FC<ButtonProps> = ({
                         variant
                     }),
                     [styles.rounded]: rounded,
-                    [styles.block]: block
+                    [styles.block]: block,
+                    [styles.sm]: size === 'sm',
+                    [styles.md]: size === 'md',
+                    [styles.lg]: size === 'lg'
                 },
                 className
             )}
@@ -51,7 +55,8 @@ const Button: React.FC<ButtonProps> = ({
 
 Button.defaultProps = {
     tabIndex: 0,
-    rounded: true
+    rounded: true,
+    size: 'md'
 }
 
 export default Button

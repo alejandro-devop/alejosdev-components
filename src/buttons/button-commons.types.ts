@@ -6,4 +6,5 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     icon?: IconNameType
     block?: boolean
     loading?: boolean
+    size?: 'sm' | 'md' | 'lg'
 }
