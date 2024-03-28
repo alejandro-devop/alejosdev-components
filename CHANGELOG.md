@@ -13,3 +13,5 @@
 -   [added]: Support for icon in buttons and inputs.
 -   [added]: Control for the icon in the button, end or lead
 -   [added]: useForm hook
+-   [added]: IconButton
+-   [added]: PasswordField

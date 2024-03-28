@@ -1,0 +1,111 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+$icon-button-size: 40px;
+
+.root {
+    width: $icon-button-size;
+    height: $icon-button-size;
+    border: 1px solid darken($default-bg, 30%);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+    background-color: $default-bg;
+    border-radius: 50%;
+    transition: background-color 0.6s;
+    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
+    color: $text-color-light;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: $default-bg-dark;
+        color: $text-color-dark;
+        border-color: lighten($color: $default-bg-dark, $amount: 40%);
+    }
+
+    &:disabled {
+        opacity: 0.2;
+        cursor: not-allowed;
+        color: #000;
+        background-color: rgba(0, 0, 0, 0.08);
+    }
+}
+
+.withLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    span.label {
+        font-size: 0.7rem;
+        margin-top: 0.2rem;
+        color: $text-color-light;
+
+        @media (prefers-color-scheme: dark) {
+            color: $text-color-dark;
+        }
+    }
+}
+
+@mixin apply-icon-button-color($color, $darken: 10%, $lighten: 40%, $colorDark: 0%) {
+    color: darken($color, $colorDark);
+    background-color: lighten($color, $lighten);
+    box-shadow: 0px 2px 0px 0px darken($color, 5%);
+
+    &:hover {
+        background-color: darken($color, $darken);
+        @include text-contrast($color);
+    }
+
+    & > .icon {
+        color: darken($color, $colorDark);
+    }
+}
+
+.primary {
+    @include apply-icon-button-color($primary);
+}
+
+.secondary {
+    @include apply-icon-button-color($secondary);
+}
+
+.success {
+    @include apply-icon-button-color($success);
+}
+
+.danger {
+    @include apply-icon-button-color($error);
+}
+
+.warning {
+    @include apply-icon-button-color(
+        $color: $warning,
+        $darken: 20%,
+        $lighten: 50%,
+        $colorDark: 40%
+    );
+}
+
+.info {
+    @include apply-icon-button-color($info);
+}
+
+.light {
+    color: darken($light-color, 50%);
+    background-color: lighten($light-color, 50%);
+    box-shadow: none;
+    &:hover {
+        background-color: darken($light-color, 20%);
+        @include text-contrast($light-color);
+    }
+}
+
+.dark {
+    @include apply-icon-button-color($dark-color, $darken: 20%, $lighten: 50%, $colorDark: 40%);
+}
+
+.flat {
+    color: $text-color-light;
+    background-color: transparent;
+    box-shadow: none;
+}
