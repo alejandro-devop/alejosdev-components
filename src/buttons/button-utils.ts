@@ -14,6 +14,7 @@ type ApplyButtonVariantStylesConfigType = {
 }
 
 const defaultVariantMaps = {
+    default: 'default',
     primary: 'primary',
     secondary: 'secondary',
     danger: 'danger',
@@ -21,8 +22,7 @@ const defaultVariantMaps = {
     success: 'success',
     info: 'info',
     light: 'light',
-    dark: 'dark',
-    flat: 'flat'
+    dark: 'dark'
 }
 
 export const applyButtonVariantStyles = (config: ApplyButtonVariantStylesConfigType) => {
@@ -32,6 +32,7 @@ export const applyButtonVariantStyles = (config: ApplyButtonVariantStylesConfigT
         ...variantMapper
     }
     return {
+        [styles[keys.default]]: variant === 'default',
         [styles[keys.primary]]: variant === 'primary',
         [styles[keys.secondary]]: variant === 'secondary',
         [styles[keys.danger]]: variant === 'danger',
@@ -39,7 +40,6 @@ export const applyButtonVariantStyles = (config: ApplyButtonVariantStylesConfigT
         [styles[keys.success]]: variant === 'success',
         [styles[keys.info]]: variant === 'info',
         [styles[keys.light]]: variant === 'light',
-        [styles[keys.dark]]: variant === 'dark',
-        [styles[keys.flat]]: variant === 'flat'
+        [styles[keys.dark]]: variant === 'dark'
     }
 }

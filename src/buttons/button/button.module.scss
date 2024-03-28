@@ -64,6 +64,22 @@
         background-color: darken($button-bg, 15%);
         @include text-contrast($button-bg);
     }
+
+    &.flat {
+        background-color: transparent;
+        border: 2px solid $button-bg;
+    }
+
+    &.flat .buttonContent {
+        color: $button-bg;
+    }
+    &.flat.flat:hover {
+        background-color: $button-bg;
+
+        .buttonContent {
+            @include text-contrast($button-bg);
+        }
+    }
 }
 
 .rounded {
@@ -97,6 +113,22 @@
     }
     .icon {
         @include text-contrast($color);
+    }
+    &.flat {
+        background-color: transparent;
+        border: 2px solid $color;
+        box-shadow: none;
+
+        .buttonContent {
+            color: $color;
+            font-weight: 400;
+        }
+        &:hover {
+            background-color: $color;
+            .buttonContent {
+                @include text-contrast($color);
+            }
+        }
     }
 }
 
@@ -132,6 +164,14 @@
     @include apply-to-button($light-color);
     color: $text-color-light;
 }
+
+// .flat {
+//     background-color: transparent;
+//     border: 2px solid #fff;
+//     .buttonContent {
+//         color: #fff;
+//     }
+// }
 
 .block {
     flex: 1;

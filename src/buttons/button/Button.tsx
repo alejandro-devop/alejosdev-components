@@ -21,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
     variant,
     loading,
     size,
+    flat,
     ...props
 }) => {
     return (
@@ -36,7 +37,8 @@ const Button: React.FC<ButtonProps> = ({
                     [styles.block]: block,
                     [styles.sm]: size === 'sm',
                     [styles.md]: size === 'md',
-                    [styles.lg]: size === 'lg'
+                    [styles.lg]: size === 'lg',
+                    [styles.flat]: flat
                 },
                 className
             )}
