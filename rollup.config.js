@@ -29,6 +29,10 @@ export default {
         'react-dom',
         'lodash',
         'moment',
-        'classnames'
+        'classnames',
+        '@fortawesome/fontawesome-svg-core',
+        '@fortawesome/free-solid-svg-icons',
+        '@fortawesome/react-fontawesome',
+        '@fortawesome/react-fontawesome'
     ]
 };

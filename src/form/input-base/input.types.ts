@@ -1,6 +1,9 @@
+import { IconType } from '../../misc/icon/icons-types'
+
 export interface InputBaseProps<ElementType> extends React.InputHTMLAttributes<ElementType> {
     /** Props to be passed to the fieldset or wrapper used by the input */
     fieldSetProps?: React.HTMLAttributes<HTMLFieldSetElement>
+    floatingLabel?: boolean
     /** Text to be used  */
     label?: string
     /** Props to be passed to the label component */
@@ -16,11 +19,11 @@ export interface InputBaseProps<ElementType> extends React.InputHTMLAttributes<E
     /** Value passed to the input */
     value?: string | readonly string[] | number | undefined
     /** Icon to be used at the begining of the input */
-    leadingIcon?: IconNameType
+    leadingIcon?: IconType
     /** Icon to be used at the end of the input */
-    trailingIcon?: IconNameType
+    trailingIcon?: IconType
     /** Icon to be used in the icon button */
-    actionIcon?: IconNameType
+    actionIcon?: IconType
     /** Function to be executed in the by the action button */
     action?: () => void
     /** Type of button used by the action button */

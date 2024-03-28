@@ -18,6 +18,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
             className,
             disableAction,
             error,
+            floatingLabel,
             hideMax,
             id,
             isNumeric,
@@ -56,7 +57,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
                 <input
                     className={cs(styles.input, className, {
                         [styles.withValue]: hasValue,
-                        [styles.withLabel]: Boolean(label),
+                        [styles.withLabel]: Boolean(label) && floatingLabel,
                         [styles.withLeadingIcon]: Boolean(leadingIcon),
                         [styles.withTrailingIcon]: Boolean(trailingIcon)
                     })}
@@ -73,6 +74,21 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
 
         const length = useMemo(() => (value as string)?.length || 0, [value])
 
+        const renderLabel = useMemo(
+            () => (
+                <Label
+                    htmlFor={htmlId}
+                    className={cs(styles.label, {
+                        [styles.labelWithLeadingIcon]: Boolean(leadingIcon),
+                        [styles.floatingLabel]: floatingLabel
+                    })}
+                >
+                    {label}
+                </Label>
+            ),
+            [floatingLabel]
+        )
+
         if (onlyInput) {
             return inputRender
         }
@@ -82,19 +98,14 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
                 {leadingComponent}
                 <div className={styles.inputWrapper}>
                     {leadingIcon && <Icon icon={leadingIcon} className={styles.icon} />}
+                    {Boolean(label) && !floatingLabel && renderLabel}
                     {inputRender}
-                    {Boolean(label) && (
-                        <Label
-                            htmlFor={htmlId}
-                            className={cs(styles.label, {
-                                [styles.labelWithLeadingIcon]: Boolean(leadingIcon)
-                            })}
-                        >
-                            {label}
-                        </Label>
-                    )}
+                    {Boolean(label) && floatingLabel && renderLabel}
                     {trailingIcon && (
-                        <Icon icon={trailingIcon} className={(styles.icon, styles.trailingIcon)} />
+                        <Icon
+                            icon={trailingIcon}
+                            className={cs(styles.icon, styles.trailingIcon)}
+                        />
                     )}
                     {!hideMax && hasValue && (
                         <span className={styles.maxDisplay}>{`${length}/${max}`}</span>

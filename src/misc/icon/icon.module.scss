@@ -1,0 +1,8 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    color: $text-color-light;
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-dark;
+    }
+}

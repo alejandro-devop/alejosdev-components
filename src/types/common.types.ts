@@ -1,3 +1,5 @@
+import { icons } from '../utils/available-icons'
+
 export type ActionItemVariantsType =
     | 'default'
     | 'primary'
@@ -10,4 +12,4 @@ export type ActionItemVariantsType =
     | 'dark'
     | 'flat'
 
-export type IconNameType = any
+export type IconNameType = (typeof icons)[number]

@@ -8,3 +8,6 @@
 -   [added]: Input base component.
 -   [fixed]: Dark and light mode for input
 -   [added]: Size to buttons
+-   [added]: TextField component
+-   [added]: Icon support
+-   [added]: Support for icon in buttons and inputs.
