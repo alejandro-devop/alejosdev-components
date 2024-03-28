@@ -4,6 +4,7 @@
     flex: 0 0 auto;
     max-width: 100%;
     position: relative;
+    box-sizing: border-box;
 }
 
 .error {
@@ -13,5 +14,6 @@
     position: absolute;
     text-align: center;
     top: 100%;
+    transform: translateY(-85%);
     width: 100%;
 }

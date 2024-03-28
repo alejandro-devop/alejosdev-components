@@ -96,6 +96,10 @@
     @include size($button-height);
 }
 
+.iconEnd {
+    right: 0;
+}
+
 .button {
     &.lg {
         .iconWrapper {

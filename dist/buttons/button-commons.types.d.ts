@@ -8,4 +8,5 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     loading?: boolean;
     size?: 'sm' | 'md' | 'lg';
     flat?: boolean;
+    iconPosition?: 'lead' | 'end';
 }

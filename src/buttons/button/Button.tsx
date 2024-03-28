@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import ButtonBase from '../button-base'
 import classNames from 'classnames'
 import styles from './button.module.scss'
@@ -22,8 +22,22 @@ const Button: React.FC<ButtonProps> = ({
     loading,
     size,
     flat,
+    iconPosition,
     ...props
 }) => {
+    const iconRenderer = useMemo(
+        () => (
+            <i
+                className={classNames(styles.iconWrapper, {
+                    [styles.iconEnd]: iconPosition === 'end',
+                    [styles.iconLead]: iconPosition === 'lead'
+                })}
+            >
+                <Icon icon={icon} className={classNames(styles.icon)} />
+            </i>
+        ),
+        [icon, iconPosition]
+    )
     return (
         <ButtonBase
             className={classNames(
@@ -45,17 +59,15 @@ const Button: React.FC<ButtonProps> = ({
             tabIndex={0}
             {...props}
         >
-            {icon && (
-                <i className={classNames(styles.iconWrapper, {})}>
-                    <Icon icon={icon} className={classNames(styles.icon)} />
-                </i>
-            )}
+            {icon && iconPosition === 'lead' && iconRenderer}
             <span className={styles.buttonContent}>{loading ? 'loading ... ' : children}</span>
+            {icon && iconPosition === 'end' && iconRenderer}
         </ButtonBase>
     )
 }
 
 Button.defaultProps = {
+    iconPosition: 'lead',
     tabIndex: 0,
     rounded: true,
     size: 'md'
