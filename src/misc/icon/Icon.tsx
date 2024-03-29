@@ -2,10 +2,11 @@ import * as React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import styles from './icon.module.scss'
+import { IconType } from './icons-types'
 
 interface IconProps {
     className?: string
-    icon?: IconNameType
+    icon?: IconType
 }
 
 /**

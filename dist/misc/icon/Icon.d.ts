@@ -1,7 +1,8 @@
 import * as React from 'react';
+import { IconType } from './icons-types';
 interface IconProps {
     className?: string;
-    icon?: IconNameType;
+    icon?: IconType;
 }
 /**
  * Renders a FontAwesomeIcon with the given icon name.
