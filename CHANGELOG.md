@@ -15,3 +15,4 @@
 -   [added]: useForm hook
 -   [added]: IconButton
 -   [added]: PasswordField
+-   [added]: SelectField

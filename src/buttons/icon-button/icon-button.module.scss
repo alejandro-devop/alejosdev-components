@@ -5,20 +5,19 @@ $icon-button-size: 40px;
 .root {
     width: $icon-button-size;
     height: $icon-button-size;
-    border: 1px solid darken($default-bg, 30%);
+    border: none;
     cursor: pointer;
     flex-shrink: 0;
     padding: 0;
     margin: 0;
     box-sizing: inherit;
-    background-color: $default-bg;
+    background-color: transparent;
     border-radius: 50%;
     transition: background-color 0.6s;
-    box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
     color: $text-color-light;
 
     @media (prefers-color-scheme: dark) {
-        background-color: $default-bg-dark;
+        // background-color: $default-bg-dark;
         color: $text-color-dark;
         border-color: lighten($color: $default-bg-dark, $amount: 40%);
     }

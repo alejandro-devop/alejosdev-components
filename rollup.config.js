@@ -33,6 +33,7 @@ export default {
         '@fortawesome/fontawesome-svg-core',
         '@fortawesome/free-solid-svg-icons',
         '@fortawesome/react-fontawesome',
-        '@fortawesome/react-fontawesome'
+        '@fortawesome/react-fontawesome',
+        'react-select'
     ]
 };

@@ -16,6 +16,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
             actionRef,
             actionVariant,
             className,
+            classes,
             disableAction,
             error,
             floatingLabel,
@@ -94,7 +95,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         }
 
         return (
-            <FormControl error={error} className={styles.root}>
+            <FormControl error={error} className={cs(styles.root, classes?.wrapper)}>
                 {leadingComponent}
                 <div className={styles.inputWrapper}>
                     {leadingIcon && <Icon icon={leadingIcon} className={styles.icon} />}

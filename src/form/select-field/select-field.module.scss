@@ -1,0 +1,20 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    margin-bottom: 1rem;
+}
+
+.inputLabel {
+    display: block;
+    left: 1rem;
+    margin: 0.2rem 0.5rem;
+    @media (prefers-color-scheme: dark) {
+        &.inputLabel {
+            color: #fff;
+        }
+    }
+}
+.formErrorMsg {
+    font-size: 0.9rem;
+    margin-left: 1rem;
+}
