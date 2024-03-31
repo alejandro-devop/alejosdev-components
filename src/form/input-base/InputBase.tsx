@@ -95,7 +95,12 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         }
 
         return (
-            <FormControl error={error} className={cs(styles.root, classes?.wrapper)}>
+            <FormControl
+                error={error}
+                className={cs(styles.root, classes?.wrapper, {
+                    [styles.isRequiredField]: Boolean(props.required)
+                })}
+            >
                 {leadingComponent}
                 <div className={styles.inputWrapper}>
                     {leadingIcon && <Icon icon={leadingIcon} className={styles.icon} />}

@@ -99,6 +99,7 @@ const useForm = <FT extends Object = {}>(
                 const [inputId, inputConfig] = item as [FieldKeyType, FieldConfigType]
                 const rules = inputConfig?.rules
                 let error: string | null = null
+                const isRequired = required?.includes(inputId)
                 if (rules || required?.includes(inputId)) {
                     error = validator.validate({
                         field: inputId as string,
@@ -118,6 +119,7 @@ const useForm = <FT extends Object = {}>(
                     renderer: inputConfig?.renderer,
                     inputProps: inputConfig?.inputProps,
                     sourceProps: inputConfig?.sourceProps,
+                    required: isRequired,
                     error
                 }
                 if (!config[inputId]?.inputProps) {

@@ -70,7 +70,8 @@ Button.defaultProps = {
     iconPosition: 'lead',
     tabIndex: 0,
     rounded: true,
-    size: 'md'
+    size: 'md',
+    variant: 'default'
 }
 
 export default Button

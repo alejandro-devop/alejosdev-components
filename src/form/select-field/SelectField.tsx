@@ -38,7 +38,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
     const defaultSelected = useMemo(() => {
         return options?.find((item) => item.value === value)
     }, [options, value])
-    console.log('mode: ', mode)
 
     return (
         <FormControl error={error} className={styles.root}>
@@ -54,6 +53,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
                         ...(Boolean(placeholder) ? [{ label: placeholder, value: '' }] : []),
                         ...options
                     ]}
+                    classNamePrefix={'react-select-control__'}
                     onChange={handleChange}
                     isLoading={loading}
                     menuPortalTarget={document.body}
@@ -64,6 +64,10 @@ const SelectField: React.FC<SelectFieldProps> = ({
                             border: mode === 'dark' ? '1px solid #8f8f8f' : '1px solid #b3b3b3',
                             outline: 'none',
                             backgroundColor: mode === 'dark' ? '#292929' : '#ffffff'
+                        }),
+                        input: (base) => ({
+                            ...base,
+                            color: mode === 'dark' ? '#FFF' : '#000'
                         }),
                         menuPortal: (base) => ({
                             ...base,
