@@ -1,3 +1,5 @@
+import { ActionItemVariantsType } from 'types/common.types'
+
 type ApplyButtonVariantStylesConfigType = {
     styles: { [k: string]: string }
     variant?: ActionItemVariantsType

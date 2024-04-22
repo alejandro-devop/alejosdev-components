@@ -12,6 +12,7 @@ interface ColProps {
     applyFor?: Partial<Record<ColSizeType, number | undefined>>;
     applyFrom?: [ColSizeType, number | undefined];
     ascendingApply?: boolean;
+    className?: string;
 }
 declare const Col: React.FC<ColProps>;
 export default Col;

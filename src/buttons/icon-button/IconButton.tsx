@@ -2,13 +2,15 @@ import styles from './icon-button.module.scss'
 import classNames from 'classnames'
 import React, { forwardRef } from 'react'
 import { Icon } from '../../misc'
-import { IconType } from '../../misc/icon/icons-types'
+import { IconType } from '../../types/icons-types'
+import { ActionItemVariantsType } from 'types/common.types'
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: IconType
     children?: React.ReactNode
     variant?: ActionItemVariantsType
     label?: string
+    size?: 'sm' | 'md' | 'lg'
     classes?: {
         label?: string
         root?: string
@@ -36,7 +38,10 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
                     [styles.light]: variant === 'light',
                     [styles.dark]: variant === 'dark',
                     [styles.flat]: variant === 'flat',
-                    [styles.disabled]: props?.disabled
+                    [styles.disabled]: props?.disabled,
+                    [styles.sizeMd]: props?.size === 'md',
+                    [styles.sizeLg]: props?.size === 'lg',
+                    [styles.sizeSm]: props?.size === 'sm'
                 })}
                 onClick={handleClick}
                 tabIndex={0}
@@ -57,6 +62,8 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     }
 )
 
-IconButton.defaultProps = {}
+IconButton.defaultProps = {
+    size: 'md'
+}
 
 export default IconButton

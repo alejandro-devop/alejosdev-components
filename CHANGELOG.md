@@ -16,3 +16,4 @@
 -   [added]: IconButton
 -   [added]: PasswordField
 -   [added]: SelectField
+-   [added]: Alert component

@@ -1,0 +1,36 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+@mixin apply-alert-color($color) {
+    background-color: rgba($color, 0.4);
+    @include text-contrast($color);
+    & .icon {
+        @include text-contrast($color);
+    }
+}
+
+.primary {
+    @include apply-alert-color($primary);
+}
+
+.info {
+    @include apply-alert-color($info);
+}
+
+.iconWrapper {
+    margin-right: 1rem;
+}
+
+.content {
+    flex: 1;
+}
+.actionButton {
+    margin: 0;
+}

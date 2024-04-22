@@ -1,9 +1,11 @@
 /// <reference types="react" />
-import { IconType } from '../../misc/icon/icons-types';
+import { ActionItemVariantsType } from 'types/common.types';
+import { IconType } from '../../types/icons-types';
 export interface InputBaseProps<ElementType> extends React.InputHTMLAttributes<ElementType> {
     classes?: {
         wrapper?: string;
     };
+    hideRequired?: boolean;
     /** Props to be passed to the fieldset or wrapper used by the input */
     fieldSetProps?: React.HTMLAttributes<HTMLFieldSetElement>;
     floatingLabel?: boolean;

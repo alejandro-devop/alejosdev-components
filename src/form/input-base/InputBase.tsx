@@ -35,6 +35,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
             trailingComponent,
             trimSpaces,
             value,
+            hideRequired,
             ...props
         },
         ref
@@ -97,6 +98,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         return (
             <FormControl
                 error={error}
+                hideRequired={hideRequired}
                 className={cs(styles.root, classes?.wrapper, {
                     [styles.isRequiredField]: Boolean(props.required)
                 })}

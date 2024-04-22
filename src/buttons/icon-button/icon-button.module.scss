@@ -104,7 +104,24 @@ $icon-button-size: 40px;
 }
 
 .flat {
-    color: $text-color-light;
     background-color: transparent;
     box-shadow: none;
+    &.flat {
+        .icon {
+            color: lighten($color: $text-color-light, $amount: 50%);
+            @media (prefers-color-scheme: dark) {
+                color: darken($color: $text-color-dark, $amount: 10%);
+            }
+        }
+    }
+}
+
+.sizeLg {
+    width: $icon-button-size + 10px;
+    height: $icon-button-size + 10px;
+}
+
+.sizeSm {
+    width: $icon-button-size - 10px;
+    height: $icon-button-size - 10px;
 }

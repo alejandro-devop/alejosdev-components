@@ -95,6 +95,9 @@
     position: absolute;
     @include size($button-height);
 }
+.iconLead {
+    left: 0;
+}
 
 .iconEnd {
     right: 0;
@@ -193,5 +196,14 @@
     & > span.buttonContent {
         flex: 1;
         text-align: center;
+    }
+}
+
+.withIcon {
+    &.iconLeading {
+        padding-left: 1rem;
+    }
+    &.iconEnding {
+        padding-right: 1rem;
     }
 }

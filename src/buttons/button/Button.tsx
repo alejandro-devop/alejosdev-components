@@ -52,7 +52,10 @@ const Button: React.FC<ButtonProps> = ({
                     [styles.sm]: size === 'sm',
                     [styles.md]: size === 'md',
                     [styles.lg]: size === 'lg',
-                    [styles.flat]: flat
+                    [styles.flat]: flat,
+                    [styles.withIcon]: Boolean(icon),
+                    [styles.iconLeading]: iconPosition === 'lead',
+                    [styles.iconEnding]: iconPosition === 'end'
                 },
                 className
             )}
