@@ -17,3 +17,4 @@
 -   [added]: PasswordField
 -   [added]: SelectField
 -   [added]: Alert component
+-   [added] Pill component
