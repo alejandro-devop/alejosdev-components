@@ -1,77 +1,40 @@
-import React from 'react'
-import Label from '../label'
-import styles from './checkbox.module.scss'
-import classNames from 'classnames'
-import { InputBaseProps } from '../input-base/input.types'
-import { useInputId } from 'hooks'
-import FormControl from 'form/form-control'
+import React, { useCallback, useMemo } from 'react'
+import styles from './check-box-field.module.scss'
+import cs from 'classnames'
+import { InputBaseProps } from '../../types/input.types'
 
-interface CheckboxFieldProps extends InputBaseProps<HTMLInputElement> {
-    rounded?: boolean
-    classes?: {
-        wrapper?: string
-    }
-    variant?:
-        | 'default'
-        | 'primary'
-        | 'secondary'
-        | 'success'
-        | 'danger'
-        | 'warning'
-        | 'info'
-        | 'dark'
+interface CheckBoxFieldProps extends InputBaseProps<HTMLInputElement> {
+    className?: string
+    checked?: boolean
 }
 
-const CheckboxField: React.FC<CheckboxFieldProps> = ({
-    label,
-    error,
-    value,
-    checked = false,
+const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
+    className,
     onChange,
-    onClick,
-    rounded,
-    classes,
-    ...props
+    name,
+    value,
+    checked
 }) => {
-    const htmlID = useInputId({ id: props.id, name: props.name })
-
-    const handleChange = () => {
-        const newValue = !checked
-        onChange?.({ target: { name: [props?.name], value: newValue } } as any)
-    }
-
+    const isChecked = useMemo(() => Boolean(value) || checked, [checked, value])
+    const handleChange = useCallback(
+        (e: React.MouseEvent) => {
+            e.stopPropagation()
+            onChange?.({
+                target: {
+                    name: name || '',
+                    checked: !Boolean(isChecked)
+                }
+            } as any)
+        },
+        [onChange, name, isChecked]
+    )
     return (
-        <FormControl className={classNames(styles.wrapper, classes?.wrapper)}>
-            <input
-                id={htmlID}
-                {...props}
-                name={props?.name || htmlID}
-                className={styles.input}
-                type="checkbox"
-                checked={Boolean(checked)}
-                onClick={handleChange}
-                onChange={() => null}
-            />
-            <Label
-                className={classNames(styles.inputLabel, {
-                    [styles.checked]: checked,
-                    [styles.primary]: props.variant === 'primary',
-                    [styles.secondary]: props.variant === 'secondary',
-                    [styles.success]: props.variant === 'success',
-                    [styles.danger]: props.variant === 'danger',
-                    [styles.warning]: props.variant === 'warning',
-                    [styles.info]: props.variant === 'info',
-                    [styles.dark]: props.variant === 'dark',
-                    [styles.rounded]: rounded
-                })}
-                onClick={handleChange}
-            >
-                {label}
-            </Label>
-        </FormControl>
+        <div className={cs(styles.root, className)}>
+            {isChecked && <span className={styles.check}></span>}
+            <input type="checkbox" />
+            <label htmlFor="" onClick={handleChange} className={styles.control}></label>
+        </div>
     )
 }
 
-CheckboxField.defaultProps = {}
-
-export default CheckboxField
+export default CheckBoxField

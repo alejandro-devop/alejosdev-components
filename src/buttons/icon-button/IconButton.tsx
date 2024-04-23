@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import React, { forwardRef } from 'react'
 import { Icon } from '../../misc'
 import { IconType } from '../../types/icons-types'
-import { ActionItemVariantsType } from 'types/common.types'
+import { ActionItemVariantsType } from '../../types/common.types'
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: IconType

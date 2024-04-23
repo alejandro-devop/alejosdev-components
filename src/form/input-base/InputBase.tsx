@@ -1,6 +1,6 @@
 import React, { forwardRef, useCallback, useMemo } from 'react'
 import { useInputId } from 'hooks'
-import { InputBaseProps } from './input.types'
+import { InputBaseProps } from '../../types/input.types'
 import cs from 'classnames'
 import styles from './input.module.scss'
 import FormControl from 'form/form-control'
@@ -119,6 +119,7 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
                         <span className={styles.maxDisplay}>{`${length}/${max}`}</span>
                     )}
                 </div>
+                {trailingComponent}
                 {Boolean(action) && (
                     <IconButton
                         ref={actionRef}

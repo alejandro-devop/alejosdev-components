@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconType } from '../../types/icons-types';
-import { ActionItemVariantsType } from 'types/common.types';
+import { ActionItemVariantsType } from '../../types/common.types';
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     icon?: IconType;
     children?: React.ReactNode;

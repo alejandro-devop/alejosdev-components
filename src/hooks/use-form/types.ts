@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { InputBaseProps } from '../../form/input-base/input.types'
+import { InputBaseProps } from '../../types/input.types'
 
 export interface SelectSourceFieldProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     label?: string
@@ -17,7 +17,7 @@ export type UseFormHookReturnType<FT extends object = {}> = [
     Partial<Record<keyof FT, InputBaseProps<any> | any>>,
     FT,
     {
-        onChange: (e: ChangeEvent<HTMLInputElement>) => void
+        onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
         isValidForm?: boolean
         changeForm: (f?: any) => void
         fieldsFilled: (fields?: string[], form?: { [k: string]: any }) => boolean

@@ -1,6 +1,6 @@
 import React from 'react'
 import { forwardRef } from 'react'
-import { InputBaseProps } from '../input-base/input.types'
+import { InputBaseProps } from '../../types/input.types'
 import InputBase from '../input-base'
 
 interface TextFieldProps extends InputBaseProps<HTMLInputElement> {}

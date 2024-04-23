@@ -6,7 +6,7 @@ import {
     UseFormHookReturnType
 } from './types'
 import { Validator } from './class'
-import { InputBaseProps } from '../../form/input-base/input.types'
+import { InputBaseProps } from '../../types/input.types'
 
 /**
  * Hook to manage forms

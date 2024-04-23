@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconType } from 'types/icons-types';
-import { ActionItemVariantsType } from 'types/common.types';
+import { ActionItemVariantsType } from '../../types/common.types';
 interface AlertProps {
     icon?: IconType;
     message?: string;

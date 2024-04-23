@@ -1,0 +1,38 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.textAreaRoot {
+    width: 100%;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.textArea {
+    display: block;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    margin: 0px 0px 10px 0px;
+    min-height: $input-height * 2;
+    width: 100%;
+    border: 1px solid darken($default-bg, 30%);
+    &:focus {
+        outline: none;
+    }
+    background-color: $default-bg;
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-dark;
+        background-color: $default-bg-dark;
+        border-color: darken($default-bg-dark, 30%);
+    }
+}
+
+.filled {
+    border: none;
+}
+
+.charCount {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.7rem;
+    color: rgba(0, 0, 0, 0.5);
+}

@@ -1,4 +1,4 @@
-import { InputBaseProps } from './form/input-base/input.types'
+import { InputBaseProps } from './types/input.types'
 import { ActionItemVariantsType } from './types/common.types'
 
 export * from './buttons'

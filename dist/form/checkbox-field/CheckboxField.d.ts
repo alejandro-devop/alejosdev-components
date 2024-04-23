@@ -1,11 +1,8 @@
 import React from 'react';
-import { InputBaseProps } from '../input-base/input.types';
-interface CheckboxFieldProps extends InputBaseProps<HTMLInputElement> {
-    rounded?: boolean;
-    classes?: {
-        wrapper?: string;
-    };
-    variant?: 'default' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark';
+import { InputBaseProps } from '../../types/input.types';
+interface CheckBoxFieldProps extends InputBaseProps<HTMLInputElement> {
+    className?: string;
+    checked?: boolean;
 }
-declare const CheckboxField: React.FC<CheckboxFieldProps>;
-export default CheckboxField;
+declare const CheckBoxField: React.FC<CheckBoxFieldProps>;
+export default CheckBoxField;

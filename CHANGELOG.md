@@ -17,4 +17,5 @@
 -   [added]: PasswordField
 -   [added]: SelectField
 -   [added]: Alert component
--   [added] Pill component
+-   [added]: Pill component
+-   [fixed]: Text area auto height

@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputBaseProps } from '../input-base/input.types';
+import { InputBaseProps } from '../../types/input.types';
 interface TextFieldProps extends InputBaseProps<HTMLInputElement> {
 }
 /**

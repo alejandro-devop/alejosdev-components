@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import InputBase from '../input-base'
-import { InputBaseProps } from '../input-base/input.types'
+import { InputBaseProps } from '../../types/input.types'
 
 const PasswordField: React.FC<InputBaseProps<HTMLInputElement>> = ({ ...props }) => {
     const [visible, setVisible] = useState(false)
