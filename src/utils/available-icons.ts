@@ -16,6 +16,7 @@ export const icons = [
     'bullseye',
     'calendar',
     'calendar-alt',
+    'calendar-day',
     'car',
     'carrot',
     'cart-shopping',

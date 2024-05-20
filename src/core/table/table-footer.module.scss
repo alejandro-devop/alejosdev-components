@@ -1,0 +1,25 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.tableFooter {
+    padding: 0 1rem 0.8rem;
+    display: flex;
+    flex-direction: row-reverse;
+    .legend {
+        font-size: 0.8rem;
+        color: rgba(0, 0, 0, 0.6);
+    }
+
+    .pagesWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footerActions {
+        flex: 1;
+    }
+
+    ul {
+        display: flex;
+    }
+}

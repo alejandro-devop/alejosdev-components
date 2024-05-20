@@ -1,0 +1,16 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.timeSeparator {
+    font-size: 2rem;
+    color: $text-color-light;
+    margin: 0 0.5rem;
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-dark;
+    }
+}

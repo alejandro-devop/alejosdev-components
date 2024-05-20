@@ -1,0 +1,95 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.mainLabel {
+    color: $primary;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+$size: 20px;
+
+@mixin apply-color-to-radio($color, $darken: 0%) {
+    span.control {
+        border-color: darken($color, $darken);
+    }
+    input[type='radio']:checked ~ span.control::after {
+        background-color: darken($color, $darken);
+    }
+}
+
+.label {
+    display: flex;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+    align-items: center;
+    // margin-left: 1rem;
+
+    input[type='radio'] {
+        display: none;
+    }
+
+    span {
+        display: inline-block;
+    }
+
+    span.control {
+        // position: absolute;
+        left: 0;
+        top: 0;
+        width: $size;
+        height: $size;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 2px solid darken($default-bg, 20%);
+        cursor: pointer;
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.5rem;
+    }
+
+    input[type='radio']:checked ~ span.control::after {
+        content: '';
+        $control-size: $size - 10px;
+        display: inline-block;
+        width: $control-size;
+        height: $control-size;
+        background-color: darken($default-bg, 20%);
+        border-radius: 50%;
+    }
+
+    &.primary {
+        @include apply-color-to-radio($primary);
+    }
+    &.secondary {
+        @include apply-color-to-radio($secondary);
+    }
+    &.success {
+        @include apply-color-to-radio($success);
+    }
+    &.danger {
+        @include apply-color-to-radio($error);
+    }
+    &.warning {
+        @include apply-color-to-radio($warning, 40%);
+    }
+    &.info {
+        @include apply-color-to-radio($info);
+    }
+    &.light {
+        @include apply-color-to-radio($light-color, 40%);
+    }
+    &.dark {
+        @include apply-color-to-radio($dark-color);
+    }
+}
+
+.horizontal {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 0;
+}

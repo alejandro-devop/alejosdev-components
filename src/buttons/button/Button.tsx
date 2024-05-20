@@ -23,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
     size,
     flat,
     iconPosition,
+    loadingLabel,
     ...props
 }) => {
     const iconRenderer = useMemo(
@@ -63,7 +64,9 @@ const Button: React.FC<ButtonProps> = ({
             {...props}
         >
             {icon && iconPosition === 'lead' && iconRenderer}
-            <span className={styles.buttonContent}>{loading ? 'loading ... ' : children}</span>
+            <span className={styles.buttonContent}>
+                {loading ? loadingLabel || 'loading...' : children}
+            </span>
             {icon && iconPosition === 'end' && iconRenderer}
         </ButtonBase>
     )

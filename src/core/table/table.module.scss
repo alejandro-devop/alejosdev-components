@@ -1,0 +1,127 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.table {
+    background-color: #fff;
+    // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 5px;
+    padding: 1.5rem 0.6rem 0.3rem 0.6rem;
+    table-layout: auto;
+    width: 100%;
+    border-collapse: collapse;
+
+    &Toolbar {
+        display: flex;
+        padding: 10px;
+    }
+
+    &ToolbarLeft {
+        flex-grow: 2;
+    }
+
+    &ToolbarRight {
+        flex-grow: 3;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    /** mobile **/
+    table,
+    tr,
+    td,
+    th {
+        border: none;
+    }
+
+    table {
+        min-width: 100%;
+    }
+
+    .isMobile {
+        thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: 0.625em;
+        }
+
+        td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: 0.8em;
+            text-align: left;
+            min-height: 20px;
+        }
+
+        td::before {
+            /*
+            * aria-label has no advantage, it won't be read inside a table
+            content: attr(aria-label);
+            */
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            min-width: 35%;
+        }
+
+        td:last-child {
+            border-bottom: 0;
+        }
+    }
+    /** mobile **/
+
+    @include md {
+        thead {
+            th {
+                span {
+                    align-items: center;
+                    justify-content: center;
+                    display: inline-flex;
+                    background-color: rgba(0, 0, 0, 0.06);
+                    border-radius: 5px;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+
+        th,
+        td {
+            font-size: 0.9rem;
+            height: 35px;
+        }
+
+        td {
+            padding: 0.4rem 1.2rem;
+        }
+
+        td:last-child {
+            text-align: right;
+            white-space: nowrap;
+            width: 1%;
+        }
+
+        tbody {
+            tr {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            }
+        }
+        tr {
+            &:nth-child(even) {
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+        }
+
+        th {
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}

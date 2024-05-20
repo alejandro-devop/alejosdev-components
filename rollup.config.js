@@ -1,6 +1,6 @@
-import typescript from 'rollup-plugin-typescript2';
-import pkg from './package.json' assert { type: 'json' };
-import postcss from 'rollup-plugin-postcss';
+import typescript from 'rollup-plugin-typescript2'
+import pkg from './package.json' assert { type: 'json' }
+import postcss from 'rollup-plugin-postcss'
 
 export default {
     input: 'src/index.ts',
@@ -15,7 +15,7 @@ export default {
     plugins: [
         typescript({
             tsconfigOverride: {
-                exclude: ["**/__test__/", "**/*.test.ts"]
+                exclude: ['**/__test__/', '**/*.test.ts']
             }
         }),
         postcss({
@@ -25,7 +25,7 @@ export default {
         })
     ],
     external: [
-        'react', 
+        'react',
         'react-dom',
         'lodash',
         'moment',
@@ -34,6 +34,8 @@ export default {
         '@fortawesome/free-solid-svg-icons',
         '@fortawesome/react-fontawesome',
         '@fortawesome/react-fontawesome',
-        'react-select'
+        'react-select',
+        'react-datepicker',
+        'react-datepicker/dist/react-datepicker.css'
     ]
-};
+}

@@ -115,7 +115,8 @@ import {
     faWeightHanging,
     faRuler,
     faGlassWater,
-    faRightToBracket
+    faRightToBracket,
+    faCalendarDay
 } from '@fortawesome/free-solid-svg-icons'
 
 export const registerIcons = () => {
@@ -139,6 +140,7 @@ export const registerIcons = () => {
         faCartShopping,
         faCalendar,
         faCalendarAlt,
+        faCalendarDay,
         faCar,
         faCheck,
         faChevronDown,

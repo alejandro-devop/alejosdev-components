@@ -19,3 +19,7 @@
 -   [added]: Alert component
 -   [added]: Pill component
 -   [fixed]: Text area auto height
+-   [added]: Table component
+-   [added]: Error boundary
+-   [added]: new icons
+-   [added]: Media query provider

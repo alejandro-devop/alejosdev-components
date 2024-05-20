@@ -117,6 +117,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
             {...props}
             leadingComponent={
                 <IconButton
+                    tabIndex={-1}
                     className={styles.iconButton}
                     icon="minus"
                     disabled={value === min}
@@ -128,6 +129,7 @@ const NumberField: React.FC<NumberFieldProps> = ({
             onChange={handleChangeValue}
             trailingComponent={
                 <IconButton
+                    tabIndex={-1}
                     className={styles.iconButton}
                     icon="add"
                     disabled={value === max}

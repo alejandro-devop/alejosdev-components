@@ -6,6 +6,18 @@
     margin-bottom: 1rem;
 }
 
+.inputLabel {
+    display: block;
+    left: 1rem;
+    margin: 0.2rem 0.5rem;
+
+    @media (prefers-color-scheme: dark) {
+        &.inputLabel {
+            color: #fff;
+        }
+    }
+}
+
 .textArea {
     display: block;
     border-radius: 20px;

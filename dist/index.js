@@ -1,11 +1,132 @@
 import * as React from 'react';
-import React__default, { useMemo, forwardRef, useState, useRef, useCallback, useLayoutEffect, useEffect } from 'react';
-import cs from 'classnames';
+import React__default, { useMemo as useMemo$1, createContext, useContext, useState as useState$1, forwardRef, useRef, useCallback as useCallback$1, useEffect, useLayoutEffect } from 'react';
+import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 import Select from 'react-select';
+import moment from 'moment';
+import DatePicker from 'react-datepicker';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAdd, faAnglesLeft, faAnglesRight, faArrowsRotate, faBan, faBell, faBars, faBed, faBedPulse, faBomb, faBook, faBoxesStacked, faBriefcase, faBrain, faBullseye, faCarrot, faCartShopping, faCalendar, faCalendarAlt, faCar, faCheck, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faCircle, faClipboard, faClock, faCloud, faCogs, faComment, faComputer, faComputerMouse, faCreditCard, faCreditCardAlt, faDog, faDroplet, faDumbbell, faFile, faFilter, faEdit, faEllipsisV, faEllipsisH, faEnvelope, faExclamationTriangle, faExclamation, faExclamationCircle, faEye, faEyeSlash, faFlag, faFloppyDisk, faFlask, faFireBurner, faFireAlt, faFireFlameCurved, faGamepad, faGasPump, faGauge, faGift, faGlassWater, faGlobe, faGraduationCap, faHandFist, faFilm, faHeart, faHeartCrack, faHeartPulse, faHeartCirclePlus, faHome, faImage, faFileInvoice, faFileInvoiceDollar, faKitchenSet, faLanguage, faLightbulb, faList, faListCheck, faLock, faLockOpen, faMinus, faMotorcycle, faMoneyBill, faMoneyBillTransfer, faMoon, faMugHot, faPause, faPalette, faPen, faPenAlt, faPerson, faPlayCircle, faPoo, faQuestionCircle, faRightToBracket, faRocket, faRuler, faSearch, faShirt, faShower, faSoap, faStar, faStarHalf, faStarHalfAlt, faStopwatch20, faStop, faSun, faTag, faTimes, faTooth, faTrash, faThumbsUp, faThumbsDown, faUtensils, faUser, faWallet, faWeightHanging } from '@fortawesome/free-solid-svg-icons';
+import { faAdd, faAnglesLeft, faAnglesRight, faArrowsRotate, faBan, faBell, faBars, faBed, faBedPulse, faBomb, faBook, faBoxesStacked, faBriefcase, faBrain, faBullseye, faCarrot, faCartShopping, faCalendar, faCalendarAlt, faCalendarDay, faCar, faCheck, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faCircle, faClipboard, faClock, faCloud, faCogs, faComment, faComputer, faComputerMouse, faCreditCard, faCreditCardAlt, faDog, faDroplet, faDumbbell, faFile, faFilter, faEdit, faEllipsisV, faEllipsisH, faEnvelope, faExclamationTriangle, faExclamation, faExclamationCircle, faEye, faEyeSlash, faFlag, faFloppyDisk, faFlask, faFireBurner, faFireAlt, faFireFlameCurved, faGamepad, faGasPump, faGauge, faGift, faGlassWater, faGlobe, faGraduationCap, faHandFist, faFilm, faHeart, faHeartCrack, faHeartPulse, faHeartCirclePlus, faHome, faImage, faFileInvoice, faFileInvoiceDollar, faKitchenSet, faLanguage, faLightbulb, faList, faListCheck, faLock, faLockOpen, faMinus, faMotorcycle, faMoneyBill, faMoneyBillTransfer, faMoon, faMugHot, faPause, faPalette, faPen, faPenAlt, faPerson, faPlayCircle, faPoo, faQuestionCircle, faRightToBracket, faRocket, faRuler, faSearch, faShirt, faShower, faSoap, faStar, faStarHalf, faStarHalfAlt, faStopwatch20, faStop, faSun, faTag, faTimes, faTooth, faTrash, faThumbsUp, faThumbsDown, faUtensils, faUser, faWallet, faWeightHanging } from '@fortawesome/free-solid-svg-icons';
+
+const icons = [
+    'add',
+    'angles-left',
+    'angles-right',
+    'arrows-rotate',
+    'ban',
+    'bars',
+    'bed',
+    'bed-pulse',
+    'bell',
+    'brain',
+    'bomb',
+    'book',
+    'boxes-stacked',
+    'briefcase',
+    'bullseye',
+    'calendar',
+    'calendar-alt',
+    'calendar-day',
+    'car',
+    'carrot',
+    'cart-shopping',
+    'check',
+    'chevron-left',
+    'chevron-right',
+    'chevron-up',
+    'chevron-down',
+    'circle',
+    'clipboard',
+    'clock',
+    'cloud',
+    'cogs',
+    'comment',
+    'computer',
+    'computer-mouse',
+    'credit-card',
+    'credit-card-alt',
+    'dog',
+    'droplet',
+    'dumbbell',
+    'edit',
+    'ellipsis-v',
+    'ellipsis-h',
+    'exclamation-triangle',
+    'exclamation',
+    'exclamation-circle',
+    'eye',
+    'eye-slash',
+    'envelope',
+    'file',
+    'film',
+    'filter',
+    'fire-burner',
+    'fire-alt',
+    'fire-flame-curved',
+    'flag',
+    'flask',
+    'floppy-disk',
+    'gas-pump',
+    'gauge',
+    'gift',
+    'glass-water',
+    'globe',
+    'graduation-cap',
+    'hand-fist',
+    'heart',
+    'heart-crack',
+    'heart-pulse',
+    'heart-circle-plus',
+    'home',
+    'file-invoice',
+    'file-invoice-dollar',
+    'gamepad',
+    'image',
+    'kitchen-set',
+    'language',
+    'lightbulb',
+    'list',
+    'list-check',
+    'lock',
+    'lock-open',
+    'minus',
+    'money-bill',
+    'money-bill-transfer',
+    'motorcycle',
+    'mug-hot',
+    'palette',
+    'play-circle',
+    'pause',
+    'pen',
+    'pen-alt',
+    'person',
+    'poo',
+    'question-circle',
+    'right-to-bracket',
+    'rocket',
+    'ruler',
+    'search',
+    'shirt',
+    'shower',
+    'soap',
+    'star',
+    'star-half',
+    'star-half-alt',
+    'stop',
+    'stopwatch-20',
+    'sun',
+    'tag',
+    'times',
+    'tooth',
+    'trash',
+    'thumbs-up',
+    'thumbs-down',
+    'utensils',
+    'user',
+    'wallet',
+    'weight-hanging'
+];
 
 const ButtonBase = ({ children, ...props }) => {
     return React__default.createElement("button", { ...props }, children);
@@ -38,13 +159,13 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z$b = "@use \"sass:math\";\n.button-module_button__yfHX9 {\n  align-items: center;\n  border-color: transparent;\n  box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;\n  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);\n  border-radius: 5px;\n  cursor: pointer;\n  display: inline-flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  font-size: 0.9rem;\n  height: 30px;\n  margin: 0 0.2rem 0.5rem 0.2rem;\n  padding: 0;\n  position: relative;\n  transition: background-color 0.6s; }\n  .button-module_button__yfHX9 span {\n    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3); }\n  .button-module_button__yfHX9:disabled, .button-module_button__yfHX9:disabled:hover {\n    background-color: rgba(0, 0, 0, 0.6);\n    opacity: 0.5;\n    cursor: not-allowed; }\n  .button-module_button__yfHX9.button-module_sm__sM-Bn {\n    height: 25px; }\n    .button-module_button__yfHX9.button-module_sm__sM-Bn span {\n      padding: 0px 0.5rem;\n      font-weight: 500;\n      font-size: small; }\n  .button-module_button__yfHX9.button-module_lg__kGxW1 {\n    height: 40px; }\n    .button-module_button__yfHX9.button-module_lg__kGxW1 span {\n      padding: 0px 1rem;\n      font-weight: 500;\n      font-size: large; }\n\n.button-module_buttonContent__4A7zq {\n  padding: 0px 0.7rem;\n  font-weight: 400; }\n\n.button-module_default__QlCDU {\n  background-color: #ffffff; }\n  .button-module_default__QlCDU:hover {\n    background-color: #d9d9d9; }\n  .button-module_default__QlCDU span {\n    color: black; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ffffff; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n    color: #ffffff; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2.button-module_flat__ItVb2:hover {\n    background-color: #ffffff; }\n    .button-module_default__QlCDU.button-module_flat__ItVb2.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n      color: black; }\n\n.button-module_rounded__jNVzk {\n  border-radius: 20px; }\n\n.button-module_iconWrapper__QUHW4 {\n  align-items: center;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  position: absolute;\n  width: 30px;\n  height: 30px; }\n\n.button-module_iconLead__Kpl1u {\n  left: 0; }\n\n.button-module_iconEnd__h067L {\n  right: 0; }\n\n.button-module_button__yfHX9.button-module_lg__kGxW1 .button-module_iconWrapper__QUHW4 {\n  width: 40px;\n  height: 40px; }\n\n.button-module_rounded__jNVzk .button-module_iconWrapper__QUHW4 {\n  border-radius: 20px; }\n\n.button-module_primary__owGsB {\n  background-color: #8d6b94;\n  box-shadow: 0px 3px 0px 0px #715676; }\n  .button-module_primary__owGsB:hover {\n    background-color: #634b68; }\n  .button-module_primary__owGsB span {\n    color: white; }\n  .button-module_primary__owGsB .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_primary__owGsB.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #8d6b94;\n    box-shadow: none; }\n    .button-module_primary__owGsB.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #8d6b94;\n      font-weight: 400; }\n    .button-module_primary__owGsB.button-module_flat__ItVb2:hover {\n      background-color: #8d6b94; }\n      .button-module_primary__owGsB.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_secondary__5ndRZ {\n  background-color: #b185a7;\n  box-shadow: 0px 3px 0px 0px #9d6691; }\n  .button-module_secondary__5ndRZ:hover {\n    background-color: #8e5b83; }\n  .button-module_secondary__5ndRZ span {\n    color: white; }\n  .button-module_secondary__5ndRZ .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_secondary__5ndRZ.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #b185a7;\n    box-shadow: none; }\n    .button-module_secondary__5ndRZ.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #b185a7;\n      font-weight: 400; }\n    .button-module_secondary__5ndRZ.button-module_flat__ItVb2:hover {\n      background-color: #b185a7; }\n      .button-module_secondary__5ndRZ.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_success__-dqWn {\n  background-color: #06d6a0;\n  box-shadow: 0px 3px 0px 0px #05a47b; }\n  .button-module_success__-dqWn:hover {\n    background-color: #048c68; }\n  .button-module_success__-dqWn span {\n    color: white; }\n  .button-module_success__-dqWn .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_success__-dqWn.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #06d6a0;\n    box-shadow: none; }\n    .button-module_success__-dqWn.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #06d6a0;\n      font-weight: 400; }\n    .button-module_success__-dqWn.button-module_flat__ItVb2:hover {\n      background-color: #06d6a0; }\n      .button-module_success__-dqWn.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_danger__ANkhq {\n  background-color: #ef476f;\n  box-shadow: 0px 3px 0px 0px #eb184a; }\n  .button-module_danger__ANkhq:hover {\n    background-color: #d71341; }\n  .button-module_danger__ANkhq span {\n    color: white; }\n  .button-module_danger__ANkhq .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_danger__ANkhq.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ef476f;\n    box-shadow: none; }\n    .button-module_danger__ANkhq.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #ef476f;\n      font-weight: 400; }\n    .button-module_danger__ANkhq.button-module_flat__ItVb2:hover {\n      background-color: #ef476f; }\n      .button-module_danger__ANkhq.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_info__XPmH4 {\n  background-color: #7796cb;\n  box-shadow: 0px 3px 0px 0px #527abd; }\n  .button-module_info__XPmH4:hover {\n    background-color: #446cb2; }\n  .button-module_info__XPmH4 span {\n    color: white; }\n  .button-module_info__XPmH4 .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_info__XPmH4.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #7796cb;\n    box-shadow: none; }\n    .button-module_info__XPmH4.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #7796cb;\n      font-weight: 400; }\n    .button-module_info__XPmH4.button-module_flat__ItVb2:hover {\n      background-color: #7796cb; }\n      .button-module_info__XPmH4.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_warning__KEyfR {\n  background-color: #f2f3ae;\n  box-shadow: 0px 3px 0px 0px #dddf29; }\n  .button-module_warning__KEyfR:hover {\n    background-color: #e7e96b; }\n  .button-module_warning__KEyfR span {\n    color: black; }\n  .button-module_warning__KEyfR .button-module_icon__Uk-sL {\n    color: black; }\n  .button-module_warning__KEyfR.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #f2f3ae;\n    box-shadow: none; }\n    .button-module_warning__KEyfR.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #f2f3ae;\n      font-weight: 400; }\n    .button-module_warning__KEyfR.button-module_flat__ItVb2:hover {\n      background-color: #f2f3ae; }\n      .button-module_warning__KEyfR.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: black; }\n\n.button-module_dark__B-o-h {\n  background-color: #212121;\n  box-shadow: 0px 3px 0px 0px #080808; }\n  .button-module_dark__B-o-h:hover {\n    background-color: black; }\n  .button-module_dark__B-o-h span {\n    color: white; }\n  .button-module_dark__B-o-h .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_dark__B-o-h.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #212121;\n    box-shadow: none; }\n    .button-module_dark__B-o-h.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #212121;\n      font-weight: 400; }\n    .button-module_dark__B-o-h.button-module_flat__ItVb2:hover {\n      background-color: #212121; }\n      .button-module_dark__B-o-h.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_light__ugMlT {\n  background-color: #ffffff;\n  box-shadow: 0px 3px 0px 0px #e6e6e6;\n  color: #000; }\n  .button-module_light__ugMlT:hover {\n    background-color: #d9d9d9; }\n  .button-module_light__ugMlT span {\n    color: black; }\n  .button-module_light__ugMlT .button-module_icon__Uk-sL {\n    color: black; }\n  .button-module_light__ugMlT.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ffffff;\n    box-shadow: none; }\n    .button-module_light__ugMlT.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #ffffff;\n      font-weight: 400; }\n    .button-module_light__ugMlT.button-module_flat__ItVb2:hover {\n      background-color: #ffffff; }\n      .button-module_light__ugMlT.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: black; }\n\n.button-module_block__QXp9s {\n  flex: 1;\n  width: 100%; }\n  .button-module_block__QXp9s > span.button-module_buttonContent__4A7zq {\n    flex: 1;\n    text-align: center; }\n\n.button-module_withIcon__8aB-N.button-module_iconLeading__PzMb4 {\n  padding-left: 1rem; }\n\n.button-module_withIcon__8aB-N.button-module_iconEnding__QJBec {\n  padding-right: 1rem; }\n";
-var styles$b = {"button":"button-module_button__yfHX9","sm":"button-module_sm__sM-Bn","lg":"button-module_lg__kGxW1","buttonContent":"button-module_buttonContent__4A7zq","default":"button-module_default__QlCDU","flat":"button-module_flat__ItVb2","rounded":"button-module_rounded__jNVzk","iconWrapper":"button-module_iconWrapper__QUHW4","iconLead":"button-module_iconLead__Kpl1u","iconEnd":"button-module_iconEnd__h067L","primary":"button-module_primary__owGsB","icon":"button-module_icon__Uk-sL","secondary":"button-module_secondary__5ndRZ","success":"button-module_success__-dqWn","danger":"button-module_danger__ANkhq","info":"button-module_info__XPmH4","warning":"button-module_warning__KEyfR","dark":"button-module_dark__B-o-h","light":"button-module_light__ugMlT","block":"button-module_block__QXp9s","withIcon":"button-module_withIcon__8aB-N","iconLeading":"button-module_iconLeading__PzMb4","iconEnding":"button-module_iconEnding__QJBec"};
-styleInject(css_248z$b);
+var css_248z$i = "@use \"sass:math\";\n.button-module_button__yfHX9 {\n  align-items: center;\n  border-color: transparent;\n  box-shadow: rgba(33, 35, 38, 0.1) 0 10px 10px -10px;\n  box-shadow: 0px 3px 0px 0px rgba(0, 0, 0, 0.1);\n  border-radius: 5px;\n  cursor: pointer;\n  display: inline-flex;\n  flex-grow: 0;\n  flex-shrink: 0;\n  font-size: 0.9rem;\n  height: 30px;\n  margin: 0 0.2rem 0.5rem 0.2rem;\n  padding: 0;\n  position: relative;\n  transition: background-color 0.6s; }\n  .button-module_button__yfHX9 span {\n    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3); }\n  .button-module_button__yfHX9:disabled, .button-module_button__yfHX9:disabled:hover {\n    background-color: rgba(0, 0, 0, 0.6);\n    opacity: 0.5;\n    cursor: not-allowed; }\n  .button-module_button__yfHX9.button-module_sm__sM-Bn {\n    height: 25px; }\n    .button-module_button__yfHX9.button-module_sm__sM-Bn span {\n      padding: 0px 0.5rem;\n      font-weight: 500;\n      font-size: small; }\n  .button-module_button__yfHX9.button-module_lg__kGxW1 {\n    height: 40px; }\n    .button-module_button__yfHX9.button-module_lg__kGxW1 span {\n      padding: 0px 1rem;\n      font-weight: 500;\n      font-size: large; }\n\n.button-module_buttonContent__4A7zq {\n  padding: 0px 0.7rem;\n  font-weight: 400; }\n\n.button-module_default__QlCDU {\n  background-color: #ffffff; }\n  .button-module_default__QlCDU:hover {\n    background-color: #d9d9d9; }\n  .button-module_default__QlCDU span {\n    color: black; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ffffff; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n    color: #ffffff; }\n  .button-module_default__QlCDU.button-module_flat__ItVb2.button-module_flat__ItVb2:hover {\n    background-color: #ffffff; }\n    .button-module_default__QlCDU.button-module_flat__ItVb2.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n      color: black; }\n\n.button-module_rounded__jNVzk {\n  border-radius: 20px; }\n\n.button-module_iconWrapper__QUHW4 {\n  align-items: center;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  position: absolute;\n  width: 30px;\n  height: 30px; }\n\n.button-module_iconLead__Kpl1u {\n  left: 0; }\n\n.button-module_iconEnd__h067L {\n  right: 0; }\n\n.button-module_button__yfHX9.button-module_lg__kGxW1 .button-module_iconWrapper__QUHW4 {\n  width: 40px;\n  height: 40px; }\n\n.button-module_rounded__jNVzk .button-module_iconWrapper__QUHW4 {\n  border-radius: 20px; }\n\n.button-module_primary__owGsB {\n  background-color: #8d6b94;\n  box-shadow: 0px 3px 0px 0px #715676; }\n  .button-module_primary__owGsB:hover {\n    background-color: #634b68; }\n  .button-module_primary__owGsB span {\n    color: white; }\n  .button-module_primary__owGsB .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_primary__owGsB.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #8d6b94;\n    box-shadow: none; }\n    .button-module_primary__owGsB.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #8d6b94;\n      font-weight: 400; }\n    .button-module_primary__owGsB.button-module_flat__ItVb2:hover {\n      background-color: #8d6b94; }\n      .button-module_primary__owGsB.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_secondary__5ndRZ {\n  background-color: #b185a7;\n  box-shadow: 0px 3px 0px 0px #9d6691; }\n  .button-module_secondary__5ndRZ:hover {\n    background-color: #8e5b83; }\n  .button-module_secondary__5ndRZ span {\n    color: white; }\n  .button-module_secondary__5ndRZ .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_secondary__5ndRZ.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #b185a7;\n    box-shadow: none; }\n    .button-module_secondary__5ndRZ.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #b185a7;\n      font-weight: 400; }\n    .button-module_secondary__5ndRZ.button-module_flat__ItVb2:hover {\n      background-color: #b185a7; }\n      .button-module_secondary__5ndRZ.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_success__-dqWn {\n  background-color: #06d6a0;\n  box-shadow: 0px 3px 0px 0px #05a47b; }\n  .button-module_success__-dqWn:hover {\n    background-color: #048c68; }\n  .button-module_success__-dqWn span {\n    color: white; }\n  .button-module_success__-dqWn .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_success__-dqWn.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #06d6a0;\n    box-shadow: none; }\n    .button-module_success__-dqWn.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #06d6a0;\n      font-weight: 400; }\n    .button-module_success__-dqWn.button-module_flat__ItVb2:hover {\n      background-color: #06d6a0; }\n      .button-module_success__-dqWn.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_danger__ANkhq {\n  background-color: #ef476f;\n  box-shadow: 0px 3px 0px 0px #eb184a; }\n  .button-module_danger__ANkhq:hover {\n    background-color: #d71341; }\n  .button-module_danger__ANkhq span {\n    color: white; }\n  .button-module_danger__ANkhq .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_danger__ANkhq.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ef476f;\n    box-shadow: none; }\n    .button-module_danger__ANkhq.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #ef476f;\n      font-weight: 400; }\n    .button-module_danger__ANkhq.button-module_flat__ItVb2:hover {\n      background-color: #ef476f; }\n      .button-module_danger__ANkhq.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_info__XPmH4 {\n  background-color: #7796cb;\n  box-shadow: 0px 3px 0px 0px #527abd; }\n  .button-module_info__XPmH4:hover {\n    background-color: #446cb2; }\n  .button-module_info__XPmH4 span {\n    color: white; }\n  .button-module_info__XPmH4 .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_info__XPmH4.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #7796cb;\n    box-shadow: none; }\n    .button-module_info__XPmH4.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #7796cb;\n      font-weight: 400; }\n    .button-module_info__XPmH4.button-module_flat__ItVb2:hover {\n      background-color: #7796cb; }\n      .button-module_info__XPmH4.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_warning__KEyfR {\n  background-color: #f2f3ae;\n  box-shadow: 0px 3px 0px 0px #dddf29; }\n  .button-module_warning__KEyfR:hover {\n    background-color: #e7e96b; }\n  .button-module_warning__KEyfR span {\n    color: black; }\n  .button-module_warning__KEyfR .button-module_icon__Uk-sL {\n    color: black; }\n  .button-module_warning__KEyfR.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #f2f3ae;\n    box-shadow: none; }\n    .button-module_warning__KEyfR.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #f2f3ae;\n      font-weight: 400; }\n    .button-module_warning__KEyfR.button-module_flat__ItVb2:hover {\n      background-color: #f2f3ae; }\n      .button-module_warning__KEyfR.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: black; }\n\n.button-module_dark__B-o-h {\n  background-color: #212121;\n  box-shadow: 0px 3px 0px 0px #080808; }\n  .button-module_dark__B-o-h:hover {\n    background-color: black; }\n  .button-module_dark__B-o-h span {\n    color: white; }\n  .button-module_dark__B-o-h .button-module_icon__Uk-sL {\n    color: white; }\n  .button-module_dark__B-o-h.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #212121;\n    box-shadow: none; }\n    .button-module_dark__B-o-h.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #212121;\n      font-weight: 400; }\n    .button-module_dark__B-o-h.button-module_flat__ItVb2:hover {\n      background-color: #212121; }\n      .button-module_dark__B-o-h.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: white; }\n\n.button-module_light__ugMlT {\n  background-color: #ffffff;\n  box-shadow: 0px 3px 0px 0px #e6e6e6;\n  color: #000; }\n  .button-module_light__ugMlT:hover {\n    background-color: #d9d9d9; }\n  .button-module_light__ugMlT span {\n    color: black; }\n  .button-module_light__ugMlT .button-module_icon__Uk-sL {\n    color: black; }\n  .button-module_light__ugMlT.button-module_flat__ItVb2 {\n    background-color: transparent;\n    border: 2px solid #ffffff;\n    box-shadow: none; }\n    .button-module_light__ugMlT.button-module_flat__ItVb2 .button-module_buttonContent__4A7zq {\n      color: #ffffff;\n      font-weight: 400; }\n    .button-module_light__ugMlT.button-module_flat__ItVb2:hover {\n      background-color: #ffffff; }\n      .button-module_light__ugMlT.button-module_flat__ItVb2:hover .button-module_buttonContent__4A7zq {\n        color: black; }\n\n.button-module_block__QXp9s {\n  flex: 1;\n  width: 100%; }\n  .button-module_block__QXp9s > span.button-module_buttonContent__4A7zq {\n    flex: 1;\n    text-align: center; }\n\n.button-module_withIcon__8aB-N.button-module_iconLeading__PzMb4 {\n  padding-left: 1rem; }\n\n.button-module_withIcon__8aB-N.button-module_iconEnding__QJBec {\n  padding-right: 1rem; }\n";
+var styles$i = {"button":"button-module_button__yfHX9","sm":"button-module_sm__sM-Bn","lg":"button-module_lg__kGxW1","buttonContent":"button-module_buttonContent__4A7zq","default":"button-module_default__QlCDU","flat":"button-module_flat__ItVb2","rounded":"button-module_rounded__jNVzk","iconWrapper":"button-module_iconWrapper__QUHW4","iconLead":"button-module_iconLead__Kpl1u","iconEnd":"button-module_iconEnd__h067L","primary":"button-module_primary__owGsB","icon":"button-module_icon__Uk-sL","secondary":"button-module_secondary__5ndRZ","success":"button-module_success__-dqWn","danger":"button-module_danger__ANkhq","info":"button-module_info__XPmH4","warning":"button-module_warning__KEyfR","dark":"button-module_dark__B-o-h","light":"button-module_light__ugMlT","block":"button-module_block__QXp9s","withIcon":"button-module_withIcon__8aB-N","iconLeading":"button-module_iconLeading__PzMb4","iconEnding":"button-module_iconEnding__QJBec"};
+styleInject(css_248z$i);
 
-var css_248z$a = "@use \"sass:math\";\n.icon-module_root__XG4tj {\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .icon-module_root__XG4tj {\n      color: #fff; } }\n";
-var styles$a = {"root":"icon-module_root__XG4tj"};
-styleInject(css_248z$a);
+var css_248z$h = "@use \"sass:math\";\n.icon-module_root__XG4tj {\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .icon-module_root__XG4tj {\n      color: #fff; } }\n";
+var styles$h = {"root":"icon-module_root__XG4tj"};
+styleInject(css_248z$h);
 
 /**
  * Renders a FontAwesomeIcon with the given icon name.
@@ -55,7 +176,7 @@ styleInject(css_248z$a);
  * @returns
  */
 const Icon = ({ className, icon = 'tag' }) => {
-    return React.createElement(FontAwesomeIcon, { icon: icon || '', className: cs(styles$a.root, className) });
+    return React.createElement(FontAwesomeIcon, { icon: icon || '', className: classNames(styles$h.root, className) });
 };
 Icon.defaultProps = {
     className: '',
@@ -98,29 +219,29 @@ const applyButtonVariantStyles = (config) => {
  * @param param0
  * @returns
  */
-const Button = ({ children, className, icon, rounded, block, variant, loading, size, flat, iconPosition, ...props }) => {
-    const iconRenderer = useMemo(() => (React__default.createElement("i", { className: cs(styles$b.iconWrapper, {
-            [styles$b.iconEnd]: iconPosition === 'end',
-            [styles$b.iconLead]: iconPosition === 'lead'
+const Button = ({ children, className, icon, rounded, block, variant, loading, size, flat, iconPosition, loadingLabel, ...props }) => {
+    const iconRenderer = useMemo$1(() => (React__default.createElement("i", { className: classNames(styles$i.iconWrapper, {
+            [styles$i.iconEnd]: iconPosition === 'end',
+            [styles$i.iconLead]: iconPosition === 'lead'
         }) },
-        React__default.createElement(Icon, { icon: icon, className: cs(styles$b.icon) }))), [icon, iconPosition]);
-    return (React__default.createElement(ButtonBase, { className: cs(styles$b.button, {
+        React__default.createElement(Icon, { icon: icon, className: classNames(styles$i.icon) }))), [icon, iconPosition]);
+    return (React__default.createElement(ButtonBase, { className: classNames(styles$i.button, {
             ...applyButtonVariantStyles({
-                styles: styles$b,
+                styles: styles$i,
                 variant
             }),
-            [styles$b.rounded]: rounded,
-            [styles$b.block]: block,
-            [styles$b.sm]: size === 'sm',
-            [styles$b.md]: size === 'md',
-            [styles$b.lg]: size === 'lg',
-            [styles$b.flat]: flat,
-            [styles$b.withIcon]: Boolean(icon),
-            [styles$b.iconLeading]: iconPosition === 'lead',
-            [styles$b.iconEnding]: iconPosition === 'end'
+            [styles$i.rounded]: rounded,
+            [styles$i.block]: block,
+            [styles$i.sm]: size === 'sm',
+            [styles$i.md]: size === 'md',
+            [styles$i.lg]: size === 'lg',
+            [styles$i.flat]: flat,
+            [styles$i.withIcon]: Boolean(icon),
+            [styles$i.iconLeading]: iconPosition === 'lead',
+            [styles$i.iconEnding]: iconPosition === 'end'
         }, className), tabIndex: 0, ...props },
         icon && iconPosition === 'lead' && iconRenderer,
-        React__default.createElement("span", { className: styles$b.buttonContent }, loading ? 'loading ... ' : children),
+        React__default.createElement("span", { className: styles$i.buttonContent }, loading ? loadingLabel || 'loading...' : children),
         icon && iconPosition === 'end' && iconRenderer));
 };
 Button.defaultProps = {
@@ -131,35 +252,35 @@ Button.defaultProps = {
     variant: 'default'
 };
 
-var css_248z$9 = "@use \"sass:math\";\n.icon-button-module_root__u1x4- {\n  width: 40px;\n  height: 40px;\n  border: none;\n  cursor: pointer;\n  flex-shrink: 0;\n  padding: 0;\n  margin: 0;\n  box-sizing: inherit;\n  background-color: transparent;\n  border-radius: 50%;\n  transition: background-color 0.6s;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .icon-button-module_root__u1x4- {\n      color: #fff;\n      border-color: #8f8f8f; } }\n  .icon-button-module_root__u1x4-:disabled {\n    opacity: 0.2;\n    cursor: not-allowed;\n    color: #000;\n    background-color: rgba(0, 0, 0, 0.08); }\n\n.icon-button-module_withLabelWrapper__9aC34 {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n    font-size: 0.7rem;\n    margin-top: 0.2rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n        color: #fff; } }\n\n.icon-button-module_primary__Lm3HE {\n  color: #8d6b94;\n  background-color: #e8e1ea;\n  box-shadow: 0px 2px 0px 0px #7f6085; }\n  .icon-button-module_primary__Lm3HE:hover {\n    background-color: #715676;\n    color: white; }\n  .icon-button-module_primary__Lm3HE > .icon-button-module_icon__x11Ki {\n    color: #8d6b94; }\n\n.icon-button-module_secondary__8ReRg {\n  color: #b185a7;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #a7759c; }\n  .icon-button-module_secondary__8ReRg:hover {\n    background-color: #9d6691;\n    color: white; }\n  .icon-button-module_secondary__8ReRg > .icon-button-module_icon__x11Ki {\n    color: #b185a7; }\n\n.icon-button-module_success__H97Hp {\n  color: #06d6a0;\n  background-color: #abfde8;\n  box-shadow: 0px 2px 0px 0px #05bd8d; }\n  .icon-button-module_success__H97Hp:hover {\n    background-color: #05a47b;\n    color: white; }\n  .icon-button-module_success__H97Hp > .icon-button-module_icon__x11Ki {\n    color: #06d6a0; }\n\n.icon-button-module_danger__Sq2b1 {\n  color: #ef476f;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #ed305d; }\n  .icon-button-module_danger__Sq2b1:hover {\n    background-color: #eb184a;\n    color: white; }\n  .icon-button-module_danger__Sq2b1 > .icon-button-module_icon__x11Ki {\n    color: #ef476f; }\n\n.icon-button-module_warning__jSzGR {\n  color: #b7ba1b;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #eef098; }\n  .icon-button-module_warning__jSzGR:hover {\n    background-color: #e4e655;\n    color: black; }\n  .icon-button-module_warning__jSzGR > .icon-button-module_icon__x11Ki {\n    color: #b7ba1b; }\n\n.icon-button-module_info__WYMmR {\n  color: #7796cb;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #6588c4; }\n  .icon-button-module_info__WYMmR:hover {\n    background-color: #527abd;\n    color: white; }\n  .icon-button-module_info__WYMmR > .icon-button-module_icon__x11Ki {\n    color: #7796cb; }\n\n.icon-button-module_light__8B2so {\n  color: gray;\n  background-color: white;\n  box-shadow: none; }\n  .icon-button-module_light__8B2so:hover {\n    background-color: #cccccc;\n    color: black; }\n\n.icon-button-module_dark__fsKvI {\n  color: black;\n  background-color: #a1a1a1;\n  box-shadow: 0px 2px 0px 0px #141414; }\n  .icon-button-module_dark__fsKvI:hover {\n    background-color: black;\n    color: white; }\n  .icon-button-module_dark__fsKvI > .icon-button-module_icon__x11Ki {\n    color: black; }\n\n.icon-button-module_flat__qVklj {\n  background-color: transparent;\n  box-shadow: none; }\n  .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n    color: gray; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n        color: #e6e6e6; } }\n\n.icon-button-module_sizeLg__HPQh1 {\n  width: 50px;\n  height: 50px; }\n\n.icon-button-module_sizeSm__-4j1C {\n  width: 30px;\n  height: 30px; }\n";
-var styles$9 = {"root":"icon-button-module_root__u1x4-","withLabelWrapper":"icon-button-module_withLabelWrapper__9aC34","label":"icon-button-module_label__rKElE","primary":"icon-button-module_primary__Lm3HE","icon":"icon-button-module_icon__x11Ki","secondary":"icon-button-module_secondary__8ReRg","success":"icon-button-module_success__H97Hp","danger":"icon-button-module_danger__Sq2b1","warning":"icon-button-module_warning__jSzGR","info":"icon-button-module_info__WYMmR","light":"icon-button-module_light__8B2so","dark":"icon-button-module_dark__fsKvI","flat":"icon-button-module_flat__qVklj","sizeLg":"icon-button-module_sizeLg__HPQh1","sizeSm":"icon-button-module_sizeSm__-4j1C"};
-styleInject(css_248z$9);
+var css_248z$g = "@use \"sass:math\";\n.icon-button-module_root__u1x4- {\n  width: 40px;\n  height: 40px;\n  border: none;\n  cursor: pointer;\n  flex-shrink: 0;\n  padding: 0;\n  margin: 0;\n  box-sizing: inherit;\n  background-color: transparent;\n  border-radius: 50%;\n  transition: background-color 0.6s;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .icon-button-module_root__u1x4- {\n      color: #fff;\n      border-color: #8f8f8f; } }\n  .icon-button-module_root__u1x4-:disabled {\n    opacity: 0.2;\n    cursor: not-allowed;\n    color: #000;\n    background-color: rgba(0, 0, 0, 0.08); }\n\n.icon-button-module_withLabelWrapper__9aC34 {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n    font-size: 0.7rem;\n    margin-top: 0.2rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n        color: #fff; } }\n\n.icon-button-module_primary__Lm3HE {\n  color: #8d6b94;\n  background-color: #e8e1ea;\n  box-shadow: 0px 2px 0px 0px #7f6085; }\n  .icon-button-module_primary__Lm3HE:hover {\n    background-color: #715676;\n    color: white; }\n  .icon-button-module_primary__Lm3HE > .icon-button-module_icon__x11Ki {\n    color: #8d6b94; }\n\n.icon-button-module_secondary__8ReRg {\n  color: #b185a7;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #a7759c; }\n  .icon-button-module_secondary__8ReRg:hover {\n    background-color: #9d6691;\n    color: white; }\n  .icon-button-module_secondary__8ReRg > .icon-button-module_icon__x11Ki {\n    color: #b185a7; }\n\n.icon-button-module_success__H97Hp {\n  color: #06d6a0;\n  background-color: #abfde8;\n  box-shadow: 0px 2px 0px 0px #05bd8d; }\n  .icon-button-module_success__H97Hp:hover {\n    background-color: #05a47b;\n    color: white; }\n  .icon-button-module_success__H97Hp > .icon-button-module_icon__x11Ki {\n    color: #06d6a0; }\n\n.icon-button-module_danger__Sq2b1 {\n  color: #ef476f;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #ed305d; }\n  .icon-button-module_danger__Sq2b1:hover {\n    background-color: #eb184a;\n    color: white; }\n  .icon-button-module_danger__Sq2b1 > .icon-button-module_icon__x11Ki {\n    color: #ef476f; }\n\n.icon-button-module_warning__jSzGR {\n  color: #b7ba1b;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #eef098; }\n  .icon-button-module_warning__jSzGR:hover {\n    background-color: #e4e655;\n    color: black; }\n  .icon-button-module_warning__jSzGR > .icon-button-module_icon__x11Ki {\n    color: #b7ba1b; }\n\n.icon-button-module_info__WYMmR {\n  color: #7796cb;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #6588c4; }\n  .icon-button-module_info__WYMmR:hover {\n    background-color: #527abd;\n    color: white; }\n  .icon-button-module_info__WYMmR > .icon-button-module_icon__x11Ki {\n    color: #7796cb; }\n\n.icon-button-module_light__8B2so {\n  color: gray;\n  background-color: white;\n  box-shadow: none; }\n  .icon-button-module_light__8B2so:hover {\n    background-color: #cccccc;\n    color: black; }\n\n.icon-button-module_dark__fsKvI {\n  color: black;\n  background-color: #a1a1a1;\n  box-shadow: 0px 2px 0px 0px #141414; }\n  .icon-button-module_dark__fsKvI:hover {\n    background-color: black;\n    color: white; }\n  .icon-button-module_dark__fsKvI > .icon-button-module_icon__x11Ki {\n    color: black; }\n\n.icon-button-module_flat__qVklj {\n  background-color: transparent;\n  box-shadow: none; }\n  .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n    color: gray; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n        color: #e6e6e6; } }\n\n.icon-button-module_sizeLg__HPQh1 {\n  width: 50px;\n  height: 50px; }\n\n.icon-button-module_sizeSm__-4j1C {\n  width: 30px;\n  height: 30px; }\n";
+var styles$g = {"root":"icon-button-module_root__u1x4-","withLabelWrapper":"icon-button-module_withLabelWrapper__9aC34","label":"icon-button-module_label__rKElE","primary":"icon-button-module_primary__Lm3HE","icon":"icon-button-module_icon__x11Ki","secondary":"icon-button-module_secondary__8ReRg","success":"icon-button-module_success__H97Hp","danger":"icon-button-module_danger__Sq2b1","warning":"icon-button-module_warning__jSzGR","info":"icon-button-module_info__WYMmR","light":"icon-button-module_light__8B2so","dark":"icon-button-module_dark__fsKvI","flat":"icon-button-module_flat__qVklj","sizeLg":"icon-button-module_sizeLg__HPQh1","sizeSm":"icon-button-module_sizeSm__-4j1C"};
+styleInject(css_248z$g);
 
-var css_248z$8 = "@use \"sass:math\";\n.alert-module_root__DQW41 {\n  border-radius: 10px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 1rem; }\n\n.alert-module_primary__iu0Wq {\n  background-color: rgba(141, 107, 148, 0.4);\n  color: white; }\n  .alert-module_primary__iu0Wq .alert-module_icon__0xtkg {\n    color: white; }\n\n.alert-module_info__5PrZI {\n  background-color: rgba(119, 150, 203, 0.4);\n  color: white; }\n  .alert-module_info__5PrZI .alert-module_icon__0xtkg {\n    color: white; }\n\n.alert-module_iconWrapper__5NtU- {\n  margin-right: 1rem; }\n\n.alert-module_content__a9vpO {\n  flex: 1; }\n\n.alert-module_actionButton__ZpuDJ {\n  margin: 0; }\n";
-var styles$8 = {"root":"alert-module_root__DQW41","primary":"alert-module_primary__iu0Wq","icon":"alert-module_icon__0xtkg","info":"alert-module_info__5PrZI","iconWrapper":"alert-module_iconWrapper__5NtU-","content":"alert-module_content__a9vpO","actionButton":"alert-module_actionButton__ZpuDJ"};
-styleInject(css_248z$8);
+var css_248z$f = "@use \"sass:math\";\n.alert-module_root__DQW41 {\n  border-radius: 10px;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  padding: 1rem; }\n\n.alert-module_primary__iu0Wq {\n  background-color: rgba(141, 107, 148, 0.4);\n  color: white; }\n  .alert-module_primary__iu0Wq .alert-module_icon__0xtkg {\n    color: white; }\n\n.alert-module_info__5PrZI {\n  background-color: rgba(119, 150, 203, 0.4);\n  color: white; }\n  .alert-module_info__5PrZI .alert-module_icon__0xtkg {\n    color: white; }\n\n.alert-module_iconWrapper__5NtU- {\n  margin-right: 1rem; }\n\n.alert-module_content__a9vpO {\n  flex: 1; }\n\n.alert-module_actionButton__ZpuDJ {\n  margin: 0; }\n";
+var styles$f = {"root":"alert-module_root__DQW41","primary":"alert-module_primary__iu0Wq","icon":"alert-module_icon__0xtkg","info":"alert-module_info__5PrZI","iconWrapper":"alert-module_iconWrapper__5NtU-","content":"alert-module_content__a9vpO","actionButton":"alert-module_actionButton__ZpuDJ"};
+styleInject(css_248z$f);
 
 const Alert = ({ action, actionIcon, actionLabel, actionVariant, message, icon, variant = 'default' }) => {
-    return (React__default.createElement("div", { className: cs(styles$8.root, {
-            [styles$8.primary]: variant === 'primary',
-            [styles$8.secondary]: variant === 'secondary',
-            [styles$8.success]: variant === 'success',
-            [styles$8.info]: variant === 'info',
-            [styles$8.danger]: variant === 'danger',
-            [styles$8.warning]: variant === 'warning'
+    return (React__default.createElement("div", { className: classNames(styles$f.root, {
+            [styles$f.primary]: variant === 'primary',
+            [styles$f.secondary]: variant === 'secondary',
+            [styles$f.success]: variant === 'success',
+            [styles$f.info]: variant === 'info',
+            [styles$f.danger]: variant === 'danger',
+            [styles$f.warning]: variant === 'warning'
         }) },
-        icon && (React__default.createElement("div", { className: styles$8.iconWrapper },
-            React__default.createElement(Icon, { className: styles$8.icon, icon: icon }))),
-        React__default.createElement("div", { className: styles$8.content }, message),
-        Boolean(action) && (React__default.createElement(Button, { className: styles$8.actionButton, variant: actionVariant, icon: actionIcon, onClick: action }, actionLabel))));
+        icon && (React__default.createElement("div", { className: styles$f.iconWrapper },
+            React__default.createElement(Icon, { className: styles$f.icon, icon: icon }))),
+        React__default.createElement("div", { className: styles$f.content }, message),
+        Boolean(action) && (React__default.createElement(Button, { className: styles$f.actionButton, variant: actionVariant, icon: actionIcon, onClick: action }, actionLabel))));
 };
 Alert.defaultProps = {
     actionVariant: 'primary'
 };
 
-var css_248z$7 = "@use \"sass:math\";\n.pill-module_root__f-Exi {\n  border-radius: 20px;\n  font-size: 0.8rem;\n  border-width: 2px;\n  border-style: solid;\n  margin: 0 0.1rem 0.2rem;\n  display: inline-flex;\n  align-items: center;\n  flex-shrink: 0;\n  flex-grow: 0; }\n\n.pill-module_label__2heeo,\n.pill-module_value__TtQc3 {\n  display: inline-block;\n  padding: 0.1rem 0.5rem; }\n\n.pill-module_value__TtQc3 {\n  margin-left: 0.2rem;\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px; }\n\n.pill-module_icon__tfAjQ {\n  margin-left: 0.5rem; }\n\n.pill-module_default__xEF67 {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_default__xEF67 .pill-module_value__TtQc3 {\n    background-color: #e6e6e6; }\n\n.pill-module_primary__GnHHP {\n  background-color: #8d6b94;\n  border-color: #634b68;\n  color: white; }\n  .pill-module_primary__GnHHP .pill-module_value__TtQc3 {\n    background-color: #554059; }\n\n.pill-module_secondary__oSDnT {\n  background-color: #b185a7;\n  border-color: #8e5b83;\n  color: white; }\n  .pill-module_secondary__oSDnT .pill-module_value__TtQc3 {\n    background-color: #7f5174; }\n\n.pill-module_success__wRcmf {\n  background-color: #06d6a0;\n  border-color: #048c68;\n  color: white; }\n  .pill-module_success__wRcmf .pill-module_value__TtQc3 {\n    background-color: #037356; }\n\n.pill-module_info__q-5Kq {\n  background-color: #7796cb;\n  border-color: #446cb2;\n  color: white; }\n  .pill-module_info__q-5Kq .pill-module_value__TtQc3 {\n    background-color: #3d619f; }\n\n.pill-module_danger__cDGNE {\n  background-color: #ef476f;\n  border-color: #d71341;\n  color: white; }\n  .pill-module_danger__cDGNE .pill-module_value__TtQc3 {\n    background-color: #bf113a; }\n\n.pill-module_warning__NJPR- {\n  background-color: #f2f3ae;\n  border-color: #e7e96b;\n  color: black; }\n  .pill-module_warning__NJPR- .pill-module_value__TtQc3 {\n    background-color: #e4e655; }\n\n.pill-module_dark__5oAtq {\n  background-color: #212121;\n  border-color: black;\n  color: white; }\n  .pill-module_dark__5oAtq .pill-module_value__TtQc3 {\n    background-color: black; }\n\n.pill-module_light__t49uX {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_light__t49uX .pill-module_value__TtQc3 {\n    background-color: #cccccc; }\n";
-var styles$7 = {"root":"pill-module_root__f-Exi","label":"pill-module_label__2heeo","value":"pill-module_value__TtQc3","icon":"pill-module_icon__tfAjQ","default":"pill-module_default__xEF67","primary":"pill-module_primary__GnHHP","secondary":"pill-module_secondary__oSDnT","success":"pill-module_success__wRcmf","info":"pill-module_info__q-5Kq","danger":"pill-module_danger__cDGNE","warning":"pill-module_warning__NJPR-","dark":"pill-module_dark__5oAtq","light":"pill-module_light__t49uX"};
-styleInject(css_248z$7);
+var css_248z$e = "@use \"sass:math\";\n.pill-module_root__f-Exi {\n  border-radius: 20px;\n  font-size: 0.8rem;\n  border-width: 2px;\n  border-style: solid;\n  margin: 0 0.1rem 0.2rem;\n  display: inline-flex;\n  align-items: center;\n  flex-shrink: 0;\n  flex-grow: 0; }\n\n.pill-module_label__2heeo,\n.pill-module_value__TtQc3 {\n  display: inline-block;\n  padding: 0.1rem 0.5rem; }\n\n.pill-module_value__TtQc3 {\n  margin-left: 0.2rem;\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px; }\n\n.pill-module_icon__tfAjQ {\n  margin-left: 0.5rem; }\n\n.pill-module_default__xEF67 {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_default__xEF67 .pill-module_value__TtQc3 {\n    background-color: #e6e6e6; }\n\n.pill-module_primary__GnHHP {\n  background-color: #8d6b94;\n  border-color: #634b68;\n  color: white; }\n  .pill-module_primary__GnHHP .pill-module_value__TtQc3 {\n    background-color: #554059; }\n\n.pill-module_secondary__oSDnT {\n  background-color: #b185a7;\n  border-color: #8e5b83;\n  color: white; }\n  .pill-module_secondary__oSDnT .pill-module_value__TtQc3 {\n    background-color: #7f5174; }\n\n.pill-module_success__wRcmf {\n  background-color: #06d6a0;\n  border-color: #048c68;\n  color: white; }\n  .pill-module_success__wRcmf .pill-module_value__TtQc3 {\n    background-color: #037356; }\n\n.pill-module_info__q-5Kq {\n  background-color: #7796cb;\n  border-color: #446cb2;\n  color: white; }\n  .pill-module_info__q-5Kq .pill-module_value__TtQc3 {\n    background-color: #3d619f; }\n\n.pill-module_danger__cDGNE {\n  background-color: #ef476f;\n  border-color: #d71341;\n  color: white; }\n  .pill-module_danger__cDGNE .pill-module_value__TtQc3 {\n    background-color: #bf113a; }\n\n.pill-module_warning__NJPR- {\n  background-color: #f2f3ae;\n  border-color: #e7e96b;\n  color: black; }\n  .pill-module_warning__NJPR- .pill-module_value__TtQc3 {\n    background-color: #e4e655; }\n\n.pill-module_dark__5oAtq {\n  background-color: #212121;\n  border-color: black;\n  color: white; }\n  .pill-module_dark__5oAtq .pill-module_value__TtQc3 {\n    background-color: black; }\n\n.pill-module_light__t49uX {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_light__t49uX .pill-module_value__TtQc3 {\n    background-color: #cccccc; }\n";
+var styles$e = {"root":"pill-module_root__f-Exi","label":"pill-module_label__2heeo","value":"pill-module_value__TtQc3","icon":"pill-module_icon__tfAjQ","default":"pill-module_default__xEF67","primary":"pill-module_primary__GnHHP","secondary":"pill-module_secondary__oSDnT","success":"pill-module_success__wRcmf","info":"pill-module_info__q-5Kq","danger":"pill-module_danger__cDGNE","warning":"pill-module_warning__NJPR-","dark":"pill-module_dark__5oAtq","light":"pill-module_light__t49uX"};
+styleInject(css_248z$e);
 
 /**
  * Generates a pill component,
@@ -167,23 +288,142 @@ styleInject(css_248z$7);
  * @returns React.FC
  */
 const Pill = ({ label, variant, icon, value, className }) => {
-    return (React__default.createElement("div", { className: cs(styles$7.root, className, {
-            [styles$7.default]: variant === 'default',
-            [styles$7.primary]: variant === 'primary',
-            [styles$7.secondary]: variant === 'secondary',
-            [styles$7.success]: variant === 'success',
-            [styles$7.warning]: variant === 'warning',
-            [styles$7.danger]: variant === 'danger',
-            [styles$7.info]: variant === 'info',
-            [styles$7.light]: variant === 'light',
-            [styles$7.dark]: variant === 'dark'
+    return (React__default.createElement("div", { className: classNames(styles$e.root, className, {
+            [styles$e.default]: variant === 'default',
+            [styles$e.primary]: variant === 'primary',
+            [styles$e.secondary]: variant === 'secondary',
+            [styles$e.success]: variant === 'success',
+            [styles$e.warning]: variant === 'warning',
+            [styles$e.danger]: variant === 'danger',
+            [styles$e.info]: variant === 'info',
+            [styles$e.light]: variant === 'light',
+            [styles$e.dark]: variant === 'dark'
         }) },
-        Boolean(icon) && React__default.createElement(Icon, { className: styles$7.icon, icon: icon }),
-        React__default.createElement("span", { className: styles$7.label }, label),
-        value && React__default.createElement("span", { className: styles$7.value }, value)));
+        Boolean(icon) && React__default.createElement(Icon, { className: styles$e.icon, icon: icon }),
+        React__default.createElement("span", { className: styles$e.label }, label),
+        value && React__default.createElement("span", { className: styles$e.value }, value)));
 };
 Pill.defaultProps = {
     variant: 'default'
+};
+
+var css_248z$d = "@use \"sass:math\";\n.step-module_step__AmOI8 h3 {\n  text-align: center;\n  font-size: 1.4rem;\n  margin-top: 1rem;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .step-module_step__AmOI8 h3 {\n      color: #fff; } }\n\n.step-module_description__V6pXT {\n  text-align: center;\n  font-size: 0.9rem;\n  margin-bottom: 2rem;\n  color: #848484; }\n";
+var styles$d = {"step":"step-module_step__AmOI8","description":"step-module_description__V6pXT"};
+styleInject(css_248z$d);
+
+const Step = ({ children, className, description, title }) => {
+    return (React__default.createElement("div", { className: classNames(styles$d.step, className) },
+        React__default.createElement("h3", null, title),
+        React__default.createElement("p", { className: styles$d.description }, description),
+        children));
+};
+
+const StepperCTX = createContext({
+    goNext: () => { },
+    goBack: () => { },
+    isInFirstStep: false,
+    isInLastStep: false
+});
+const StepperProvider = StepperCTX.Provider;
+StepperCTX.Consumer;
+
+const StepperActions = ({ children, appendRender }) => {
+    const { isInLastStep } = useContext(StepperCTX);
+    return (React__default.createElement("div", { className: "flex flex-1 mt-10 justify-center" },
+        children,
+        appendRender?.({ isInLastStep })));
+};
+
+const StepperNext = ({ label }) => {
+    const { goNext, isInLastStep, isValidStep } = useContext(StepperCTX);
+    if (isInLastStep)
+        return null;
+    return (React__default.createElement(Button, { variant: "primary", rounded: true, onClick: goNext, disabled: !isValidStep, type: "button" }, label || 'Next step'));
+};
+// * Keep the dots visible when the page reloads
+// * Hide the tooltip when the user scrolls down.
+// * Basically there will be only one set of dots opened at the same time
+// *
+
+const StepperBack = ({ label }) => {
+    const { goBack, isInFirstStep } = useContext(StepperCTX);
+    if (isInFirstStep)
+        return null;
+    return (React__default.createElement(Button, { rounded: true, onClick: goBack, type: "button", variant: "light" }, label || 'Previous'));
+};
+
+const StepperFinish = ({ label, ...props }) => {
+    const { goBack, isInLastStep } = useContext(StepperCTX);
+    return (React__default.createElement(Button, { rounded: true, disabled: !isInLastStep, onClick: goBack, type: "button", variant: "success", ...props }, label || 'Finish'));
+};
+
+const StepWrapper = ({ children }) => {
+    return React__default.createElement(React__default.Fragment, null, children);
+};
+
+var css_248z$c = "@use \"sass:math\";\n.stepper-module_stepperRoot__d2yiJ,\n.stepper-module_stepperStep__mwSSL,\n.stepper-module_stepperStepWrapper__hDUxK {\n  display: flex; }\n\n.stepper-module_stepperRoot__d2yiJ,\n.stepper-module_stepperStep__mwSSL,\n.stepper-module_stepperStepWrapper__hDUxK {\n  align-items: center;\n  justify-content: center; }\n\n.stepper-module_stepperRoot__d2yiJ {\n  flex: 1;\n  position: relative;\n  align-items: center;\n  justify-content: space-between; }\n\n.stepper-module_stepperStep__mwSSL {\n  flex: 1;\n  position: relative; }\n  .stepper-module_stepperStep__mwSSL::after {\n    content: '';\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    width: 100%;\n    height: 5px;\n    background-color: rgba(0, 0, 0, 0.2);\n    border-radius: 20px;\n    transform: translateY(-50%);\n    z-index: -1; }\n  .stepper-module_stepperStep__mwSSL.stepper-module_active__l5Rqf::after {\n    background-color: #8d6b94; }\n  .stepper-module_stepperStep__mwSSL:last-child::after {\n    display: none; }\n\n.stepper-module_stepperStepWrapper__hDUxK {\n  background-color: #d1d1d1;\n  border-radius: 50%;\n  width: 30px;\n  height: 30px; }\n  .stepper-module_stepperStepWrapper__hDUxK span {\n    color: #848484; }\n  .stepper-module_stepperStepWrapper__hDUxK.stepper-module_active__l5Rqf {\n    background-color: #8d6b94; }\n    .stepper-module_stepperStepWrapper__hDUxK.stepper-module_active__l5Rqf span {\n      color: #fff;\n      font-size: 0.8rem; }\n";
+var styles$c = {"stepperRoot":"stepper-module_stepperRoot__d2yiJ","stepperStep":"stepper-module_stepperStep__mwSSL","stepperStepWrapper":"stepper-module_stepperStepWrapper__hDUxK","active":"stepper-module_active__l5Rqf"};
+styleInject(css_248z$c);
+
+const Stepper = ({ children, onCompleted, stepsValidation, initialStep = 0 }) => {
+    const [currentStep, setStep] = useState$1(initialStep);
+    const stepsToRender = useMemo$1(() => {
+        return React__default.Children.map(children, (child) => {
+            if (React__default.isValidElement(child) && child.type === Step) {
+                return child;
+            }
+            return null;
+        })?.filter((item) => Boolean(item));
+    }, [children]);
+    const otherPieces = useMemo$1(() => {
+        return React__default.Children.map(children, (child) => {
+            if (React__default.isValidElement(child) && child.type === StepperActions) {
+                return child;
+            }
+            return null;
+        })?.filter((item) => Boolean(item));
+    }, [children]);
+    const totalSteps = useMemo$1(() => stepsToRender?.length || 0, [stepsToRender]);
+    const handleNext = () => {
+        let newStep = currentStep + 1;
+        if (newStep < totalSteps) {
+            setStep(newStep);
+        }
+        if (newStep === totalSteps - 1 && onCompleted) {
+            onCompleted?.();
+        }
+    };
+    const handleBack = () => {
+        let newStep = currentStep - 1;
+        if (newStep >= 0) {
+            setStep(newStep);
+        }
+    };
+    const isInLastStep = useMemo$1(() => currentStep === totalSteps - 1, [currentStep, totalSteps]);
+    const isValidStep = useMemo$1(() => {
+        if (stepsValidation && stepsValidation[currentStep] === false) {
+            return false;
+        }
+        return true;
+    }, [stepsValidation, currentStep]);
+    const isInFirstStep = useMemo$1(() => currentStep === 0, [currentStep]);
+    return (React__default.createElement(StepperProvider, { value: {
+            goNext: handleNext,
+            goBack: handleBack,
+            isInFirstStep,
+            isInLastStep,
+            stepsValidation,
+            isValidStep
+        } },
+        React__default.createElement("div", { className: styles$c.stepperRoot }, _.range(0, totalSteps).map((item, key) => (React__default.createElement("div", { className: classNames(styles$c.stepperStep, {
+                [styles$c.active]: key < currentStep
+            }), key: `step-${key}` },
+            React__default.createElement("div", { className: classNames(styles$c.stepperStepWrapper, {
+                    [styles$c.active]: key <= currentStep
+                }) },
+                React__default.createElement("span", null, item + 1)))))),
+        stepsToRender?.[currentStep],
+        otherPieces?.map((item, key) => (React__default.createElement(StepWrapper, { key: `step-${key}` }, item)))));
 };
 
 const IconButton = forwardRef(({ icon, children, label, variant, onClick, classes, ...props }, ref) => {
@@ -191,25 +431,25 @@ const IconButton = forwardRef(({ icon, children, label, variant, onClick, classe
         e.stopPropagation();
         onClick?.(e);
     };
-    const buttonRenderer = (React__default.createElement("button", { ...props, ref: ref, type: "button", className: cs(styles$9.root, classes?.root, props?.className, {
-            [styles$9.primary]: variant === 'primary',
-            [styles$9.secondary]: variant === 'secondary',
-            [styles$9.danger]: variant === 'danger',
-            [styles$9.warning]: variant === 'warning',
-            [styles$9.success]: variant === 'success',
-            [styles$9.info]: variant === 'info',
-            [styles$9.light]: variant === 'light',
-            [styles$9.dark]: variant === 'dark',
-            [styles$9.flat]: variant === 'flat',
-            [styles$9.disabled]: props?.disabled,
-            [styles$9.sizeMd]: props?.size === 'md',
-            [styles$9.sizeLg]: props?.size === 'lg',
-            [styles$9.sizeSm]: props?.size === 'sm'
-        }), onClick: handleClick, tabIndex: 0 }, children ? children : React__default.createElement(Icon, { className: styles$9.icon, icon: icon })));
+    const buttonRenderer = (React__default.createElement("button", { ...props, ref: ref, type: "button", className: classNames(styles$g.root, classes?.root, props?.className, {
+            [styles$g.primary]: variant === 'primary',
+            [styles$g.secondary]: variant === 'secondary',
+            [styles$g.danger]: variant === 'danger',
+            [styles$g.warning]: variant === 'warning',
+            [styles$g.success]: variant === 'success',
+            [styles$g.info]: variant === 'info',
+            [styles$g.light]: variant === 'light',
+            [styles$g.dark]: variant === 'dark',
+            [styles$g.flat]: variant === 'flat',
+            [styles$g.disabled]: props?.disabled,
+            [styles$g.sizeMd]: props?.size === 'md',
+            [styles$g.sizeLg]: props?.size === 'lg',
+            [styles$g.sizeSm]: props?.size === 'sm'
+        }), onClick: handleClick, tabIndex: 0 }, children ? children : React__default.createElement(Icon, { className: styles$g.icon, icon: icon })));
     if (label) {
-        return (React__default.createElement("div", { className: styles$9.withLabelWrapper },
+        return (React__default.createElement("div", { className: styles$g.withLabelWrapper },
             buttonRenderer,
-            React__default.createElement("span", { className: cs(styles$9.label, classes?.label) }, label)));
+            React__default.createElement("span", { className: classNames(styles$g.label, classes?.label) }, label)));
     }
     return buttonRenderer;
 });
@@ -373,11 +613,11 @@ class Validator {
  */
 const useForm = (config) => {
     const { defaultValues, fields, required } = config || { defaultValues: {} };
-    const [form, setForm] = useState(defaultValues);
+    const [form, setForm] = useState$1(defaultValues);
     const validator = useRef(new Validator(fields, {
         required: required
     })).current;
-    const processValue = useCallback((processorConfig) => {
+    const processValue = useCallback$1((processorConfig) => {
         const { processor, currentValue, field, form } = processorConfig;
         const [processorName] = processor.split(':');
         if (processorName === 'switchGroup') {
@@ -395,7 +635,7 @@ const useForm = (config) => {
     /**
      * Handles the change of the form fields
      */
-    const handleChange = useCallback((e) => {
+    const handleChange = useCallback$1((e) => {
         const { name, value } = e.target;
         const config = fields ? fields[name] : {};
         if (config?.processor) {
@@ -417,7 +657,7 @@ const useForm = (config) => {
     /**
      * Output form data buit from the configuration of the fields
      */
-    const [formData, isValidForm, fieldsWithErrors] = useMemo(() => {
+    const [formData, isValidForm, fieldsWithErrors] = useMemo$1(() => {
         const config = {};
         let hasError = false;
         const fieldsWithErrors = [];
@@ -462,16 +702,16 @@ const useForm = (config) => {
         });
         return [config, !hasError, fieldsWithErrors];
     }, [form, fields, handleChange, validator, defaultValues, required]);
-    const changeForm = useCallback((newForm) => {
+    const changeForm = useCallback$1((newForm) => {
         setForm({
             ...form,
             ...newForm
         });
     }, [form]);
-    const clearForm = useCallback(() => {
+    const clearForm = useCallback$1(() => {
         setForm(defaultValues);
     }, [defaultValues]);
-    const fieldsFilled = useCallback((fields, form) => {
+    const fieldsFilled = useCallback$1((fields, form) => {
         let valid = true;
         if (!fields) {
             return true;
@@ -497,23 +737,93 @@ const useForm = (config) => {
     ];
 };
 
-var css_248z$6 = "@use \"sass:math\";\n.input-module_root__xcWOB {\n  align-items: flex-end;\n  display: flex; }\n\n.input-module_input__9x0t6 {\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  max-width: 100%;\n  min-height: 2.5rem;\n  padding: 0.2rem 1rem;\n  width: 100%; }\n  .input-module_input__9x0t6::placeholder {\n    color: #b3b3b3;\n    transition: opacity 0.2s ease-in-out; }\n  .input-module_input__9x0t6.input-module_withLabel__m6cZE {\n    margin-top: 1.5rem; }\n    .input-module_input__9x0t6.input-module_withLabel__m6cZE::placeholder {\n      opacity: 0; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6 {\n      color: #fff;\n      background-color: #292929;\n      border-color: #8f8f8f; }\n      .input-module_input__9x0t6::placeholder {\n        color: #5c5c5c; } }\n\n.input-module_isRequiredField__Xx5qd {\n  margin-bottom: 1rem; }\n\n.input-module_inputWrapper__qSGvA {\n  flex: 1;\n  position: relative; }\n\n.input-module_label__sQuAx {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_label__sQuAx.input-module_label__sQuAx {\n      color: #fff; } }\n\n.input-module_floatingLabel__WrOdN {\n  bottom: 0.75rem;\n  margin: 0;\n  position: absolute;\n  transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out; }\n\n.input-module_input__9x0t6:focus + .input-module_label__sQuAx,\n.input-module_withValue__wYYkt + .input-module_label__sQuAx {\n  bottom: calc(100% - 1.25rem);\n  font-size: 0.9rem;\n  font-weight: 500;\n  left: 0.2rem; }\n\n.input-module_input__9x0t6:focus {\n  outline: none;\n  border-color: #8d6b94; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6:focus {\n      border-color: #fff; } }\n  .input-module_input__9x0t6:focus::placeholder {\n    opacity: 1; }\n\n.input-module_icon__JQ0Uo {\n  position: absolute;\n  bottom: 0.75rem;\n  left: 1rem;\n  pointer-events: none;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_icon__JQ0Uo {\n      color: #fff; } }\n\n.input-module_trailingIcon__ixXtK {\n  right: 1rem;\n  left: auto; }\n\n.input-module_withLeadingIcon__3vKMc {\n  padding-left: 2.5rem; }\n\n.input-module_withTrailingIcon__80V4h {\n  padding-right: 1.6rem; }\n\n.input-module_actionIcon__hhYVt {\n  position: relative;\n  margin-left: 0.25rem;\n  color: rgba(0, 0, 0, 0.5); }\n\n.input-module_maxDisplay__2ajTW {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.7rem;\n  position: absolute;\n  right: 0.5rem;\n  top: 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_maxDisplay__2ajTW {\n      color: rgba(255, 255, 255, 0.4); } }\n";
-var styles$6 = {"root":"input-module_root__xcWOB","input":"input-module_input__9x0t6","withLabel":"input-module_withLabel__m6cZE","isRequiredField":"input-module_isRequiredField__Xx5qd","inputWrapper":"input-module_inputWrapper__qSGvA","label":"input-module_label__sQuAx","floatingLabel":"input-module_floatingLabel__WrOdN","withValue":"input-module_withValue__wYYkt","icon":"input-module_icon__JQ0Uo","trailingIcon":"input-module_trailingIcon__ixXtK","withLeadingIcon":"input-module_withLeadingIcon__3vKMc","withTrailingIcon":"input-module_withTrailingIcon__80V4h","actionIcon":"input-module_actionIcon__hhYVt","maxDisplay":"input-module_maxDisplay__2ajTW"};
-styleInject(css_248z$6);
+var css_248z$b = ".media-query-module_mediaWrapper__p8cKU {\n  position: fixed;\n  bottom: 0;\n  right: 10px;\n  z-index: 20000;\n  background-color: rgba(255, 255, 255, 0.5); }\n";
+var styles$b = {"mediaWrapper":"media-query-module_mediaWrapper__p8cKU"};
+styleInject(css_248z$b);
 
-var css_248z$5 = "@use \"sass:math\";\n.form-control-module_root__DeA9S {\n  flex: 0 0 auto;\n  max-width: 100%;\n  position: relative;\n  box-sizing: border-box; }\n\n.form-control-module_error__dWO81 {\n  color: #ef476f;\n  font-size: 0.8rem;\n  font-weight: 400;\n  position: absolute;\n  top: 100%;\n  left: 1rem;\n  width: 100%; }\n";
-var styles$5 = {"root":"form-control-module_root__DeA9S","error":"form-control-module_error__dWO81"};
-styleInject(css_248z$5);
-
-const FormControl = ({ children, className, error, hideRequired, ...props }) => {
-    return (React__default.createElement("div", { className: cs(styles$5.root, className), ...props },
-        children,
-        !hideRequired && React__default.createElement(React__default.Fragment, null, Boolean(error) && React__default.createElement("p", { className: styles$5.error }, error))));
+const MediaQueryCTX = createContext({
+    currentRes: 'xl',
+    isIn: () => false
+});
+const MediaQueryProviderProvider = MediaQueryCTX.Provider;
+MediaQueryCTX.Consumer;
+const MediaQueryProvider = ({ children }) => {
+    const [loaded, setLoaded] = useState$1(false);
+    const [res, setResolution] = useState$1({
+        width: 0,
+        height: 0
+    });
+    useEffect(() => {
+        const handleUpdate = () => {
+            setResolution({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+        window.addEventListener('resize', handleUpdate);
+        return () => {
+            window.removeEventListener('resize', handleUpdate);
+        };
+    }, []);
+    useEffect(() => {
+        if (!loaded) {
+            setLoaded(true);
+            setResolution({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        }
+    }, [loaded]);
+    const currentRes = useMemo$1(() => {
+        if (res.width < 479)
+            return 'xs';
+        if (res.width < 719)
+            return 'sm';
+        if (res.width < 959)
+            return 'md';
+        if (res.width < 1200)
+            return 'lg';
+        return 'xl';
+    }, [res.width]);
+    const isIn = useCallback$1((res) => {
+        return res.includes(currentRes);
+    }, [currentRes]);
+    return (React__default.createElement(MediaQueryProviderProvider, { value: {
+            currentRes,
+            isIn
+        } },
+        res.width > 0 && res.height > 0 && children,
+        React__default.createElement("div", { className: styles$b.mediaWrapper },
+            "Resolution: w: ",
+            res.width,
+            " | h: ",
+            res.height,
+            " | ",
+            currentRes)));
 };
 
-var css_248z$4 = "@use \"sass:math\";\n.label-module_root__5HbZT {\n  color: #7f5174;\n  font-weight: 400; }\n  @media (prefers-color-scheme: dark) {\n    .label-module_root__5HbZT {\n      color: #000; } }\n";
-var styles$4 = {"root":"label-module_root__5HbZT"};
-styleInject(css_248z$4);
+const useMediaQuery = () => {
+    const context = useContext(MediaQueryCTX);
+    return context;
+};
+
+var css_248z$a = "@use \"sass:math\";\n.input-module_root__xcWOB {\n  align-items: flex-end;\n  display: flex; }\n\n.input-module_input__9x0t6 {\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  max-width: 100%;\n  min-height: 2.5rem;\n  padding: 0.2rem 1rem;\n  width: 100%; }\n  .input-module_input__9x0t6::placeholder {\n    color: #b3b3b3;\n    transition: opacity 0.2s ease-in-out; }\n  .input-module_input__9x0t6.input-module_withLabel__m6cZE {\n    margin-top: 1.5rem; }\n    .input-module_input__9x0t6.input-module_withLabel__m6cZE::placeholder {\n      opacity: 0; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6 {\n      color: #fff;\n      background-color: #292929;\n      border-color: #8f8f8f; }\n      .input-module_input__9x0t6::placeholder {\n        color: #5c5c5c; } }\n\n.input-module_isRequiredField__Xx5qd {\n  margin-bottom: 1rem; }\n\n.input-module_inputWrapper__qSGvA {\n  flex: 1;\n  position: relative; }\n\n.input-module_label__sQuAx {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_label__sQuAx.input-module_label__sQuAx {\n      color: #fff; } }\n\n.input-module_floatingLabel__WrOdN {\n  bottom: 0.75rem;\n  margin: 0;\n  position: absolute;\n  transition: bottom 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out; }\n\n.input-module_input__9x0t6:focus + .input-module_label__sQuAx,\n.input-module_withValue__wYYkt + .input-module_label__sQuAx {\n  bottom: calc(100% - 1.25rem);\n  font-size: 0.9rem;\n  font-weight: 500;\n  left: 0.2rem; }\n\n.input-module_input__9x0t6:focus {\n  outline: none;\n  border-color: #8d6b94; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_input__9x0t6:focus {\n      border-color: #fff; } }\n  .input-module_input__9x0t6:focus::placeholder {\n    opacity: 1; }\n\n.input-module_icon__JQ0Uo {\n  position: absolute;\n  bottom: 0.75rem;\n  left: 1rem;\n  pointer-events: none;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_icon__JQ0Uo {\n      color: #fff; } }\n\n.input-module_trailingIcon__ixXtK {\n  right: 1rem;\n  left: auto; }\n\n.input-module_withLeadingIcon__3vKMc {\n  padding-left: 2.5rem; }\n\n.input-module_withTrailingIcon__80V4h {\n  padding-right: 1.6rem; }\n\n.input-module_actionIcon__hhYVt {\n  position: relative;\n  margin-left: 0.25rem;\n  color: rgba(0, 0, 0, 0.5); }\n\n.input-module_maxDisplay__2ajTW {\n  color: rgba(0, 0, 0, 0.5);\n  font-size: 0.7rem;\n  position: absolute;\n  right: 0.5rem;\n  top: 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .input-module_maxDisplay__2ajTW {\n      color: rgba(255, 255, 255, 0.4); } }\n";
+var styles$a = {"root":"input-module_root__xcWOB","input":"input-module_input__9x0t6","withLabel":"input-module_withLabel__m6cZE","isRequiredField":"input-module_isRequiredField__Xx5qd","inputWrapper":"input-module_inputWrapper__qSGvA","label":"input-module_label__sQuAx","floatingLabel":"input-module_floatingLabel__WrOdN","withValue":"input-module_withValue__wYYkt","icon":"input-module_icon__JQ0Uo","trailingIcon":"input-module_trailingIcon__ixXtK","withLeadingIcon":"input-module_withLeadingIcon__3vKMc","withTrailingIcon":"input-module_withTrailingIcon__80V4h","actionIcon":"input-module_actionIcon__hhYVt","maxDisplay":"input-module_maxDisplay__2ajTW"};
+styleInject(css_248z$a);
+
+var css_248z$9 = "@use \"sass:math\";\n.form-control-module_root__DeA9S {\n  flex: 0 0 auto;\n  max-width: 100%;\n  position: relative;\n  box-sizing: border-box; }\n\n.form-control-module_error__dWO81 {\n  color: #ef476f;\n  font-size: 0.8rem;\n  font-weight: 400;\n  position: absolute;\n  top: 100%;\n  left: 1rem;\n  width: 100%; }\n";
+var styles$9 = {"root":"form-control-module_root__DeA9S","error":"form-control-module_error__dWO81"};
+styleInject(css_248z$9);
+
+const FormControl = ({ children, className, error, hideRequired, ...props }) => {
+    return (React__default.createElement("div", { className: classNames(styles$9.root, className), ...props },
+        children,
+        !hideRequired && React__default.createElement(React__default.Fragment, null, Boolean(error) && React__default.createElement("p", { className: styles$9.error }, error))));
+};
+
+var css_248z$8 = "@use \"sass:math\";\n.label-module_root__5HbZT {\n  color: #7f5174;\n  font-weight: 400; }\n  @media (prefers-color-scheme: dark) {\n    .label-module_root__5HbZT {\n      color: #000; } }\n";
+var styles$8 = {"root":"label-module_root__5HbZT"};
+styleInject(css_248z$8);
 
 /**
  * Facade for label element. It's a simple label element.
@@ -521,48 +831,48 @@ styleInject(css_248z$4);
  * @returns React.FC
  */
 const Label = ({ children, className, ...props }) => {
-    return (React__default.createElement("label", { className: cs(styles$4.root, className), ...props }, children));
+    return (React__default.createElement("label", { className: classNames(styles$8.root, className), ...props }, children));
 };
 
 const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, className, classes, disableAction, error, floatingLabel, hideMax, id, isNumeric, label, leadingIcon, leadingComponent, max, maxEndingSpaces, name, onChange, onlyInput, trailingIcon, trailingComponent, trimSpaces, value, hideRequired, ...props }, ref) => {
     const htmlId = useInputId({ id, name });
-    const handleChangeProxy = useCallback((event) => {
+    const handleChangeProxy = useCallback$1((event) => {
         /**
          * Todo: Implement trim spaces from the event
          * Todo: Implement string, number, email validations.
          */
         onChange?.(event);
     }, [onChange]);
-    const hasValue = useMemo(() => value?.length > 0, [value]);
-    const inputRender = useMemo(() => {
-        return (React__default.createElement("input", { className: cs(styles$6.input, className, {
-                [styles$6.withValue]: hasValue,
-                [styles$6.withLabel]: Boolean(label) && floatingLabel,
-                [styles$6.withLeadingIcon]: Boolean(leadingIcon),
-                [styles$6.withTrailingIcon]: Boolean(trailingIcon)
+    const hasValue = useMemo$1(() => value?.length > 0, [value]);
+    const inputRender = useMemo$1(() => {
+        return (React__default.createElement("input", { className: classNames(styles$a.input, className, {
+                [styles$a.withValue]: hasValue,
+                [styles$a.withLabel]: Boolean(label) && floatingLabel,
+                [styles$a.withLeadingIcon]: Boolean(leadingIcon),
+                [styles$a.withTrailingIcon]: Boolean(trailingIcon)
             }), id: htmlId, maxLength: max, name: name, onChange: handleChangeProxy, ref: ref, value: value || '', ...props }));
     }, [props, htmlId, max, name, className]);
-    const length = useMemo(() => value?.length || 0, [value]);
-    const renderLabel = useMemo(() => (React__default.createElement(Label, { htmlFor: htmlId, className: cs(styles$6.label, {
-            [styles$6.labelWithLeadingIcon]: Boolean(leadingIcon),
-            [styles$6.floatingLabel]: floatingLabel
+    const length = useMemo$1(() => value?.length || 0, [value]);
+    const renderLabel = useMemo$1(() => (React__default.createElement(Label, { htmlFor: htmlId, className: classNames(styles$a.label, {
+            [styles$a.labelWithLeadingIcon]: Boolean(leadingIcon),
+            [styles$a.floatingLabel]: floatingLabel
         }) }, label)), [floatingLabel]);
     if (onlyInput) {
         return inputRender;
     }
-    return (React__default.createElement(FormControl, { error: error, hideRequired: hideRequired, className: cs(styles$6.root, classes?.wrapper, {
-            [styles$6.isRequiredField]: Boolean(props.required)
+    return (React__default.createElement(FormControl, { error: error, hideRequired: hideRequired, className: classNames(styles$a.root, classes?.wrapper, {
+            [styles$a.isRequiredField]: Boolean(props.required)
         }) },
         leadingComponent,
-        React__default.createElement("div", { className: styles$6.inputWrapper },
-            leadingIcon && React__default.createElement(Icon, { icon: leadingIcon, className: styles$6.icon }),
+        React__default.createElement("div", { className: styles$a.inputWrapper },
+            leadingIcon && React__default.createElement(Icon, { icon: leadingIcon, className: styles$a.icon }),
             Boolean(label) && !floatingLabel && renderLabel,
             inputRender,
             Boolean(label) && floatingLabel && renderLabel,
-            trailingIcon && (React__default.createElement(Icon, { icon: trailingIcon, className: cs(styles$6.icon, styles$6.trailingIcon) })),
-            !hideMax && hasValue && (React__default.createElement("span", { className: styles$6.maxDisplay }, `${length}/${max}`))),
+            trailingIcon && (React__default.createElement(Icon, { icon: trailingIcon, className: classNames(styles$a.icon, styles$a.trailingIcon) })),
+            !hideMax && hasValue && (React__default.createElement("span", { className: styles$a.maxDisplay }, `${length}/${max}`))),
         trailingComponent,
-        Boolean(action) && (React__default.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$6.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
+        Boolean(action) && (React__default.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$a.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
 });
 InputBase.defaultProps = {
     max: 100,
@@ -579,22 +889,22 @@ const TextField = forwardRef(({ ...props }, ref) => {
 TextField.defaultProps = {};
 
 const PasswordField = ({ ...props }) => {
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState$1(false);
     const toggleVisible = () => setVisible(!visible);
     return (React__default.createElement(InputBase, { ...props, type: visible ? 'text' : 'password', action: toggleVisible, actionIcon: visible ? 'eye-slash' : 'eye' }));
 };
 PasswordField.defaultProps = {};
 
-var css_248z$3 = "@use \"sass:math\";\n.select-field-module_root__l5e-P {\n  margin-bottom: 1rem; }\n\n.select-field-module_inputLabel__Cex2T {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .select-field-module_inputLabel__Cex2T.select-field-module_inputLabel__Cex2T {\n      color: #fff; } }\n\n.select-field-module_control__24wTu {\n  color: red; }\n\n.select-field-module_formErrorMsg__EWFH2 {\n  font-size: 0.9rem;\n  margin-left: 1rem; }\n";
-var styles$3 = {"root":"select-field-module_root__l5e-P","inputLabel":"select-field-module_inputLabel__Cex2T","control":"select-field-module_control__24wTu","formErrorMsg":"select-field-module_formErrorMsg__EWFH2"};
-styleInject(css_248z$3);
+var css_248z$7 = "@use \"sass:math\";\n.select-field-module_root__l5e-P {\n  margin-bottom: 1rem; }\n\n.select-field-module_inputLabel__Cex2T {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .select-field-module_inputLabel__Cex2T.select-field-module_inputLabel__Cex2T {\n      color: #fff; } }\n\n.select-field-module_control__24wTu {\n  color: red; }\n\n.select-field-module_formErrorMsg__EWFH2 {\n  font-size: 0.9rem;\n  margin-left: 1rem; }\n";
+var styles$7 = {"root":"select-field-module_root__l5e-P","inputLabel":"select-field-module_inputLabel__Cex2T","control":"select-field-module_control__24wTu","formErrorMsg":"select-field-module_formErrorMsg__EWFH2"};
+styleInject(css_248z$7);
 
 const useDeviceMode = () => {
-    const currentMode = useMemo(() => {
+    const currentMode = useMemo$1(() => {
         return window.matchMedia('(prefers-color-scheme: dark)')?.matches ? 'dark' : 'light';
     }, []);
-    const [mode, setMode] = useState(currentMode);
-    const toggleMode = useCallback(() => {
+    const [mode, setMode] = useState$1(currentMode);
+    const toggleMode = useCallback$1(() => {
         setMode(mode === 'dark' ? 'light' : 'dark');
     }, [mode]);
     return { mode, toggleMode };
@@ -610,11 +920,11 @@ const SelectField = ({ label: inputLabel, placeholder = '', error, id, onChange,
             }
         });
     };
-    const defaultSelected = useMemo(() => {
+    const defaultSelected = useMemo$1(() => {
         return options?.find((item) => item.value === value);
     }, [options, value]);
-    return (React__default.createElement(FormControl, { error: error, className: styles$3.root },
-        inputLabel && (React__default.createElement(Label, { htmlFor: id, className: styles$3.inputLabel }, inputLabel)),
+    return (React__default.createElement(FormControl, { error: error, className: styles$7.root },
+        inputLabel && (React__default.createElement(Label, { htmlFor: id, className: styles$7.inputLabel }, inputLabel)),
         !loading && (React__default.createElement(Select, { placeholder: placeholder, options: [
                 ...(Boolean(placeholder) ? [{ label: placeholder, value: '' }] : []),
                 ...options
@@ -637,13 +947,13 @@ const SelectField = ({ label: inputLabel, placeholder = '', error, id, onChange,
             }, value: defaultSelected }))));
 };
 
-var css_248z$2 = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
-var styles$2 = {"root":"check-box-field-module_root__Owe-O","check":"check-box-field-module_check__TWIEp","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
-styleInject(css_248z$2);
+var css_248z$6 = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
+var styles$6 = {"root":"check-box-field-module_root__Owe-O","check":"check-box-field-module_check__TWIEp","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
+styleInject(css_248z$6);
 
 const CheckBoxField = ({ className, onChange, name, value, checked }) => {
-    const isChecked = useMemo(() => Boolean(value) || checked, [checked, value]);
-    const handleChange = useCallback((e) => {
+    const isChecked = useMemo$1(() => Boolean(value) || checked, [checked, value]);
+    const handleChange = useCallback$1((e) => {
         e.stopPropagation();
         onChange?.({
             target: {
@@ -652,20 +962,20 @@ const CheckBoxField = ({ className, onChange, name, value, checked }) => {
             }
         });
     }, [onChange, name, isChecked]);
-    return (React__default.createElement("div", { className: cs(styles$2.root, className) },
-        isChecked && React__default.createElement("span", { className: styles$2.check }),
+    return (React__default.createElement("div", { className: classNames(styles$6.root, className) },
+        isChecked && React__default.createElement("span", { className: styles$6.check }),
         React__default.createElement("input", { type: "checkbox" }),
-        React__default.createElement("label", { htmlFor: "", onClick: handleChange, className: styles$2.control })));
+        React__default.createElement("label", { htmlFor: "", onClick: handleChange, className: styles$6.control })));
 };
 
-var css_248z$1 = "@use \"sass:math\";\n.textarea-module_textAreaRoot__BTLb5 {\n  width: 100%;\n  position: relative;\n  margin-bottom: 1rem; }\n\n.textarea-module_textArea__v8bRT {\n  display: block;\n  border-radius: 20px;\n  padding: 0.5rem 1rem;\n  margin: 0px 0px 10px 0px;\n  min-height: 64px;\n  width: 100%;\n  border: 1px solid #b3b3b3;\n  background-color: #ffffff; }\n  .textarea-module_textArea__v8bRT:focus {\n    outline: none; }\n  @media (prefers-color-scheme: dark) {\n    .textarea-module_textArea__v8bRT {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; } }\n\n.textarea-module_filled__OQ2A- {\n  border: none; }\n\n.textarea-module_charCount__nw4qg {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n  font-size: 0.7rem;\n  color: rgba(0, 0, 0, 0.5); }\n";
-var styles$1 = {"textAreaRoot":"textarea-module_textAreaRoot__BTLb5","textArea":"textarea-module_textArea__v8bRT","filled":"textarea-module_filled__OQ2A-","charCount":"textarea-module_charCount__nw4qg"};
-styleInject(css_248z$1);
+var css_248z$5 = "@use \"sass:math\";\n.textarea-module_textAreaRoot__BTLb5 {\n  width: 100%;\n  position: relative;\n  margin-bottom: 1rem; }\n\n.textarea-module_inputLabel__sNfSq {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .textarea-module_inputLabel__sNfSq.textarea-module_inputLabel__sNfSq {\n      color: #fff; } }\n\n.textarea-module_textArea__v8bRT {\n  display: block;\n  border-radius: 20px;\n  padding: 0.5rem 1rem;\n  margin: 0px 0px 10px 0px;\n  min-height: 64px;\n  width: 100%;\n  border: 1px solid #b3b3b3;\n  background-color: #ffffff; }\n  .textarea-module_textArea__v8bRT:focus {\n    outline: none; }\n  @media (prefers-color-scheme: dark) {\n    .textarea-module_textArea__v8bRT {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; } }\n\n.textarea-module_filled__OQ2A- {\n  border: none; }\n\n.textarea-module_charCount__nw4qg {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n  font-size: 0.7rem;\n  color: rgba(0, 0, 0, 0.5); }\n";
+var styles$5 = {"textAreaRoot":"textarea-module_textAreaRoot__BTLb5","inputLabel":"textarea-module_inputLabel__sNfSq","textArea":"textarea-module_textArea__v8bRT","filled":"textarea-module_filled__OQ2A-","charCount":"textarea-module_charCount__nw4qg"};
+styleInject(css_248z$5);
 
 const TEXT_AREA_INPUT_HEIGHT = 32;
 const TextAreaField = ({ label, error, value, max, onChange, hideMax, trimSpaces, maxEndingSpaces = 4, ...props }) => {
     const textAreaRef = useRef(null);
-    const trimEventSpaces = useCallback((evt) => {
+    const trimEventSpaces = useCallback$1((evt) => {
         if (trimSpaces && evt.target?.value?.length > 0) {
             evt.target.value = evt.target?.value?.trimStart();
         }
@@ -677,7 +987,7 @@ const TextAreaField = ({ label, error, value, max, onChange, hideMax, trimSpaces
         }
         return evt;
     }, [trimSpaces, maxEndingSpaces]);
-    const handleChangeProxy = useCallback((evt) => {
+    const handleChangeProxy = useCallback$1((evt) => {
         onChange?.(trimEventSpaces(evt));
     }, [onChange, trimEventSpaces]);
     useLayoutEffect(() => {
@@ -685,12 +995,12 @@ const TextAreaField = ({ label, error, value, max, onChange, hideMax, trimSpaces
             textAreaRef.current.style.height = `${Math.max(textAreaRef.current.scrollHeight, TEXT_AREA_INPUT_HEIGHT)}px`;
         }
     }, [value]);
-    return (React__default.createElement(FormControl, { className: styles$1.textAreaRoot },
-        label && (React__default.createElement(Label, { className: styles$1.inputLabel, htmlFor: props?.id },
+    return (React__default.createElement(FormControl, { className: styles$5.textAreaRoot },
+        label && (React__default.createElement(Label, { className: styles$5.inputLabel, htmlFor: props?.id },
             label,
-            error && React__default.createElement("span", { className: styles$1.formErrorMsg }, error))),
-        React__default.createElement("textarea", { ref: textAreaRef, onChange: handleChangeProxy, maxLength: max, className: styles$1.textArea, value: value || '', ...props }),
-        max && !hideMax && (React__default.createElement("span", { className: styles$1.charCount },
+            error && React__default.createElement("span", { className: styles$5.formErrorMsg }, error))),
+        React__default.createElement("textarea", { ref: textAreaRef, onChange: handleChangeProxy, maxLength: max, className: styles$5.textArea, value: value || '', ...props }),
+        max && !hideMax && (React__default.createElement("span", { className: styles$5.charCount },
             `${value || ''}`?.length,
             "/",
             max))));
@@ -701,14 +1011,14 @@ TextAreaField.defaultProps = {
     trimSpaces: true
 };
 
-var css_248z = ".number-field-module_iconButton__ZBKjd {\n  position: relative;\n  bottom: 0.125rem; }\n";
-var styles = {"iconButton":"number-field-module_iconButton__ZBKjd"};
-styleInject(css_248z);
+var css_248z$4 = ".number-field-module_iconButton__ZBKjd {\n  position: relative;\n  bottom: 0.125rem; }\n";
+var styles$4 = {"iconButton":"number-field-module_iconButton__ZBKjd"};
+styleInject(css_248z$4);
 
 const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, name, addVariant, subVariant, ...props }) => {
     const inputRef = useRef({}).current;
     const [value, setValue] = React__default.useState(isNaN(defValue) ? 0 : parseInt(defValue, 10));
-    const triggerChange = useCallback((newValue) => {
+    const triggerChange = useCallback$1((newValue) => {
         onChange?.({
             target: {
                 name: name || '',
@@ -716,7 +1026,7 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
             }
         });
     }, [name, onChange]);
-    const increase = useCallback(() => {
+    const increase = useCallback$1(() => {
         let newValue = value + step;
         if (newValue > max) {
             newValue = max;
@@ -724,7 +1034,7 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
         setValue(newValue);
         triggerChange(newValue);
     }, [max, value, step, triggerChange]);
-    const decrease = useCallback(() => {
+    const decrease = useCallback$1(() => {
         let newValue = value - step;
         if (newValue < min) {
             newValue = min;
@@ -732,7 +1042,7 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
         setValue(newValue);
         triggerChange(newValue);
     }, [min, value, step, triggerChange]);
-    const handleChangeValue = useCallback((e) => {
+    const handleChangeValue = useCallback$1((e) => {
         const { value } = e?.target;
         const valueToCheck = parseInt(value, 10);
         let newValue = valueToCheck;
@@ -758,7 +1068,7 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
         setValue(newValue);
         triggerChange(newValue);
     }, [min, max, triggerChange]);
-    const handleWheel = useCallback((e) => {
+    const handleWheel = useCallback$1((e) => {
         e.preventDefault();
     }, []);
     useEffect(() => {
@@ -779,7 +1089,7 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
     }, [defValue, value]);
     return (React__default.createElement(TextField, { ref: (ref) => {
             inputRef.current = ref;
-        }, hideMax: true, ...props, leadingComponent: React__default.createElement(IconButton, { className: styles.iconButton, icon: "minus", disabled: value === min, onClick: decrease, variant: subVariant }), type: "number", onChange: handleChangeValue, trailingComponent: React__default.createElement(IconButton, { className: styles.iconButton, icon: "add", disabled: value === max, onClick: increase, variant: addVariant }), value: value.toString() }));
+        }, hideMax: true, ...props, leadingComponent: React__default.createElement(IconButton, { tabIndex: -1, className: styles$4.iconButton, icon: "minus", disabled: value === min, onClick: decrease, variant: subVariant }), type: "number", onChange: handleChangeValue, trailingComponent: React__default.createElement(IconButton, { tabIndex: -1, className: styles$4.iconButton, icon: "add", disabled: value === max, onClick: increase, variant: addVariant }), value: value.toString() }));
 };
 NumberField.defaultProps = {
     max: 1000,
@@ -788,13 +1098,189 @@ NumberField.defaultProps = {
 };
 var NumberField$1 = React__default.memo(NumberField);
 
+var css_248z$3 = "@use \"sass:math\";\n.input-control-module_root__FvlwC {\n  display: flex;\n  flex-direction: column; }\n\n.input-control-module_input__lvLgx {\n  width: 4rem;\n  text-align: center;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0rem 0.5rem;\n  font-size: 1.5rem;\n  margin: 0;\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000; }\n  .input-control-module_input__lvLgx::placeholder {\n    color: #ffffff;\n    transition: color 0.2s; }\n  @media (prefers-color-scheme: dark) {\n    .input-control-module_input__lvLgx {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; }\n      .input-control-module_input__lvLgx::placeholder {\n        color: #292929; } }\n\n.input-control-module_input__lvLgx:focus {\n  border-width: 1px;\n  outline: none;\n  border-color: #8d6b94; }\n  .input-control-module_input__lvLgx:focus::placeholder {\n    color: rgba(0, 0, 0, 0.4); }\n  @media (prefers-color-scheme: dark) {\n    .input-control-module_input__lvLgx:focus::placeholder {\n      color: rgba(255, 255, 255, 0.4); } }\n";
+var styles$3 = {"root":"input-control-module_root__FvlwC","input":"input-control-module_input__lvLgx"};
+styleInject(css_248z$3);
+
+const InputControl = ({ value, onChange, twoDigitMax = 59, oneDigitMax = 5, autoFocus }) => {
+    const handleChange = useCallback$1((e) => {
+        const { value } = e.target;
+        if (value.length > 2)
+            return;
+        if (value.length === 2 && parseInt(value) > twoDigitMax)
+            return;
+        if (value.length === 1 && parseInt(value) > oneDigitMax)
+            return;
+        onChange(value);
+    }, [onChange, oneDigitMax, twoDigitMax]);
+    const handleBlur = useCallback$1(() => {
+        if (value.length === 1) {
+            onChange(`0${value}`);
+        }
+    }, [value, onChange]);
+    const formatValue = (valueToFormat) => {
+        return valueToFormat < 10 ? `0${valueToFormat}` : `${valueToFormat}`;
+    };
+    const handleUp = useCallback$1(() => {
+        let newValue = parseInt(value) + 1;
+        if (newValue > twoDigitMax)
+            newValue = 0;
+        onChange(formatValue(newValue));
+    }, [value, onChange, twoDigitMax]);
+    const handleDown = useCallback$1(() => {
+        let newValue = parseInt(value) - 1;
+        if (newValue < 0)
+            newValue = twoDigitMax;
+        onChange(formatValue(newValue));
+    }, [value, onChange, twoDigitMax]);
+    return (React__default.createElement("div", { className: styles$3.root },
+        React__default.createElement("button", { tabIndex: -1, className: styles$3.actionButton, onClick: handleUp },
+            React__default.createElement(Icon, { icon: "chevron-up" })),
+        React__default.createElement("input", { tabIndex: 0, autoFocus: autoFocus, placeholder: "mm", value: value, onChange: handleChange, className: styles$3.input, onBlur: handleBlur }),
+        React__default.createElement("button", { tabIndex: -1, className: styles$3.actionButton, onClick: handleDown },
+            React__default.createElement(Icon, { icon: "chevron-down" }))));
+};
+InputControl.defaultProps = {};
+
+var css_248z$2 = "@use \"sass:math\";\n.time-field-module_wrapper__C-I0x {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center; }\n\n.time-field-module_timeSeparator__Cp93w {\n  font-size: 2rem;\n  color: #000;\n  margin: 0 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .time-field-module_timeSeparator__Cp93w {\n      color: #fff; } }\n";
+var styles$2 = {"wrapper":"time-field-module_wrapper__C-I0x","timeSeparator":"time-field-module_timeSeparator__Cp93w"};
+styleInject(css_248z$2);
+
+const { useState, useCallback, useMemo } = React;
+const TimeField = ({ value, onChange, name, label, ...props }) => {
+    const defaultTime = useMemo(() => (value ? moment(value, 'HH:mm') : moment()), [value]);
+    const [minutes, setMinutes] = useState(value ? defaultTime.format('mm') : '00');
+    const [hours, setHours] = useState(value ? defaultTime.format('HH') : '00');
+    const formattedValue = useMemo(() => `${hours}:${minutes}`, [hours, minutes]);
+    const handleChange = useCallback((newVal) => {
+        onChange?.({
+            target: {
+                name: name || '',
+                value: newVal
+            }
+        });
+    }, [onChange, name]);
+    const handleChangeMinutes = useCallback((minutesVal) => {
+        const newVal = `${hours}:${minutesVal}`;
+        setMinutes(minutesVal);
+        handleChange(newVal);
+    }, [handleChange, hours]);
+    const handleChangeHours = useCallback((hoursVal) => {
+        const newVal = `${hoursVal}:${minutes}`;
+        setHours(hoursVal);
+        handleChange(newVal);
+    }, [minutes, handleChange]);
+    React.useEffect(() => {
+        if (value !== formattedValue) {
+            console.log('The value changed!: ', value, formattedValue);
+            const newTime = moment(value, 'HH:mm');
+            setMinutes(newTime.format('mm'));
+            setHours(newTime.format('HH'));
+        }
+    }, [formattedValue, value]);
+    return (React.createElement("div", { className: styles$2.root },
+        React.createElement(Label, null, label),
+        React.createElement("input", { type: "hidden", value: formattedValue, ...props }),
+        React.createElement("div", { className: styles$2.wrapper },
+            React.createElement(InputControl, { autoFocus: props?.autoFocus, value: hours, onChange: handleChangeHours, oneDigitMax: 9, twoDigitMax: 23 }),
+            React.createElement("span", { className: styles$2.timeSeparator }, ":"),
+            React.createElement(InputControl, { value: minutes, onChange: handleChangeMinutes }))));
+};
+TimeField.defaultProps = {};
+
+// import 'react-datepicker/dist/react-datepicker.css'
+const DateField = ({}) => {
+    // const initialDate = useRef(value ? moment(value as string, format) : moment()).current
+    // const inputRef = useRef<HTMLInputElement>(null)
+    // const [currentDate, setCurrentDate] = useState(initialDate.toDate())
+    const handleChange = () => {
+        // const handleChange = (date: any) => {
+        // const parseDate = moment(date)
+        // setCurrentDate(parseDate.toDate())
+        // onChange?.({
+        //     target: {
+        //         name: name || '',
+        //         value: parseDate.format('YYYY-MM-DD')
+        //     }
+        // } as any)
+    };
+    // const handleInputAction = useCallback(() => {
+    //     if (inputRef?.current) {
+    //         ;(inputRef?.current as any)?.deferFocusInput()
+    //     }
+    // }, [inputRef])
+    // useEffect(() => {
+    //     if (inputRef?.current) {
+    //         ;(inputRef?.current as any)?.input?.setAttribute('readonly', 'true')
+    //     }
+    // }, [])
+    // const strValueDate = useMemo(() => {
+    //     return moment(value as any, format).format('YYYY-MM-DD')
+    // }, [value, format])
+    // const strCurrentDate = useMemo(() => {
+    //     return moment(currentDate, format).format('YYYY-MM-DD')
+    // }, [currentDate, format])
+    // useEffect(() => {
+    //     if (strValueDate !== strCurrentDate) {
+    //         setCurrentDate(moment(value as string, format).toDate())
+    //     }
+    // }, [strValueDate, strCurrentDate, value, currentDate, format, onChange])
+    return (React__default.createElement(DatePicker
+    // ref={inputRef as any}
+    // wrapperClassName={styles.root}
+    // selected={currentDate}
+    , { 
+        // ref={inputRef as any}
+        // wrapperClassName={styles.root}
+        // selected={currentDate}
+        onChange: handleChange, dateFormat: 'yyyy-MM-dd' }));
+};
+DateField.defaultProps = {};
+
+var css_248z$1 = "@use \"sass:math\";\n.options-field-module_mainLabel__7rChb {\n  color: #8d6b94;\n  margin-bottom: 0.5rem;\n  display: block; }\n\n.options-field-module_label__98IL4 {\n  display: flex;\n  padding-left: 1rem;\n  position: relative;\n  margin-bottom: 0.4rem;\n  align-items: center; }\n  .options-field-module_label__98IL4 input[type='radio'] {\n    display: none; }\n  .options-field-module_label__98IL4 span {\n    display: inline-block; }\n  .options-field-module_label__98IL4 span.options-field-module_control__NZaec {\n    left: 0;\n    top: 0;\n    width: 20px;\n    height: 20px;\n    flex-shrink: 0;\n    border-radius: 50%;\n    border: 2px solid #cccccc;\n    cursor: pointer;\n    position: relative;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    margin-right: 0.5rem; }\n  .options-field-module_label__98IL4 input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    content: '';\n    display: inline-block;\n    width: 10px;\n    height: 10px;\n    background-color: #cccccc;\n    border-radius: 50%; }\n  .options-field-module_label__98IL4.options-field-module_primary__p9hE8 span.options-field-module_control__NZaec {\n    border-color: #8d6b94; }\n  .options-field-module_label__98IL4.options-field-module_primary__p9hE8 input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #8d6b94; }\n  .options-field-module_label__98IL4.options-field-module_secondary__d-b2t span.options-field-module_control__NZaec {\n    border-color: #b185a7; }\n  .options-field-module_label__98IL4.options-field-module_secondary__d-b2t input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #b185a7; }\n  .options-field-module_label__98IL4.options-field-module_success__zgosL span.options-field-module_control__NZaec {\n    border-color: #06d6a0; }\n  .options-field-module_label__98IL4.options-field-module_success__zgosL input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #06d6a0; }\n  .options-field-module_label__98IL4.options-field-module_danger__OSNrV span.options-field-module_control__NZaec {\n    border-color: #ef476f; }\n  .options-field-module_label__98IL4.options-field-module_danger__OSNrV input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #ef476f; }\n  .options-field-module_label__98IL4.options-field-module_warning__avuUr span.options-field-module_control__NZaec {\n    border-color: #b7ba1b; }\n  .options-field-module_label__98IL4.options-field-module_warning__avuUr input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #b7ba1b; }\n  .options-field-module_label__98IL4.options-field-module_info__AdifF span.options-field-module_control__NZaec {\n    border-color: #7796cb; }\n  .options-field-module_label__98IL4.options-field-module_info__AdifF input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #7796cb; }\n  .options-field-module_label__98IL4.options-field-module_light__FS4LK span.options-field-module_control__NZaec {\n    border-color: #999999; }\n  .options-field-module_label__98IL4.options-field-module_light__FS4LK input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #999999; }\n  .options-field-module_label__98IL4.options-field-module_dark__greBM span.options-field-module_control__NZaec {\n    border-color: #212121; }\n  .options-field-module_label__98IL4.options-field-module_dark__greBM input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #212121; }\n\n.options-field-module_horizontal__2sweq {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  align-items: center;\n  margin-bottom: 0; }\n";
+var styles$1 = {"mainLabel":"options-field-module_mainLabel__7rChb","label":"options-field-module_label__98IL4","control":"options-field-module_control__NZaec","primary":"options-field-module_primary__p9hE8","secondary":"options-field-module_secondary__d-b2t","success":"options-field-module_success__zgosL","danger":"options-field-module_danger__OSNrV","warning":"options-field-module_warning__avuUr","info":"options-field-module_info__AdifF","light":"options-field-module_light__FS4LK","dark":"options-field-module_dark__greBM","horizontal":"options-field-module_horizontal__2sweq"};
+styleInject(css_248z$1);
+
+const OptionsButton = ({ name, label, options = [], value, onChange, horizontal, variant }) => {
+    const [selected, setSelected] = useState$1(value);
+    const changeValue = (newValue) => {
+        setSelected(newValue);
+        onChange?.({
+            target: {
+                name: name || '',
+                value: newValue
+            }
+        });
+    };
+    return (React__default.createElement("div", { className: styles$1.buttonsRoot },
+        label && React__default.createElement(Label, { className: styles$1.mainLabel }, label),
+        React__default.createElement("div", { className: classNames({
+                [styles$1.horizontal]: horizontal
+            }) }, options.map((item, key) => (React__default.createElement(Label, { key: `option-${key}`, className: classNames(styles$1.label, {
+                [styles$1.primary]: variant === 'primary',
+                [styles$1.secondary]: variant === 'secondary',
+                [styles$1.danger]: variant === 'danger',
+                [styles$1.warning]: variant === 'warning',
+                [styles$1.success]: variant === 'success',
+                [styles$1.info]: variant === 'info',
+                [styles$1.light]: variant === 'light',
+                [styles$1.dark]: variant === 'dark'
+            }) },
+            React__default.createElement("input", { type: "radio", name: name, onClick: () => changeValue(item.value), onChange: () => null, checked: selected === item.value }),
+            React__default.createElement("span", { className: styles$1.control }),
+            React__default.createElement("span", null, item.label)))))));
+};
+OptionsButton.defaultProps = {
+    variant: 'primary'
+};
+
 const Grid = ({ children, className }) => {
-    return React__default.createElement("div", { className: cs('grid-container', className) }, children);
+    return React__default.createElement("div", { className: classNames('grid-container', className) }, children);
 };
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
 const Col = ({ all, applyFor, applyFrom, ascendingApply, children, xs, sm, md, lg, xl }) => {
-    const generatedClassName = useMemo(() => {
+    const generatedClassName = useMemo$1(() => {
         let dimensions = {
             xs,
             sm,
@@ -841,12 +1327,34 @@ Col.defaultProps = {
 };
 
 const Row = ({ children, className }) => {
-    return React__default.createElement("div", { className: cs('row', className) }, children);
+    return React__default.createElement("div", { className: classNames('row', className) }, children);
 };
+
+var css_248z = "@use \"sass:math\";\n.detail-view-module_root__DfdLG {\n  max-width: 100%;\n  border-radius: 10px;\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 0.5rem;\n  margin: 0.4rem 0rem; }\n\n.detail-view-module_header__-rQvG {\n  padding: 0.5rem 1rem; }\n  .detail-view-module_header__-rQvG h3 {\n    font-size: 1.2rem;\n    font-weight: 500;\n    color: #8d6b94; }\n\n.detail-view-module_body__21s5h {\n  background-color: #ffffff;\n  border-radius: 10px;\n  padding: 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .detail-view-module_body__21s5h {\n      background-color: #292929; } }\n  .detail-view-module_body__21s5h .detail-view-module_detailsWrapper__E88MM {\n    display: flex;\n    flex-direction: column; }\n  .detail-view-module_body__21s5h .detail-view-module_icon__nrFKn {\n    margin-right: 0.5rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_icon__nrFKn {\n        color: #fff; } }\n  .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n    font-size: 1rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n        color: #fff; } }\n    @media (min-width: 720px) {\n      .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n        flex: 2; } }\n  .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n    font-size: 0.9rem;\n    color: rgba(0, 0, 0, 0.5); }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n        color: rgba(255, 255, 255, 0.5); } }\n    @media (min-width: 720px) {\n      .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n        flex: 3; } }\n\n.detail-view-module_infoCol__RiYFk {\n  flex: 1;\n  margin: 0.5rem;\n  min-width: 200px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }\n  @media (prefers-color-scheme: dark) {\n    .detail-view-module_infoCol__RiYFk {\n      border-bottom: 1px solid rgba(255, 255, 255, 0.1); } }\n  @media (min-width: 720px) {\n    .detail-view-module_infoCol__RiYFk {\n      display: flex; } }\n";
+var styles = {"root":"detail-view-module_root__DfdLG","header":"detail-view-module_header__-rQvG","body":"detail-view-module_body__21s5h","detailsWrapper":"detail-view-module_detailsWrapper__E88MM","icon":"detail-view-module_icon__nrFKn","infoTitle":"detail-view-module_infoTitle__-YYMg","infoDescription":"detail-view-module_infoDescription__2yjTG","infoCol":"detail-view-module_infoCol__RiYFk"};
+styleInject(css_248z);
+
+const DetailView = ({ title, details, pills, children }) => {
+    const detailsToRender = useMemo$1(() => {
+        return details?.filter((item) => item !== null);
+    }, [details]);
+    return (React__default.createElement("div", { className: styles.root },
+        Boolean(title) && (React__default.createElement("div", { className: styles.header },
+            React__default.createElement("h3", null, title))),
+        React__default.createElement("div", { className: styles.body },
+            React__default.createElement("div", { className: styles.detailsWrapper }, detailsToRender?.map((detail, key) => (React__default.createElement("div", { className: styles.infoCol, key: key },
+                React__default.createElement("p", { className: styles.infoTitle },
+                    detail?.icon && (React__default.createElement(Icon, { icon: detail.icon, className: styles.icon })),
+                    detail?.title),
+                React__default.createElement("span", { className: styles.infoDescription }, detail?.description))))),
+            React__default.createElement("div", { className: "flex flex-wrap" }, pills?.map((pill, key) => (React__default.createElement(Pill, { key: key, label: pill?.title, icon: pill.icon, variant: pill?.variant })))),
+            children)));
+};
+DetailView.defaultProps = {};
 
 const registerIcons = () => {
-    library.add(faAdd, faAnglesLeft, faAnglesRight, faArrowsRotate, faBan, faBell, faBars, faBed, faBedPulse, faBomb, faBook, faBoxesStacked, faBriefcase, faBrain, faBullseye, faCarrot, faCartShopping, faCalendar, faCalendarAlt, faCar, faCheck, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faCircle, faClipboard, faClock, faCloud, faCogs, faComment, faComputer, faComputerMouse, faCreditCard, faCreditCardAlt, faDog, faDroplet, faDumbbell, faFile, faFilter, faEdit, faEllipsisV, faEllipsisH, faEnvelope, faExclamationTriangle, faExclamation, faExclamationCircle, faEye, faEyeSlash, faFlag, faFloppyDisk, faFlask, faFireBurner, faFireAlt, faFireFlameCurved, faGamepad, faGasPump, faGauge, faGift, faGlassWater, faGlobe, faGraduationCap, faHandFist, faFilm, faHeart, faHeartCrack, faHeartPulse, faHeartCirclePlus, faHome, faImage, faFileInvoice, faFileInvoiceDollar, faKitchenSet, faLanguage, faLightbulb, faList, faListCheck, faLock, faLockOpen, faMinus, faMotorcycle, faMoneyBill, faMoneyBillTransfer, faMoon, faMugHot, faPause, faPalette, faPen, faPenAlt, faPerson, faPlayCircle, faPoo, faQuestionCircle, faRightToBracket, faRocket, faRuler, faSearch, faShirt, faShower, faSoap, faStar, faStarHalf, faStarHalfAlt, faStopwatch20, faStop, faSun, faTag, faTimes, faTooth, faTrash, faThumbsUp, faThumbsDown, faUtensils, faUser, faWallet, faWeightHanging);
+    library.add(faAdd, faAnglesLeft, faAnglesRight, faArrowsRotate, faBan, faBell, faBars, faBed, faBedPulse, faBomb, faBook, faBoxesStacked, faBriefcase, faBrain, faBullseye, faCarrot, faCartShopping, faCalendar, faCalendarAlt, faCalendarDay, faCar, faCheck, faChevronDown, faChevronLeft, faChevronRight, faChevronUp, faCircle, faClipboard, faClock, faCloud, faCogs, faComment, faComputer, faComputerMouse, faCreditCard, faCreditCardAlt, faDog, faDroplet, faDumbbell, faFile, faFilter, faEdit, faEllipsisV, faEllipsisH, faEnvelope, faExclamationTriangle, faExclamation, faExclamationCircle, faEye, faEyeSlash, faFlag, faFloppyDisk, faFlask, faFireBurner, faFireAlt, faFireFlameCurved, faGamepad, faGasPump, faGauge, faGift, faGlassWater, faGlobe, faGraduationCap, faHandFist, faFilm, faHeart, faHeartCrack, faHeartPulse, faHeartCirclePlus, faHome, faImage, faFileInvoice, faFileInvoiceDollar, faKitchenSet, faLanguage, faLightbulb, faList, faListCheck, faLock, faLockOpen, faMinus, faMotorcycle, faMoneyBill, faMoneyBillTransfer, faMoon, faMugHot, faPause, faPalette, faPen, faPenAlt, faPerson, faPlayCircle, faPoo, faQuestionCircle, faRightToBracket, faRocket, faRuler, faSearch, faShirt, faShower, faSoap, faStar, faStarHalf, faStarHalfAlt, faStopwatch20, faStop, faSun, faTag, faTimes, faTooth, faTrash, faThumbsUp, faThumbsDown, faUtensils, faUser, faWallet, faWeightHanging);
 };
 
-export { Alert, Button, ButtonBase, CheckBoxField, Col, FormControl, Grid, Icon, IconButton, InputBase, Label, NumberField$1 as NumberField, PasswordField, Pill, Row, SelectField, TextAreaField, TextField, registerIcons, useForm, useInputId };
+export { Alert, Button, ButtonBase, CheckBoxField, Col, DateField, DetailView, FormControl, Grid, Icon, IconButton, InputBase, Label, MediaQueryProvider, NumberField$1 as NumberField, OptionsButton as OptionsField, PasswordField, Pill, Row, SelectField, Step, Stepper, StepperActions, StepperBack, StepperFinish, StepperNext, TextAreaField, TextField, TimeField, icons, registerIcons, useForm, useInputId, useMediaQuery };
 //# sourceMappingURL=index.js.map
