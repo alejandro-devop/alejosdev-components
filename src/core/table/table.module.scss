@@ -4,10 +4,14 @@
     background-color: #fff;
     // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     border-radius: 5px;
-    padding: 1.5rem 0.6rem 0.3rem 0.6rem;
+    padding: 0.3rem 0.6rem 0.3rem 0.6rem;
     table-layout: auto;
     width: 100%;
     border-collapse: collapse;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: $default-bg-dark;
+    }
 
     &Toolbar {
         display: flex;
@@ -50,15 +54,27 @@
         tr {
             border-bottom: 3px solid #ddd;
             display: block;
-            margin-bottom: 0.625em;
+            // padding: 0.625em 0;
         }
 
         td {
+            color: $text-color-light;
             border-bottom: 1px solid #ddd;
             display: block;
             font-size: 0.8em;
             text-align: left;
             min-height: 20px;
+            padding: 0.4em 0.5rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            tr,
+            td {
+                border-bottom-color: rgba($default-bg, 0.1);
+            }
+            td {
+                color: $text-color-dark;
+            }
         }
 
         td::before {
@@ -74,6 +90,12 @@
 
         td:last-child {
             border-bottom: 0;
+        }
+        tr {
+            // margin-bottom: 1rem;
+            &:nth-child(even) {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
         }
     }
     /** mobile **/
@@ -97,13 +119,21 @@
         td {
             font-size: 0.9rem;
             height: 35px;
+            color: $text-color-light;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            th,
+            td {
+                color: $text-color-dark;
+            }
         }
 
         td {
             padding: 0.4rem 1.2rem;
         }
 
-        td:last-child {
+        td.hasActions:last-child {
             text-align: right;
             white-space: nowrap;
             width: 1%;
@@ -117,11 +147,16 @@
         tr {
             &:nth-child(even) {
                 background-color: rgba(0, 0, 0, 0.03);
+                @media (prefers-color-scheme: dark) {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
             }
         }
 
         th {
-            color: rgba(0, 0, 0, 0.6);
+            @media (prefers-color-scheme: dark) {
+                background-color: rgba(0, 0, 0, 0.4);
+            }
         }
     }
 }

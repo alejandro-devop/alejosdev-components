@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react'
 import styles from './table.module.scss'
-import TableFilters from './TableFilters'
+// import TableFilters from './TableFilters'
 import TableActions from './TableActions'
 import TableFooter from './TableFooter'
 import { ActionType } from './types'
 import classNames from 'classnames'
 import { useMediaQuery } from 'hooks'
 import IconButton from '../../buttons/icon-button'
+import TableEmpty from './TableEmpty'
 
 interface TableProps {
     tableActions?: ActionType[]
@@ -48,9 +49,12 @@ const RenderRow: React.FC<RenderRowProps> = ({
                 <td data-label={'Actions'}>
                     {actions.map((item, index) => (
                         <IconButton
+                            className="mr-2"
                             icon={item.icon}
                             onClick={() => handleAction(item.action, data)}
                             key={`${index}-${item.action}`}
+                            size="sm"
+                            {...item?.buttonProps}
                         />
                     ))}
                 </td>
@@ -77,17 +81,19 @@ const Table: React.FC<TableProps> = ({
     )
 
     const isMobile = isIn(['xs', 'sm', 'md'])
-
+    const hasData = data?.length || 0 > 0
     return (
         <div className={classNames(styles.table)}>
-            <div className={styles.tableToolbar}>
-                <div className={styles.tableToolbarLeft}>
-                    <TableFilters />
+            {hasData && (
+                <div className={styles.tableToolbar}>
+                    {/* <div className={styles.tableToolbarLeft}>
+                        <TableFilters />
+                    </div> */}
+                    <div className={styles.tableToolbarRight}>
+                        <TableActions actions={tableActions} onActionCalled={onTableActionCalled} />
+                    </div>
                 </div>
-                <div className={styles.tableToolbarRight}>
-                    <TableActions actions={tableActions} onActionCalled={onTableActionCalled} />
-                </div>
-            </div>
+            )}
             <table className={classNames({ [styles.isMobile]: isMobile })}>
                 <thead>
                     <tr>
@@ -100,6 +106,9 @@ const Table: React.FC<TableProps> = ({
                     </tr>
                 </thead>
                 <tbody>
+                    {!hasData && (
+                        <TableEmpty colsNumber={columns?.length + (Boolean(actions) ? 1 : 0)} />
+                    )}
                     {data?.map((rowData, index) => (
                         <RenderRow
                             handleAction={handleActionTriggered}
@@ -113,7 +122,7 @@ const Table: React.FC<TableProps> = ({
                     ))}
                 </tbody>
             </table>
-            <TableFooter />
+            {hasData && <TableFooter />}
         </div>
     )
 }
