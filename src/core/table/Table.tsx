@@ -46,7 +46,10 @@ const RenderRow: React.FC<RenderRowProps> = ({
                 </td>
             ))}
             {actions?.length && (
-                <td data-label={'Actions'}>
+                <td
+                    data-label={'Actions'}
+                    className={classNames(styles.actionsCell, styles.hasActions)}
+                >
                     {actions.map((item, index) => (
                         <IconButton
                             className="mr-2"
@@ -102,7 +105,11 @@ const Table: React.FC<TableProps> = ({
                                 <span>{colLabels[col] || col}</span>
                             </th>
                         ))}
-                        {actions?.length && <th>Actions</th>}
+                        {actions?.length && (
+                            <th className={classNames(styles.actionsCell, styles.hasActions)}>
+                                <span>Actions</span>
+                            </th>
+                        )}
                     </tr>
                 </thead>
                 <tbody>

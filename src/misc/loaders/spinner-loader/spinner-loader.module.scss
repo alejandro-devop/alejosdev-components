@@ -1,0 +1,41 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.loader {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 3px solid rgba($primary, 0.3);
+    border-radius: 50%;
+    border-top-color: $primary;
+    animation: spin 1s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+    margin: 0 0.5rem;
+}
+
+.md {
+    width: 2rem;
+    height: 2rem;
+    border-width: 6px;
+}
+
+.lg {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 6px;
+}
+
+.dark {
+    border: 3px solid rgba(0, 0, 0, 0.3);
+    border-top-color: #000;
+}
+
+@keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}

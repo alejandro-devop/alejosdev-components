@@ -94,10 +94,13 @@
         tr {
             // margin-bottom: 1rem;
             &:nth-child(even) {
-                background-color: rgba(0, 0, 0, 0.4);
+                background-color: rgba(0, 0, 0, 0.08);
             }
         }
     }
+    // th.actionsCell {
+    //     text-align: right;
+    // }
     /** mobile **/
 
     @include md {
@@ -133,10 +136,16 @@
             padding: 0.4rem 1.2rem;
         }
 
-        td.hasActions:last-child {
+        th.hasActions:last-child,
+        td._hasActions:last-child {
             text-align: right;
             white-space: nowrap;
-            width: 1%;
+            width: 10%;
+        }
+
+        td.actionsCell {
+            display: flex;
+            justify-content: center;
         }
 
         tbody {
@@ -146,7 +155,7 @@
         }
         tr {
             &:nth-child(even) {
-                background-color: rgba(0, 0, 0, 0.03);
+                background-color: rgba(0, 0, 0, 0.01);
                 @media (prefers-color-scheme: dark) {
                     background-color: rgba(0, 0, 0, 0.2);
                 }
