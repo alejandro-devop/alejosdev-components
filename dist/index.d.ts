@@ -1,6 +1,7 @@
 import { InputBaseProps } from './types/input.types';
 import { ActionItemVariantsType } from './types/common.types';
 import { icons } from './utils/available-icons';
+import { UseFormHookConfigType } from 'hooks/use-form/types';
 export * from './buttons';
 export * from './hooks';
 export * from './form';
@@ -9,4 +10,4 @@ export * from './misc';
 export * from './types/icons-types';
 export * from './utils/icon-registry';
 export * from './providers';
-export { InputBaseProps, ActionItemVariantsType, icons };
+export { InputBaseProps, ActionItemVariantsType, icons, UseFormHookConfigType };

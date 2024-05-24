@@ -12,6 +12,12 @@ $size: 20px;
     span.control {
         border-color: darken($color, $darken);
     }
+    span.label {
+        color: $text-color-light;
+        @media (prefers-color-scheme: dark) {
+            color: $text-color-dark;
+        }
+    }
     input[type='radio']:checked ~ span.control::after {
         background-color: darken($color, $darken);
     }

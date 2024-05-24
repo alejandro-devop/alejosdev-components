@@ -61,7 +61,7 @@ const OptionsButton: React.FC<OptionsButtonProps> = ({
                             checked={selected === item.value}
                         />
                         <span className={styles.control}></span>
-                        <span>{item.label}</span>
+                        <span className={styles.label}>{item.label}</span>
                     </Label>
                 ))}
             </div>

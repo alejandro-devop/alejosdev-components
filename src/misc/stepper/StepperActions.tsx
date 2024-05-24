@@ -9,7 +9,7 @@ const StepperActions: React.FC<StepperActionsProps> = ({ children, appendRender 
     const { isInLastStep } = useContext(StepperCTX)
 
     return (
-        <div className="flex flex-1 mt-10 justify-center">
+        <div className="flex flex-1 mt-4 justify-center">
             {children}
             {appendRender?.({ isInLastStep })}
         </div>

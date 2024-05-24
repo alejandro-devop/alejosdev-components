@@ -9,16 +9,21 @@ import { useMediaQuery } from 'hooks'
 import IconButton from '../../buttons/icon-button'
 import TableEmpty from './TableEmpty'
 
+type ColumnResolversType = {
+    [key: string]: (data: any) => React.ReactNode
+}
 interface TableProps {
     tableActions?: ActionType[]
     colLabels?: { [k: string]: string }
-    columns: string[]
+    columns?: string[]
     data?: { [k: string]: any }[]
     title?: string
     actions?: ActionType[]
     loading?: boolean
     onActionCalled?: (action: string, item: any) => void
     onTableActionCalled?: (action: string, item: any) => void
+    columnResolvers?: ColumnResolversType
+    columnClasses?: { [k: string]: string }
 }
 
 interface RenderRowProps {
@@ -28,6 +33,8 @@ interface RenderRowProps {
     rowId: string
     cols: string[]
     data: { [k: string]: any }
+    columnResolvers?: ColumnResolversType
+    columnClasses?: { [k: string]: string }
 }
 
 const RenderRow: React.FC<RenderRowProps> = ({
@@ -36,13 +43,19 @@ const RenderRow: React.FC<RenderRowProps> = ({
     colLabels,
     data,
     rowId,
-    handleAction
+    handleAction,
+    columnResolvers,
+    columnClasses
 }) => {
     return (
         <tr>
             {cols.map((key, index) => (
-                <td data-label={colLabels ? colLabels[key] || key : key} key={`${rowId}-${index}`}>
-                    {data[key]}
+                <td
+                    className={columnClasses?.[key]}
+                    data-label={colLabels ? colLabels[key] || key : key}
+                    key={`${rowId}-${index}`}
+                >
+                    {columnResolvers?.[key] ? columnResolvers?.[key]?.(data) : data[key]}
                 </td>
             ))}
             {actions?.length && (
@@ -70,12 +83,15 @@ const Table: React.FC<TableProps> = ({
     actions,
     data,
     colLabels = {},
-    columns,
+    columns: receivedCols,
     onActionCalled,
     onTableActionCalled,
-    tableActions
+    tableActions,
+    columnResolvers,
+    columnClasses
 }) => {
     const { isIn } = useMediaQuery()
+    const columns = !receivedCols ? Object.keys(colLabels) : receivedCols
     const handleActionTriggered = useCallback(
         (action: string, item: any) => {
             onActionCalled?.(action, item)
@@ -87,7 +103,7 @@ const Table: React.FC<TableProps> = ({
     const hasData = data?.length || 0 > 0
     return (
         <div className={classNames(styles.table)}>
-            {hasData && (
+            {tableActions && tableActions?.length > 0 && (
                 <div className={styles.tableToolbar}>
                     {/* <div className={styles.tableToolbarLeft}>
                         <TableFilters />
@@ -118,6 +134,7 @@ const Table: React.FC<TableProps> = ({
                     )}
                     {data?.map((rowData, index) => (
                         <RenderRow
+                            columnClasses={columnClasses}
                             handleAction={handleActionTriggered}
                             actions={actions}
                             rowId={`${index}`}
@@ -125,6 +142,7 @@ const Table: React.FC<TableProps> = ({
                             cols={columns}
                             data={rowData}
                             key={`row-${index}`}
+                            columnResolvers={columnResolvers}
                         />
                     ))}
                 </tbody>
