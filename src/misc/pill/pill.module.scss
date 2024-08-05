@@ -36,6 +36,14 @@ $pill-border-radius: 20px;
     .value {
         background-color: darken($default-bg, 10%);
     }
+
+    @media (prefers-color-scheme: dark) {
+        .icon,
+        .value,
+        .label {
+            color: $text-color-light;
+        }
+    }
 }
 
 @mixin apply-color-to-pill($color) {
@@ -44,6 +52,7 @@ $pill-border-radius: 20px;
     @include text-contrast($color);
     .value {
         background-color: darken($color, 20%);
+        @include text-contrast(darken($color, 20%));
     }
 }
 
@@ -66,6 +75,13 @@ $pill-border-radius: 20px;
 }
 .warning {
     @include apply-color-to-pill($warning);
+    @media (prefers-color-scheme: dark) {
+        .icon,
+        .value,
+        .label {
+            color: $text-color-light;
+        }
+    }
 }
 .dark {
     @include apply-color-to-pill($dark-color);

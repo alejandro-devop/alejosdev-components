@@ -18,7 +18,7 @@ interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
 }
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-    ({ icon, children, label, variant, onClick, classes, ...props }, ref) => {
+    ({ icon, children, label, variant, onClick, classes, size = 'md', ...props }, ref) => {
         const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation()
             onClick?.(e)
@@ -39,9 +39,9 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
                     [styles.dark]: variant === 'dark',
                     [styles.flat]: variant === 'flat',
                     [styles.disabled]: props?.disabled,
-                    [styles.sizeMd]: props?.size === 'md',
-                    [styles.sizeLg]: props?.size === 'lg',
-                    [styles.sizeSm]: props?.size === 'sm'
+                    [styles.sizeMd]: size === 'md',
+                    [styles.sizeLg]: size === 'lg',
+                    [styles.sizeSm]: size === 'sm'
                 })}
                 onClick={handleClick}
                 tabIndex={0}
@@ -61,9 +61,5 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         return buttonRenderer
     }
 )
-
-IconButton.defaultProps = {
-    size: 'md'
-}
 
 export default IconButton

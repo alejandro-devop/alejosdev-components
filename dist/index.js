@@ -175,12 +175,8 @@ styleInject(css_248z$m);
  * @param param0
  * @returns
  */
-const Icon = ({ className, icon = 'tag' }) => {
+const Icon = ({ className = '', icon = 'tag' }) => {
     return React.createElement(FontAwesomeIcon, { icon: icon || '', className: classNames(styles$m.root, className) });
-};
-Icon.defaultProps = {
-    className: '',
-    icon: 'tag'
 };
 
 const defaultVariantMaps = {
@@ -219,7 +215,7 @@ const applyButtonVariantStyles = (config) => {
  * @param param0
  * @returns
  */
-const Button = ({ children, className, icon, rounded, block, variant, loading, size, flat, iconPosition, loadingLabel, ...props }) => {
+const Button = ({ children, className, icon, rounded = true, block, variant = 'default', loading, size = 'md', flat, iconPosition = 'lead', tabIndex = 0, loadingLabel, ...props }) => {
     const iconRenderer = useMemo$1(() => (React__default.createElement("i", { className: classNames(styles$n.iconWrapper, {
             [styles$n.iconEnd]: iconPosition === 'end',
             [styles$n.iconLead]: iconPosition === 'lead'
@@ -239,17 +235,10 @@ const Button = ({ children, className, icon, rounded, block, variant, loading, s
             [styles$n.withIcon]: Boolean(icon),
             [styles$n.iconLeading]: iconPosition === 'lead',
             [styles$n.iconEnding]: iconPosition === 'end'
-        }, className), tabIndex: 0, ...props },
+        }, className), tabIndex: tabIndex, ...props },
         icon && iconPosition === 'lead' && iconRenderer,
         React__default.createElement("span", { className: styles$n.buttonContent }, loading ? loadingLabel || 'loading...' : children),
         icon && iconPosition === 'end' && iconRenderer));
-};
-Button.defaultProps = {
-    iconPosition: 'lead',
-    tabIndex: 0,
-    rounded: true,
-    size: 'md',
-    variant: 'default'
 };
 
 var css_248z$l = "@use \"sass:math\";\n.icon-button-module_root__u1x4- {\n  width: 40px;\n  height: 40px;\n  border: none;\n  cursor: pointer;\n  flex-shrink: 0;\n  padding: 0;\n  margin: 0;\n  box-sizing: inherit;\n  background-color: transparent;\n  border-radius: 50%;\n  transition: background-color 0.6s;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .icon-button-module_root__u1x4- {\n      color: #fff;\n      border-color: #8f8f8f; } }\n  .icon-button-module_root__u1x4-:disabled {\n    opacity: 0.2;\n    cursor: not-allowed;\n    color: #000;\n    background-color: rgba(0, 0, 0, 0.08); }\n\n.icon-button-module_withLabelWrapper__9aC34 {\n  display: flex;\n  flex-direction: column;\n  align-items: center; }\n  .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n    font-size: 0.7rem;\n    margin-top: 0.2rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_withLabelWrapper__9aC34 span.icon-button-module_label__rKElE {\n        color: #fff; } }\n\n.icon-button-module_primary__Lm3HE {\n  color: #8d6b94;\n  background-color: #e8e1ea;\n  box-shadow: 0px 2px 0px 0px #7f6085; }\n  .icon-button-module_primary__Lm3HE:hover {\n    background-color: #715676;\n    color: white; }\n  .icon-button-module_primary__Lm3HE > .icon-button-module_icon__x11Ki {\n    color: #8d6b94; }\n\n.icon-button-module_secondary__8ReRg {\n  color: #b185a7;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #a7759c; }\n  .icon-button-module_secondary__8ReRg:hover {\n    background-color: #9d6691;\n    color: white; }\n  .icon-button-module_secondary__8ReRg > .icon-button-module_icon__x11Ki {\n    color: #b185a7; }\n\n.icon-button-module_success__H97Hp {\n  color: #06d6a0;\n  background-color: #abfde8;\n  box-shadow: 0px 2px 0px 0px #05bd8d; }\n  .icon-button-module_success__H97Hp:hover {\n    background-color: #05a47b;\n    color: white; }\n  .icon-button-module_success__H97Hp > .icon-button-module_icon__x11Ki {\n    color: #06d6a0; }\n\n.icon-button-module_danger__Sq2b1 {\n  color: #ef476f;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #ed305d; }\n  .icon-button-module_danger__Sq2b1:hover {\n    background-color: #eb184a;\n    color: white; }\n  .icon-button-module_danger__Sq2b1 > .icon-button-module_icon__x11Ki {\n    color: #ef476f; }\n\n.icon-button-module_warning__jSzGR {\n  color: #b7ba1b;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #eef098; }\n  .icon-button-module_warning__jSzGR:hover {\n    background-color: #e4e655;\n    color: black; }\n  .icon-button-module_warning__jSzGR > .icon-button-module_icon__x11Ki {\n    color: #b7ba1b; }\n\n.icon-button-module_info__WYMmR {\n  color: #7796cb;\n  background-color: white;\n  box-shadow: 0px 2px 0px 0px #6588c4; }\n  .icon-button-module_info__WYMmR:hover {\n    background-color: #527abd;\n    color: white; }\n  .icon-button-module_info__WYMmR > .icon-button-module_icon__x11Ki {\n    color: #7796cb; }\n\n.icon-button-module_light__8B2so {\n  color: gray;\n  background-color: white;\n  box-shadow: none; }\n  .icon-button-module_light__8B2so:hover {\n    background-color: #cccccc;\n    color: black; }\n\n.icon-button-module_dark__fsKvI {\n  color: black;\n  background-color: #a1a1a1;\n  box-shadow: 0px 2px 0px 0px #141414; }\n  .icon-button-module_dark__fsKvI:hover {\n    background-color: black;\n    color: white; }\n  .icon-button-module_dark__fsKvI > .icon-button-module_icon__x11Ki {\n    color: black; }\n\n.icon-button-module_flat__qVklj {\n  background-color: transparent;\n  box-shadow: none; }\n  .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n    color: gray; }\n    @media (prefers-color-scheme: dark) {\n      .icon-button-module_flat__qVklj.icon-button-module_flat__qVklj .icon-button-module_icon__x11Ki {\n        color: #e6e6e6; } }\n\n.icon-button-module_sizeLg__HPQh1 {\n  width: 50px;\n  height: 50px; }\n\n.icon-button-module_sizeSm__-4j1C {\n  width: 30px;\n  height: 30px; }\n";
@@ -260,7 +249,7 @@ var css_248z$k = "@use \"sass:math\";\n.alert-module_root__DQW41 {\n  border-rad
 var styles$k = {"root":"alert-module_root__DQW41","primary":"alert-module_primary__iu0Wq","icon":"alert-module_icon__0xtkg","info":"alert-module_info__5PrZI","iconWrapper":"alert-module_iconWrapper__5NtU-","content":"alert-module_content__a9vpO","actionButton":"alert-module_actionButton__ZpuDJ"};
 styleInject(css_248z$k);
 
-const Alert = ({ action, actionIcon, actionLabel, actionVariant, message, icon, variant = 'default' }) => {
+const Alert = ({ action, actionIcon, actionLabel, actionVariant = 'primary', message, icon, variant = 'default' }) => {
     return (React__default.createElement("div", { className: classNames(styles$k.root, {
             [styles$k.primary]: variant === 'primary',
             [styles$k.secondary]: variant === 'secondary',
@@ -274,11 +263,8 @@ const Alert = ({ action, actionIcon, actionLabel, actionVariant, message, icon, 
         React__default.createElement("div", { className: styles$k.content }, message),
         Boolean(action) && (React__default.createElement(Button, { className: styles$k.actionButton, variant: actionVariant, icon: actionIcon, onClick: action }, actionLabel))));
 };
-Alert.defaultProps = {
-    actionVariant: 'primary'
-};
 
-var css_248z$j = "@use \"sass:math\";\n.pill-module_root__f-Exi {\n  border-radius: 20px;\n  font-size: 0.8rem;\n  border-width: 2px;\n  border-style: solid;\n  margin: 0 0.1rem 0.2rem;\n  display: inline-flex;\n  align-items: center;\n  flex-shrink: 0;\n  flex-grow: 0; }\n\n.pill-module_label__2heeo,\n.pill-module_value__TtQc3 {\n  display: inline-block;\n  padding: 0.1rem 0.5rem; }\n\n.pill-module_value__TtQc3 {\n  margin-left: 0.2rem;\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px; }\n\n.pill-module_icon__tfAjQ {\n  margin-left: 0.5rem; }\n\n.pill-module_default__xEF67 {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_default__xEF67 .pill-module_value__TtQc3 {\n    background-color: #e6e6e6; }\n\n.pill-module_primary__GnHHP {\n  background-color: #8d6b94;\n  border-color: #634b68;\n  color: white; }\n  .pill-module_primary__GnHHP .pill-module_value__TtQc3 {\n    background-color: #554059; }\n\n.pill-module_secondary__oSDnT {\n  background-color: #b185a7;\n  border-color: #8e5b83;\n  color: white; }\n  .pill-module_secondary__oSDnT .pill-module_value__TtQc3 {\n    background-color: #7f5174; }\n\n.pill-module_success__wRcmf {\n  background-color: #06d6a0;\n  border-color: #048c68;\n  color: white; }\n  .pill-module_success__wRcmf .pill-module_value__TtQc3 {\n    background-color: #037356; }\n\n.pill-module_info__q-5Kq {\n  background-color: #7796cb;\n  border-color: #446cb2;\n  color: white; }\n  .pill-module_info__q-5Kq .pill-module_value__TtQc3 {\n    background-color: #3d619f; }\n\n.pill-module_danger__cDGNE {\n  background-color: #ef476f;\n  border-color: #d71341;\n  color: white; }\n  .pill-module_danger__cDGNE .pill-module_value__TtQc3 {\n    background-color: #bf113a; }\n\n.pill-module_warning__NJPR- {\n  background-color: #f2f3ae;\n  border-color: #e7e96b;\n  color: black; }\n  .pill-module_warning__NJPR- .pill-module_value__TtQc3 {\n    background-color: #e4e655; }\n\n.pill-module_dark__5oAtq {\n  background-color: #212121;\n  border-color: black;\n  color: white; }\n  .pill-module_dark__5oAtq .pill-module_value__TtQc3 {\n    background-color: black; }\n\n.pill-module_light__t49uX {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_light__t49uX .pill-module_value__TtQc3 {\n    background-color: #cccccc; }\n";
+var css_248z$j = "@use \"sass:math\";\n.pill-module_root__f-Exi {\n  border-radius: 20px;\n  font-size: 0.8rem;\n  border-width: 2px;\n  border-style: solid;\n  margin: 0 0.1rem 0.2rem;\n  display: inline-flex;\n  align-items: center;\n  flex-shrink: 0;\n  flex-grow: 0; }\n\n.pill-module_label__2heeo,\n.pill-module_value__TtQc3 {\n  display: inline-block;\n  padding: 0.1rem 0.5rem; }\n\n.pill-module_value__TtQc3 {\n  margin-left: 0.2rem;\n  border-top-right-radius: 20px;\n  border-bottom-right-radius: 20px; }\n\n.pill-module_icon__tfAjQ {\n  margin-left: 0.5rem; }\n\n.pill-module_default__xEF67 {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_default__xEF67 .pill-module_value__TtQc3 {\n    background-color: #e6e6e6; }\n  @media (prefers-color-scheme: dark) {\n    .pill-module_default__xEF67 .pill-module_icon__tfAjQ,\n    .pill-module_default__xEF67 .pill-module_value__TtQc3,\n    .pill-module_default__xEF67 .pill-module_label__2heeo {\n      color: #000; } }\n\n.pill-module_primary__GnHHP {\n  background-color: #8d6b94;\n  border-color: #634b68;\n  color: white; }\n  .pill-module_primary__GnHHP .pill-module_value__TtQc3 {\n    background-color: #554059;\n    color: white; }\n\n.pill-module_secondary__oSDnT {\n  background-color: #b185a7;\n  border-color: #8e5b83;\n  color: white; }\n  .pill-module_secondary__oSDnT .pill-module_value__TtQc3 {\n    background-color: #7f5174;\n    color: white; }\n\n.pill-module_success__wRcmf {\n  background-color: #06d6a0;\n  border-color: #048c68;\n  color: white; }\n  .pill-module_success__wRcmf .pill-module_value__TtQc3 {\n    background-color: #037356;\n    color: white; }\n\n.pill-module_info__q-5Kq {\n  background-color: #7796cb;\n  border-color: #446cb2;\n  color: white; }\n  .pill-module_info__q-5Kq .pill-module_value__TtQc3 {\n    background-color: #3d619f;\n    color: white; }\n\n.pill-module_danger__cDGNE {\n  background-color: #ef476f;\n  border-color: #d71341;\n  color: white; }\n  .pill-module_danger__cDGNE .pill-module_value__TtQc3 {\n    background-color: #bf113a;\n    color: white; }\n\n.pill-module_warning__NJPR- {\n  background-color: #f2f3ae;\n  border-color: #e7e96b;\n  color: black; }\n  .pill-module_warning__NJPR- .pill-module_value__TtQc3 {\n    background-color: #e4e655;\n    color: black; }\n  @media (prefers-color-scheme: dark) {\n    .pill-module_warning__NJPR- .pill-module_icon__tfAjQ,\n    .pill-module_warning__NJPR- .pill-module_value__TtQc3,\n    .pill-module_warning__NJPR- .pill-module_label__2heeo {\n      color: #000; } }\n\n.pill-module_dark__5oAtq {\n  background-color: #212121;\n  border-color: black;\n  color: white; }\n  .pill-module_dark__5oAtq .pill-module_value__TtQc3 {\n    background-color: black;\n    color: white; }\n\n.pill-module_light__t49uX {\n  background-color: #ffffff;\n  border-color: #d9d9d9;\n  color: black; }\n  .pill-module_light__t49uX .pill-module_value__TtQc3 {\n    background-color: #cccccc;\n    color: black; }\n";
 var styles$j = {"root":"pill-module_root__f-Exi","label":"pill-module_label__2heeo","value":"pill-module_value__TtQc3","icon":"pill-module_icon__tfAjQ","default":"pill-module_default__xEF67","primary":"pill-module_primary__GnHHP","secondary":"pill-module_secondary__oSDnT","success":"pill-module_success__wRcmf","info":"pill-module_info__q-5Kq","danger":"pill-module_danger__cDGNE","warning":"pill-module_warning__NJPR-","dark":"pill-module_dark__5oAtq","light":"pill-module_light__t49uX"};
 styleInject(css_248z$j);
 
@@ -287,7 +273,7 @@ styleInject(css_248z$j);
  * which is a small rounded rectangle with a text inside or icon
  * @returns React.FC
  */
-const Pill = ({ label, variant, icon, value, className }) => {
+const Pill = ({ label, variant = 'default', icon, value, className }) => {
     return (React__default.createElement("div", { className: classNames(styles$j.root, className, {
             [styles$j.default]: variant === 'default',
             [styles$j.primary]: variant === 'primary',
@@ -302,9 +288,6 @@ const Pill = ({ label, variant, icon, value, className }) => {
         Boolean(icon) && React__default.createElement(Icon, { className: styles$j.icon, icon: icon }),
         React__default.createElement("span", { className: styles$j.label }, label),
         value && React__default.createElement("span", { className: styles$j.value }, value)));
-};
-Pill.defaultProps = {
-    variant: 'default'
 };
 
 var css_248z$i = "@use \"sass:math\";\n.step-module_step__AmOI8 h3 {\n  text-align: center;\n  font-size: 1.4rem;\n  margin-top: 1rem;\n  color: #000; }\n  @media (prefers-color-scheme: dark) {\n    .step-module_step__AmOI8 h3 {\n      color: #fff; } }\n\n.step-module_description__V6pXT {\n  text-align: center;\n  font-size: 0.9rem;\n  margin-bottom: 2rem;\n  color: #848484; }\n";
@@ -430,18 +413,15 @@ var css_248z$g = "@use \"sass:math\";\n.spinner-loader-module_loader__L1Fq1 {\n 
 var styles$g = {"loader":"spinner-loader-module_loader__L1Fq1","spin":"spinner-loader-module_spin__wFFZE","md":"spinner-loader-module_md__o8ofm","lg":"spinner-loader-module_lg__PNz-3","dark":"spinner-loader-module_dark__3i42R"};
 styleInject(css_248z$g);
 
-const SpinnerLoader = ({ dark, size }) => {
+const SpinnerLoader = ({ dark, size = 'md' }) => {
     return (React__default.createElement("div", { className: classNames(styles$g.loader, {
             [styles$g.dark]: dark,
             [styles$g.lg]: size === 'lg',
             [styles$g.md]: size === 'md'
         }) }));
 };
-SpinnerLoader.defaultProps = {
-    size: 'md'
-};
 
-const IconButton = forwardRef(({ icon, children, label, variant, onClick, classes, ...props }, ref) => {
+const IconButton = forwardRef(({ icon, children, label, variant, onClick, classes, size = 'md', ...props }, ref) => {
     const handleClick = (e) => {
         e.stopPropagation();
         onClick?.(e);
@@ -457,9 +437,9 @@ const IconButton = forwardRef(({ icon, children, label, variant, onClick, classe
             [styles$l.dark]: variant === 'dark',
             [styles$l.flat]: variant === 'flat',
             [styles$l.disabled]: props?.disabled,
-            [styles$l.sizeMd]: props?.size === 'md',
-            [styles$l.sizeLg]: props?.size === 'lg',
-            [styles$l.sizeSm]: props?.size === 'sm'
+            [styles$l.sizeMd]: size === 'md',
+            [styles$l.sizeLg]: size === 'lg',
+            [styles$l.sizeSm]: size === 'sm'
         }), onClick: handleClick, tabIndex: 0 }, children ? children : React__default.createElement(Icon, { className: styles$l.icon, icon: icon })));
     if (label) {
         return (React__default.createElement("div", { className: styles$l.withLabelWrapper },
@@ -468,9 +448,6 @@ const IconButton = forwardRef(({ icon, children, label, variant, onClick, classe
     }
     return buttonRenderer;
 });
-IconButton.defaultProps = {
-    size: 'md'
-};
 
 /**
  * Function to generate a random number between the given range.
@@ -633,32 +610,34 @@ const useForm = (config) => {
         required: required
     })).current;
     const processValue = useCallback$1((processorConfig) => {
-        const { processor, currentValue, field, form } = processorConfig;
+        const { processor, field, form, type, checked } = processorConfig;
         const [processorName] = processor.split(':');
-        if (processorName === 'switchGroup') {
+        if (processorName === 'switchGroup' && type === 'checkbox') {
             const otherFields = Object.keys(fields || {}).filter((key) => {
                 const fieldConfig = fields ? fields[key] : {};
-                return fieldConfig?.processor?.includes('switchGroup');
+                return fieldConfig?.processor?.includes(processor);
             });
             const groupValue = otherFields.reduce((accu, currentKey) => ({
                 ...accu,
                 [currentKey]: false
             }), []);
-            return { ...form, ...groupValue, [field]: currentValue === 'on' };
+            return { ...form, ...groupValue, [field]: checked };
         }
     }, [fields]);
     /**
      * Handles the change of the form fields
      */
     const handleChange = useCallback$1((e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         const config = fields ? fields[name] : {};
         if (config?.processor) {
             const newValue = processValue({
                 processor: config?.processor,
                 form,
                 field: name,
-                currentValue: value
+                currentValue: value,
+                type,
+                checked: Boolean(checked)
             });
             setForm(newValue);
         }
@@ -849,7 +828,7 @@ const Label = ({ children, className, ...props }) => {
     return (React__default.createElement("label", { className: classNames(styles$c.root, className), ...props }, children));
 };
 
-const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, className, classes, disableAction, error, floatingLabel, hideMax, id, isNumeric, label, leadingIcon, leadingComponent, max, maxEndingSpaces, name, onChange, onlyInput, trailingIcon, trailingComponent, trimSpaces, value, hideRequired, ...props }, ref) => {
+const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, className, classes, disableAction, error, floatingLabel, hideMax, id, isNumeric, label, leadingIcon, leadingComponent, max = 200, maxEndingSpaces, name, onChange, onlyInput, trailingIcon, trailingComponent, trimSpaces = true, value, hideRequired, ...props }, ref) => {
     const htmlId = useInputId({ id, name });
     const handleChangeProxy = useCallback$1((event) => {
         /**
@@ -889,10 +868,6 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
         trailingComponent,
         Boolean(action) && (React__default.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$e.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
 });
-InputBase.defaultProps = {
-    max: 100,
-    trimSpaces: true
-};
 
 /**
  * Component documentation...
@@ -901,14 +876,12 @@ InputBase.defaultProps = {
 const TextField = forwardRef(({ ...props }, ref) => {
     return React__default.createElement(InputBase, { ref: ref, ...props });
 });
-TextField.defaultProps = {};
 
 const PasswordField = ({ ...props }) => {
     const [visible, setVisible] = useState$1(false);
     const toggleVisible = () => setVisible(!visible);
     return (React__default.createElement(InputBase, { ...props, type: visible ? 'text' : 'password', action: toggleVisible, actionIcon: visible ? 'eye-slash' : 'eye' }));
 };
-PasswordField.defaultProps = {};
 
 var css_248z$b = "@use \"sass:math\";\n.select-field-module_root__l5e-P {\n  margin-bottom: 1rem; }\n\n.select-field-module_inputLabel__Cex2T {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .select-field-module_inputLabel__Cex2T.select-field-module_inputLabel__Cex2T {\n      color: #fff; } }\n\n.select-field-module_control__24wTu {\n  color: red; }\n\n.select-field-module_formErrorMsg__EWFH2 {\n  font-size: 0.9rem;\n  margin-left: 1rem; }\n";
 var styles$b = {"root":"select-field-module_root__l5e-P","inputLabel":"select-field-module_inputLabel__Cex2T","control":"select-field-module_control__24wTu","formErrorMsg":"select-field-module_formErrorMsg__EWFH2"};
@@ -962,25 +935,35 @@ const SelectField = ({ label: inputLabel, placeholder = '', error, id, onChange,
             }, value: defaultSelected }))));
 };
 
-var css_248z$a = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
-var styles$a = {"root":"check-box-field-module_root__Owe-O","check":"check-box-field-module_check__TWIEp","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
+var css_248z$a = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_disabled__B8wBD {\n  opacity: 0.25;\n  cursor: not-allowed; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
+var styles$a = {"root":"check-box-field-module_root__Owe-O","check":"check-box-field-module_check__TWIEp","disabled":"check-box-field-module_disabled__B8wBD","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
 styleInject(css_248z$a);
 
-const CheckBoxField = ({ className, onChange, name, value, checked }) => {
+const CheckBoxField = ({ className, onChange, name, value, checked, label, classes, disabled }) => {
     const isChecked = useMemo$1(() => Boolean(value) || checked, [checked, value]);
     const handleChange = useCallback$1((e) => {
         e.stopPropagation();
-        onChange?.({
-            target: {
-                name: name || '',
-                checked: !Boolean(isChecked)
-            }
-        });
-    }, [onChange, name, isChecked]);
-    return (React__default.createElement("div", { className: classNames(styles$a.root, className) },
+        if (!disabled) {
+            onChange?.({
+                target: {
+                    name: name || '',
+                    checked: !Boolean(isChecked),
+                    type: 'checkbox'
+                }
+            });
+        }
+    }, [onChange, name, isChecked, disabled]);
+    const inputRenderer = (React__default.createElement("div", { className: classNames(styles$a.root, {
+            [styles$a.disabled]: Boolean(disabled)
+        }, className) },
         isChecked && React__default.createElement("span", { className: styles$a.check }),
-        React__default.createElement("input", { type: "checkbox" }),
+        React__default.createElement("input", { type: "checkbox", disabled: disabled }),
         React__default.createElement("label", { htmlFor: "", onClick: handleChange, className: styles$a.control })));
+    if (!label)
+        return inputRenderer;
+    return (React__default.createElement(FormControl, { className: classNames('flex items-center mb-2', classes?.wrapper) },
+        inputRenderer,
+        React__default.createElement("span", { className: "textWithMode block pl-2 ml-2 cursor-pointer z-1", tabIndex: 0, onClick: handleChange }, label)));
 };
 
 var css_248z$9 = "@use \"sass:math\";\n.textarea-module_textAreaRoot__BTLb5 {\n  width: 100%;\n  position: relative;\n  margin-bottom: 1rem; }\n\n.textarea-module_inputLabel__sNfSq {\n  display: block;\n  left: 1rem;\n  margin: 0.2rem 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .textarea-module_inputLabel__sNfSq.textarea-module_inputLabel__sNfSq {\n      color: #fff; } }\n\n.textarea-module_textArea__v8bRT {\n  display: block;\n  border-radius: 20px;\n  padding: 0.5rem 1rem;\n  margin: 0px 0px 10px 0px;\n  min-height: 64px;\n  width: 100%;\n  border: 1px solid #b3b3b3;\n  background-color: #ffffff; }\n  .textarea-module_textArea__v8bRT:focus {\n    outline: none; }\n  @media (prefers-color-scheme: dark) {\n    .textarea-module_textArea__v8bRT {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; } }\n\n.textarea-module_filled__OQ2A- {\n  border: none; }\n\n.textarea-module_charCount__nw4qg {\n  position: absolute;\n  top: 0.5rem;\n  right: 0.5rem;\n  font-size: 0.7rem;\n  color: rgba(0, 0, 0, 0.5); }\n";
@@ -988,7 +971,7 @@ var styles$9 = {"textAreaRoot":"textarea-module_textAreaRoot__BTLb5","inputLabel
 styleInject(css_248z$9);
 
 const TEXT_AREA_INPUT_HEIGHT = 32;
-const TextAreaField = ({ label, error, value, max, onChange, hideMax, trimSpaces, maxEndingSpaces = 4, ...props }) => {
+const TextAreaField = ({ label, error, value = '', max = 255, onChange, hideMax, trimSpaces = true, maxEndingSpaces = 4, ...props }) => {
     const textAreaRef = useRef(null);
     const trimEventSpaces = useCallback$1((evt) => {
         if (trimSpaces && evt.target?.value?.length > 0) {
@@ -1020,17 +1003,12 @@ const TextAreaField = ({ label, error, value, max, onChange, hideMax, trimSpaces
             "/",
             max))));
 };
-TextAreaField.defaultProps = {
-    value: '',
-    max: 255,
-    trimSpaces: true
-};
 
 var css_248z$8 = ".number-field-module_iconButton__ZBKjd {\n  position: relative;\n  bottom: 0.125rem; }\n";
 var styles$8 = {"iconButton":"number-field-module_iconButton__ZBKjd"};
 styleInject(css_248z$8);
 
-const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, name, addVariant, subVariant, ...props }) => {
+const NumberField = ({ value: defValue, min = 0, max = 1000, step = 1, onChange, name, addVariant, subVariant, ...props }) => {
     const inputRef = useRef({}).current;
     const [value, setValue] = React__default.useState(isNaN(defValue) ? 0 : parseInt(defValue, 10));
     const triggerChange = useCallback$1((newValue) => {
@@ -1106,11 +1084,6 @@ const NumberField = ({ value: defValue, min = 0, max = 0, step = 1, onChange, na
             inputRef.current = ref;
         }, hideMax: true, ...props, leadingComponent: React__default.createElement(IconButton, { tabIndex: -1, className: styles$8.iconButton, icon: "minus", disabled: value === min, onClick: decrease, variant: subVariant }), type: "number", onChange: handleChangeValue, trailingComponent: React__default.createElement(IconButton, { tabIndex: -1, className: styles$8.iconButton, icon: "add", disabled: value === max, onClick: increase, variant: addVariant }), value: value.toString() }));
 };
-NumberField.defaultProps = {
-    max: 1000,
-    min: 0,
-    step: 1
-};
 var NumberField$1 = React__default.memo(NumberField);
 
 var css_248z$7 = "@use \"sass:math\";\n.input-control-module_root__FvlwC {\n  display: flex;\n  flex-direction: column; }\n\n.input-control-module_input__lvLgx {\n  width: 4rem;\n  text-align: center;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0rem 0.5rem;\n  font-size: 1.5rem;\n  margin: 0;\n  background-color: #ffffff;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000; }\n  .input-control-module_input__lvLgx::placeholder {\n    color: #ffffff;\n    transition: color 0.2s; }\n  @media (prefers-color-scheme: dark) {\n    .input-control-module_input__lvLgx {\n      color: #fff;\n      background-color: #292929;\n      border-color: black; }\n      .input-control-module_input__lvLgx::placeholder {\n        color: #292929; } }\n\n.input-control-module_input__lvLgx:focus {\n  border-width: 1px;\n  outline: none;\n  border-color: #8d6b94; }\n  .input-control-module_input__lvLgx:focus::placeholder {\n    color: rgba(0, 0, 0, 0.4); }\n  @media (prefers-color-scheme: dark) {\n    .input-control-module_input__lvLgx:focus::placeholder {\n      color: rgba(255, 255, 255, 0.4); } }\n";
@@ -1155,7 +1128,6 @@ const InputControl = ({ value, onChange, twoDigitMax = 59, oneDigitMax = 5, auto
         React__default.createElement("button", { tabIndex: -1, className: styles$7.actionButton, onClick: handleDown },
             React__default.createElement(Icon, { icon: "chevron-down" }))));
 };
-InputControl.defaultProps = {};
 
 var css_248z$6 = "@use \"sass:math\";\n.time-field-module_wrapper__C-I0x {\n  display: flex;\n  justify-content: flex-start;\n  align-items: center; }\n\n.time-field-module_timeSeparator__Cp93w {\n  font-size: 2rem;\n  color: #000;\n  margin: 0 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .time-field-module_timeSeparator__Cp93w {\n      color: #fff; } }\n";
 var styles$6 = {"wrapper":"time-field-module_wrapper__C-I0x","timeSeparator":"time-field-module_timeSeparator__Cp93w"};
@@ -1201,7 +1173,6 @@ const TimeField = ({ value, onChange, name, label, ...props }) => {
             React.createElement("span", { className: styles$6.timeSeparator }, ":"),
             React.createElement(InputControl, { value: minutes, onChange: handleChangeMinutes }))));
 };
-TimeField.defaultProps = {};
 
 // import 'react-datepicker/dist/react-datepicker.css'
 const DateField = ({}) => {
@@ -1250,13 +1221,12 @@ const DateField = ({}) => {
         // selected={currentDate}
         onChange: handleChange, dateFormat: 'yyyy-MM-dd' }));
 };
-DateField.defaultProps = {};
 
 var css_248z$5 = "@use \"sass:math\";\n.options-field-module_mainLabel__7rChb {\n  color: #8d6b94;\n  margin-bottom: 0.5rem;\n  display: block; }\n\n.options-field-module_label__98IL4 {\n  display: flex;\n  padding-left: 1rem;\n  position: relative;\n  margin-bottom: 0.4rem;\n  align-items: center; }\n  .options-field-module_label__98IL4 input[type='radio'] {\n    display: none; }\n  .options-field-module_label__98IL4 span {\n    display: inline-block; }\n  .options-field-module_label__98IL4 span.options-field-module_control__NZaec {\n    left: 0;\n    top: 0;\n    width: 20px;\n    height: 20px;\n    flex-shrink: 0;\n    border-radius: 50%;\n    border: 2px solid #cccccc;\n    cursor: pointer;\n    position: relative;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    margin-right: 0.5rem; }\n  .options-field-module_label__98IL4 input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    content: '';\n    display: inline-block;\n    width: 10px;\n    height: 10px;\n    background-color: #cccccc;\n    border-radius: 50%; }\n  .options-field-module_label__98IL4.options-field-module_primary__p9hE8 span.options-field-module_control__NZaec {\n    border-color: #8d6b94; }\n  .options-field-module_label__98IL4.options-field-module_primary__p9hE8 span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_primary__p9hE8 span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_primary__p9hE8 input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #8d6b94; }\n  .options-field-module_label__98IL4.options-field-module_secondary__d-b2t span.options-field-module_control__NZaec {\n    border-color: #b185a7; }\n  .options-field-module_label__98IL4.options-field-module_secondary__d-b2t span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_secondary__d-b2t span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_secondary__d-b2t input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #b185a7; }\n  .options-field-module_label__98IL4.options-field-module_success__zgosL span.options-field-module_control__NZaec {\n    border-color: #06d6a0; }\n  .options-field-module_label__98IL4.options-field-module_success__zgosL span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_success__zgosL span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_success__zgosL input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #06d6a0; }\n  .options-field-module_label__98IL4.options-field-module_danger__OSNrV span.options-field-module_control__NZaec {\n    border-color: #ef476f; }\n  .options-field-module_label__98IL4.options-field-module_danger__OSNrV span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_danger__OSNrV span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_danger__OSNrV input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #ef476f; }\n  .options-field-module_label__98IL4.options-field-module_warning__avuUr span.options-field-module_control__NZaec {\n    border-color: #b7ba1b; }\n  .options-field-module_label__98IL4.options-field-module_warning__avuUr span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_warning__avuUr span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_warning__avuUr input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #b7ba1b; }\n  .options-field-module_label__98IL4.options-field-module_info__AdifF span.options-field-module_control__NZaec {\n    border-color: #7796cb; }\n  .options-field-module_label__98IL4.options-field-module_info__AdifF span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_info__AdifF span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_info__AdifF input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #7796cb; }\n  .options-field-module_label__98IL4.options-field-module_light__FS4LK span.options-field-module_control__NZaec {\n    border-color: #999999; }\n  .options-field-module_label__98IL4.options-field-module_light__FS4LK span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_light__FS4LK span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_light__FS4LK input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #999999; }\n  .options-field-module_label__98IL4.options-field-module_dark__greBM span.options-field-module_control__NZaec {\n    border-color: #212121; }\n  .options-field-module_label__98IL4.options-field-module_dark__greBM span.options-field-module_label__98IL4 {\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .options-field-module_label__98IL4.options-field-module_dark__greBM span.options-field-module_label__98IL4 {\n        color: #fff; } }\n  .options-field-module_label__98IL4.options-field-module_dark__greBM input[type='radio']:checked ~ span.options-field-module_control__NZaec::after {\n    background-color: #212121; }\n\n.options-field-module_horizontal__2sweq {\n  display: flex;\n  flex-direction: row;\n  flex-wrap: wrap;\n  align-items: center;\n  margin-bottom: 0; }\n";
 var styles$5 = {"mainLabel":"options-field-module_mainLabel__7rChb","label":"options-field-module_label__98IL4","control":"options-field-module_control__NZaec","primary":"options-field-module_primary__p9hE8","secondary":"options-field-module_secondary__d-b2t","success":"options-field-module_success__zgosL","danger":"options-field-module_danger__OSNrV","warning":"options-field-module_warning__avuUr","info":"options-field-module_info__AdifF","light":"options-field-module_light__FS4LK","dark":"options-field-module_dark__greBM","horizontal":"options-field-module_horizontal__2sweq"};
 styleInject(css_248z$5);
 
-const OptionsButton = ({ name, label, options = [], value, onChange, horizontal, variant }) => {
+const OptionsButton = ({ name, label, options = [], value, onChange, horizontal, variant = 'primary' }) => {
     const [selected, setSelected] = useState$1(value);
     const changeValue = (newValue) => {
         setSelected(newValue);
@@ -1285,16 +1255,13 @@ const OptionsButton = ({ name, label, options = [], value, onChange, horizontal,
             React__default.createElement("span", { className: styles$5.control }),
             React__default.createElement("span", { className: styles$5.label }, item.label)))))));
 };
-OptionsButton.defaultProps = {
-    variant: 'primary'
-};
 
 const Grid = ({ children, className }) => {
     return React__default.createElement("div", { className: classNames('grid-container', className) }, children);
 };
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
-const Col = ({ all, applyFor, applyFrom, ascendingApply, children, xs, sm, md, lg, xl }) => {
+const Col = ({ all, applyFor, applyFrom, ascendingApply = true, children, xs = 12, sm = 12, md = 12, lg = 12, xl = 12 }) => {
     const generatedClassName = useMemo$1(() => {
         let dimensions = {
             xs,
@@ -1332,14 +1299,6 @@ const Col = ({ all, applyFor, applyFrom, ascendingApply, children, xs, sm, md, l
     }, [xs, sm, md, lg, xl, all, applyFor, applyFrom, ascendingApply]);
     return React__default.createElement("div", { className: generatedClassName }, children);
 };
-Col.defaultProps = {
-    xs: 12,
-    sm: 12,
-    lg: 12,
-    xl: 12,
-    md: 12,
-    ascendingApply: true
-};
 
 const Row = ({ children, className }) => {
     return React__default.createElement("div", { className: classNames('row', className) }, children);
@@ -1365,7 +1324,6 @@ const DetailView = ({ title, details, pills, children }) => {
             React__default.createElement("div", { className: "flex flex-wrap" }, pills?.map((pill, key) => (React__default.createElement(Pill, { key: key, label: pill?.title, icon: pill.icon, variant: pill?.variant })))),
             children)));
 };
-DetailView.defaultProps = {};
 
 var css_248z$3 = "@use \"sass:math\";\n.table-module_table__s0wcG {\n  background-color: #fff;\n  border-radius: 5px;\n  padding: 0.3rem 0.6rem 0.3rem 0.6rem;\n  table-layout: auto;\n  width: 100%;\n  border-collapse: collapse;\n  /** mobile **/\n  /** mobile **/ }\n  @media (prefers-color-scheme: dark) {\n    .table-module_table__s0wcG {\n      background-color: #292929; } }\n  .table-module_tableToolbar__XES3X {\n    display: flex;\n    padding: 10px; }\n  .table-module_tableToolbarLeft__TYjrQ {\n    flex-grow: 2; }\n  .table-module_tableToolbarRight__7tL5d {\n    flex-grow: 3;\n    display: flex;\n    justify-content: flex-end; }\n  .table-module_table__s0wcG table,\n  .table-module_table__s0wcG tr,\n  .table-module_table__s0wcG td,\n  .table-module_table__s0wcG th {\n    border: none; }\n  .table-module_table__s0wcG table {\n    min-width: 100%; }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq thead {\n    border: none;\n    clip: rect(0 0 0 0);\n    height: 1px;\n    margin: -1px;\n    overflow: hidden;\n    padding: 0;\n    position: absolute;\n    width: 1px; }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq tr {\n    border-bottom: 3px solid #ddd;\n    display: block; }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq td {\n    color: #000;\n    border-bottom: 1px solid #ddd;\n    display: block;\n    font-size: 0.8em;\n    text-align: left;\n    min-height: 20px;\n    padding: 0.4em 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .table-module_table__s0wcG .table-module_isMobile__YBoRq tr,\n    .table-module_table__s0wcG .table-module_isMobile__YBoRq td {\n      border-bottom-color: rgba(255, 255, 255, 0.1); }\n    .table-module_table__s0wcG .table-module_isMobile__YBoRq td {\n      color: #fff; } }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq td::before {\n    /*\n            * aria-label has no advantage, it won't be read inside a table\n            content: attr(aria-label);\n            */\n    content: attr(data-label);\n    float: left;\n    font-weight: bold;\n    min-width: 35%; }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq td:last-child {\n    border-bottom: 0; }\n  .table-module_table__s0wcG .table-module_isMobile__YBoRq tr:nth-child(even) {\n    background-color: rgba(0, 0, 0, 0.08); }\n  @media (min-width: 720px) {\n    .table-module_table__s0wcG table {\n      table-layout: auto;\n      max-width: 100%; }\n    .table-module_table__s0wcG thead th span {\n      align-items: center;\n      justify-content: center;\n      display: inline-flex;\n      background-color: rgba(0, 0, 0, 0.06);\n      border-radius: 5px;\n      width: 100%;\n      height: 100%; }\n    .table-module_table__s0wcG th,\n    .table-module_table__s0wcG td {\n      font-size: 0.9rem;\n      height: 35px;\n      color: #000; } }\n\n@media (min-width: 720px) and (prefers-color-scheme: dark) {\n  .table-module_table__s0wcG th,\n  .table-module_table__s0wcG td {\n    color: #fff; } }\n  @media (min-width: 720px) {\n    .table-module_table__s0wcG td {\n      padding: 0.4rem 1.2rem;\n      white-space: normal;\n      word-wrap: break-word;\n      text-overflow: ellipsis; }\n    .table-module_table__s0wcG th.table-module_hasActions__h89lt:last-child,\n    .table-module_table__s0wcG td.table-module__hasActions__FTO2A:last-child {\n      text-align: right;\n      white-space: nowrap;\n      width: 10%; }\n    .table-module_table__s0wcG td.table-module_actionsCell__1xBTM {\n      display: flex;\n      justify-content: center; }\n    .table-module_table__s0wcG tbody tr {\n      border-bottom: 1px solid rgba(0, 0, 0, 0.08); }\n    .table-module_table__s0wcG tr:nth-child(even) {\n      background-color: rgba(0, 0, 0, 0.01); } }\n  @media (min-width: 720px) and (prefers-color-scheme: dark) {\n    .table-module_table__s0wcG tr:nth-child(even) {\n      background-color: rgba(0, 0, 0, 0.2); } }\n\n@media (min-width: 720px) and (prefers-color-scheme: dark) {\n  .table-module_table__s0wcG th {\n    background-color: rgba(0, 0, 0, 0.4); } }\n";
 var styles$3 = {"table":"table-module_table__s0wcG","tableToolbar":"table-module_tableToolbar__XES3X","tableToolbarLeft":"table-module_tableToolbarLeft__TYjrQ","tableToolbarRight":"table-module_tableToolbarRight__7tL5d","isMobile":"table-module_isMobile__YBoRq","hasActions":"table-module_hasActions__h89lt","_hasActions":"table-module__hasActions__FTO2A","actionsCell":"table-module_actionsCell__1xBTM"};
@@ -1414,9 +1372,9 @@ const TableEmpty = ({ colsNumber }) => {
 const RenderRow = ({ actions, cols, colLabels, data, rowId, handleAction, columnResolvers, columnClasses }) => {
     return (React__default.createElement("tr", null,
         cols.map((key, index) => (React__default.createElement("td", { className: columnClasses?.[key], "data-label": colLabels ? colLabels[key] || key : key, key: `${rowId}-${index}` }, columnResolvers?.[key] ? columnResolvers?.[key]?.(data) : data[key]))),
-        actions?.length && (React__default.createElement("td", { "data-label": 'Actions', className: classNames(styles$3.actionsCell, styles$3.hasActions) }, actions.map((item, index) => (React__default.createElement(IconButton, { className: "mr-2", icon: item.icon, onClick: () => handleAction(item.action, data), key: `${index}-${item.action}`, size: "sm", ...item?.buttonProps })))))));
+        actions && actions?.length > 0 && (React__default.createElement("td", { "data-label": 'Actions', className: classNames(styles$3.actionsCell, styles$3.hasActions) }, actions.map((item, index) => (React__default.createElement(IconButton, { className: "mr-2", icon: item.icon, onClick: () => handleAction(item.action, data), key: `${index}-${item.action}`, size: "sm", ...item?.buttonProps })))))));
 };
-const Table = ({ actions, data, colLabels = {}, columns: receivedCols, onActionCalled, onTableActionCalled, tableActions, columnResolvers, columnClasses }) => {
+const Table = ({ actions, data, colLabels = {}, columns: receivedCols, onActionCalled, onTableActionCalled, tableActions, columnResolvers, columnClasses, disablePagination }) => {
     const { isIn } = useMediaQuery();
     const columns = !receivedCols ? Object.keys(colLabels) : receivedCols;
     const handleActionTriggered = useCallback$1((action, item) => {
@@ -1433,12 +1391,12 @@ const Table = ({ actions, data, colLabels = {}, columns: receivedCols, onActionC
                 React__default.createElement("tr", null,
                     columns.map((col, index) => (React__default.createElement("th", { key: `title-${index}` },
                         React__default.createElement("span", null, colLabels[col] || col)))),
-                    actions?.length && (React__default.createElement("th", { className: classNames(styles$3.actionsCell, styles$3.hasActions) },
+                    actions && actions?.length > 0 && (React__default.createElement("th", { className: classNames(styles$3.actionsCell, styles$3.hasActions) },
                         React__default.createElement("span", null, "Actions"))))),
             React__default.createElement("tbody", null,
                 !hasData && (React__default.createElement(TableEmpty, { colsNumber: columns?.length + (Boolean(actions) ? 1 : 0) })),
                 data?.map((rowData, index) => (React__default.createElement(RenderRow, { columnClasses: columnClasses, handleAction: handleActionTriggered, actions: actions, rowId: `${index}`, colLabels: colLabels, cols: columns, data: rowData, key: `row-${index}`, columnResolvers: columnResolvers }))))),
-        hasData && React__default.createElement(TableFooter, null)));
+        !disablePagination && hasData && React__default.createElement(TableFooter, null)));
 };
 
 const registerIcons = () => {

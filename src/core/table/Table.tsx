@@ -12,7 +12,7 @@ import TableEmpty from './TableEmpty'
 type ColumnResolversType = {
     [key: string]: (data: any) => React.ReactNode
 }
-interface TableProps {
+export interface TableProps {
     tableActions?: ActionType[]
     colLabels?: { [k: string]: string }
     columns?: string[]
@@ -24,6 +24,7 @@ interface TableProps {
     onTableActionCalled?: (action: string, item: any) => void
     columnResolvers?: ColumnResolversType
     columnClasses?: { [k: string]: string }
+    disablePagination?: boolean
 }
 
 interface RenderRowProps {
@@ -58,7 +59,7 @@ const RenderRow: React.FC<RenderRowProps> = ({
                     {columnResolvers?.[key] ? columnResolvers?.[key]?.(data) : data[key]}
                 </td>
             ))}
-            {actions?.length && (
+            {actions && actions?.length > 0 && (
                 <td
                     data-label={'Actions'}
                     className={classNames(styles.actionsCell, styles.hasActions)}
@@ -88,7 +89,8 @@ const Table: React.FC<TableProps> = ({
     onTableActionCalled,
     tableActions,
     columnResolvers,
-    columnClasses
+    columnClasses,
+    disablePagination
 }) => {
     const { isIn } = useMediaQuery()
     const columns = !receivedCols ? Object.keys(colLabels) : receivedCols
@@ -121,7 +123,7 @@ const Table: React.FC<TableProps> = ({
                                 <span>{colLabels[col] || col}</span>
                             </th>
                         ))}
-                        {actions?.length && (
+                        {actions && actions?.length > 0 && (
                             <th className={classNames(styles.actionsCell, styles.hasActions)}>
                                 <span>Actions</span>
                             </th>
@@ -147,7 +149,7 @@ const Table: React.FC<TableProps> = ({
                     ))}
                 </tbody>
             </table>
-            {hasData && <TableFooter />}
+            {!disablePagination && hasData && <TableFooter />}
         </div>
     )
 }

@@ -18,7 +18,7 @@ const OptionsButton: React.FC<OptionsButtonProps> = ({
     value,
     onChange,
     horizontal,
-    variant
+    variant = 'primary'
 }) => {
     const [selected, setSelected] = useState<any>(value)
 
@@ -67,10 +67,6 @@ const OptionsButton: React.FC<OptionsButtonProps> = ({
             </div>
         </div>
     )
-}
-
-OptionsButton.defaultProps = {
-    variant: 'primary'
 }
 
 export default OptionsButton

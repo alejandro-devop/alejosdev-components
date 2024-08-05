@@ -22,13 +22,13 @@ const Col: React.FC<ColProps> = ({
     all,
     applyFor,
     applyFrom,
-    ascendingApply,
+    ascendingApply = true,
     children,
-    xs,
-    sm,
-    md,
-    lg,
-    xl
+    xs = 12,
+    sm = 12,
+    md = 12,
+    lg = 12,
+    xl = 12
 }) => {
     const generatedClassName = useMemo(() => {
         // The outputted dimensions.
@@ -68,15 +68,6 @@ const Col: React.FC<ColProps> = ({
     }, [xs, sm, md, lg, xl, all, applyFor, applyFrom, ascendingApply])
 
     return <div className={generatedClassName}>{children}</div>
-}
-
-Col.defaultProps = {
-    xs: 12,
-    sm: 12,
-    lg: 12,
-    xl: 12,
-    md: 12,
-    ascendingApply: true
 }
 
 export default Col

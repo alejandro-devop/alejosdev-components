@@ -16,6 +16,4 @@ const PasswordField: React.FC<InputBaseProps<HTMLInputElement>> = ({ ...props })
     )
 }
 
-PasswordField.defaultProps = {}
-
 export default PasswordField

@@ -20,7 +20,7 @@ const Alert: React.FC<AlertProps> = ({
     action,
     actionIcon,
     actionLabel,
-    actionVariant,
+    actionVariant = 'primary',
     message,
     icon,
     variant = 'default'
@@ -54,10 +54,6 @@ const Alert: React.FC<AlertProps> = ({
             )}
         </div>
     )
-}
-
-Alert.defaultProps = {
-    actionVariant: 'primary'
 }
 
 export default Alert

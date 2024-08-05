@@ -17,11 +17,11 @@ interface TextAreaFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaEl
 const TextAreaField: React.FC<TextAreaFieldProps> = ({
     label,
     error,
-    value,
-    max,
+    value = '',
+    max = 255,
     onChange,
     hideMax,
-    trimSpaces,
+    trimSpaces = true,
     maxEndingSpaces = 4,
     ...props
 }) => {
@@ -83,12 +83,6 @@ const TextAreaField: React.FC<TextAreaFieldProps> = ({
             )}
         </FormControl>
     )
-}
-
-TextAreaField.defaultProps = {
-    value: '',
-    max: 255,
-    trimSpaces: true
 }
 
 export default TextAreaField

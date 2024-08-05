@@ -17,13 +17,8 @@ interface IconProps {
  * @param param0
  * @returns
  */
-const Icon: React.FC<IconProps> = ({ className, icon = 'tag' }) => {
+const Icon: React.FC<IconProps> = ({ className = '', icon = 'tag' }) => {
     return <FontAwesomeIcon icon={icon || ''} className={classNames(styles.root, className)} />
-}
-
-Icon.defaultProps = {
-    className: '',
-    icon: 'tag'
 }
 
 export default Icon

@@ -16,6 +16,4 @@ const Fieldset: React.FC<FieldsetProps> = ({ children, className, ...otherProps 
     )
 }
 
-Fieldset.defaultProps = {}
-
 export default Fieldset

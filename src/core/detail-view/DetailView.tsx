@@ -61,6 +61,4 @@ const DetailView: React.FC<DetailViewProps> = ({ title, details, pills, children
     )
 }
 
-DetailView.defaultProps = {}
-
 export default DetailView

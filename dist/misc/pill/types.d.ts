@@ -1,5 +1,5 @@
-import { ActionItemVariantsType } from 'types/common.types';
-import { IconType } from 'types/icons-types';
+import { ActionItemVariantsType } from '../../types/common.types';
+import { IconType } from '../../types/icons-types';
 export type PillConfigType = {
     label?: string;
     icon?: IconType;

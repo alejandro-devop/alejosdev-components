@@ -26,14 +26,14 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
             label,
             leadingIcon,
             leadingComponent,
-            max,
+            max = 200,
             maxEndingSpaces,
             name,
             onChange,
             onlyInput,
             trailingIcon,
             trailingComponent,
-            trimSpaces,
+            trimSpaces = true,
             value,
             hideRequired,
             ...props
@@ -134,10 +134,5 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         )
     }
 )
-
-InputBase.defaultProps = {
-    max: 100,
-    trimSpaces: true
-}
 
 export default InputBase

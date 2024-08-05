@@ -16,7 +16,7 @@ interface NumberFieldProps extends InputBaseProps<HTMLInputElement> {
 const NumberField: React.FC<NumberFieldProps> = ({
     value: defValue,
     min = 0,
-    max = 0,
+    max = 1000,
     step = 1,
     onChange,
     name,
@@ -140,12 +140,6 @@ const NumberField: React.FC<NumberFieldProps> = ({
             value={value.toString()}
         />
     )
-}
-
-NumberField.defaultProps = {
-    max: 1000,
-    min: 0,
-    step: 1
 }
 
 export default React.memo(NumberField)

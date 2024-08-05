@@ -77,6 +77,4 @@ const TimeField: React.FC<TimeFieldProps> = ({ value, onChange, name, label, ...
     )
 }
 
-TimeField.defaultProps = {}
-
 export default TimeField

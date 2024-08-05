@@ -13,6 +13,4 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(({ ...props }, re
     return <InputBase ref={ref} {...props} />
 })
 
-TextField.defaultProps = {}
-
 export default TextField

@@ -7,7 +7,7 @@ interface SpinnerLoaderProps {
     size?: 'sm' | 'lg' | 'md'
 }
 
-const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ dark, size }) => {
+const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ dark, size = 'md' }) => {
     return (
         <div
             className={classNames(styles.loader, {
@@ -17,10 +17,6 @@ const SpinnerLoader: React.FC<SpinnerLoaderProps> = ({ dark, size }) => {
             })}
         />
     )
-}
-
-SpinnerLoader.defaultProps = {
-    size: 'md'
 }
 
 export default SpinnerLoader

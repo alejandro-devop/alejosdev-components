@@ -30,6 +30,11 @@ $check-box-field-size: 25px;
     }
 }
 
+.disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
 .control {
     position: relative;
     z-index: 1;

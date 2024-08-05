@@ -82,6 +82,4 @@ const DateField: React.FC<DateFieldProps> = (
     )
 }
 
-DateField.defaultProps = {}
-
 export default DateField

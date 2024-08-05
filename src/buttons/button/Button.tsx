@@ -16,13 +16,14 @@ const Button: React.FC<ButtonProps> = ({
     children,
     className,
     icon,
-    rounded,
+    rounded = true,
     block,
-    variant,
+    variant = 'default',
     loading,
-    size,
+    size = 'md',
     flat,
-    iconPosition,
+    iconPosition = 'lead',
+    tabIndex = 0,
     loadingLabel,
     ...props
 }) => {
@@ -60,7 +61,7 @@ const Button: React.FC<ButtonProps> = ({
                 },
                 className
             )}
-            tabIndex={0}
+            tabIndex={tabIndex}
             {...props}
         >
             {icon && iconPosition === 'lead' && iconRenderer}
@@ -70,14 +71,6 @@ const Button: React.FC<ButtonProps> = ({
             {icon && iconPosition === 'end' && iconRenderer}
         </ButtonBase>
     )
-}
-
-Button.defaultProps = {
-    iconPosition: 'lead',
-    tabIndex: 0,
-    rounded: true,
-    size: 'md',
-    variant: 'default'
 }
 
 export default Button

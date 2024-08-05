@@ -25,14 +25,21 @@ const useForm = <FT extends Object = {}>(
     ).current
 
     const processValue = useCallback(
-        (processorConfig: { processor: string; form: any; field: string; currentValue: any }) => {
-            const { processor, currentValue, field, form } = processorConfig
+        (processorConfig: {
+            processor: string
+            form: any
+            field: string
+            currentValue: any
+            type?: string
+            checked?: boolean
+        }) => {
+            const { processor, field, form, type, checked } = processorConfig
             const [processorName] = processor.split(':')
 
-            if (processorName === 'switchGroup') {
+            if (processorName === 'switchGroup' && type === 'checkbox') {
                 const otherFields = Object.keys(fields || {}).filter((key) => {
                     const fieldConfig = fields ? fields[key as keyof FT] : {}
-                    return fieldConfig?.processor?.includes('switchGroup')
+                    return fieldConfig?.processor?.includes(processor)
                 })
                 const groupValue: any = otherFields.reduce(
                     (accu, currentKey) => ({
@@ -41,7 +48,8 @@ const useForm = <FT extends Object = {}>(
                     }),
                     []
                 )
-                return { ...form, ...groupValue, [field]: currentValue === 'on' }
+
+                return { ...form, ...groupValue, [field]: checked }
             }
         },
         [fields]
@@ -52,14 +60,16 @@ const useForm = <FT extends Object = {}>(
      */
     const handleChange = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
-            const { name, value } = e.target
+            const { name, value, type, checked } = e.target
             const config = fields ? fields[name as keyof FT] : {}
             if (config?.processor) {
                 const newValue = processValue({
                     processor: config?.processor,
                     form,
                     field: name,
-                    currentValue: value
+                    currentValue: value,
+                    type,
+                    checked: Boolean(checked)
                 })
                 setForm(newValue)
             } else {

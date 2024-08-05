@@ -72,6 +72,4 @@ const InputControl: React.FC<InputControlProps> = ({
     )
 }
 
-InputControl.defaultProps = {}
-
 export default InputControl

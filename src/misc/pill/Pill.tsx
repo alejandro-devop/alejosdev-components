@@ -15,7 +15,7 @@ interface PillProps extends PillConfigType {
  * which is a small rounded rectangle with a text inside or icon
  * @returns React.FC
  */
-const Pill: React.FC<PillProps> = ({ label, variant, icon, value, className }) => {
+const Pill: React.FC<PillProps> = ({ label, variant = 'default', icon, value, className }) => {
     return (
         <div
             className={classNames(styles.root, className, {
@@ -35,10 +35,6 @@ const Pill: React.FC<PillProps> = ({ label, variant, icon, value, className }) =
             {value && <span className={styles.value}>{value}</span>}
         </div>
     )
-}
-
-Pill.defaultProps = {
-    variant: 'default'
 }
 
 export default Pill

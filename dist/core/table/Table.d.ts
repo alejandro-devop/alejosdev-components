@@ -3,7 +3,7 @@ import { ActionType } from './types';
 type ColumnResolversType = {
     [key: string]: (data: any) => React.ReactNode;
 };
-interface TableProps {
+export interface TableProps {
     tableActions?: ActionType[];
     colLabels?: {
         [k: string]: string;
@@ -21,6 +21,7 @@ interface TableProps {
     columnClasses?: {
         [k: string]: string;
     };
+    disablePagination?: boolean;
 }
 declare const Table: React.FC<TableProps>;
 export default Table;
