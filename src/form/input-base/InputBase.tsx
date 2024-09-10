@@ -57,12 +57,16 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         const inputRender = useMemo(() => {
             return (
                 <input
-                    className={cs(styles.input, className, {
-                        [styles.withValue]: hasValue,
-                        [styles.withLabel]: Boolean(label) && floatingLabel,
-                        [styles.withLeadingIcon]: Boolean(leadingIcon),
-                        [styles.withTrailingIcon]: Boolean(trailingIcon)
-                    })}
+                    className={cs(
+                        styles.input,
+                        {
+                            [styles.withValue]: hasValue,
+                            [styles.withLabel]: Boolean(label) && floatingLabel,
+                            [styles.withLeadingIcon]: Boolean(leadingIcon),
+                            [styles.withTrailingIcon]: Boolean(trailingIcon)
+                        },
+                        className
+                    )}
                     id={htmlId}
                     maxLength={max}
                     name={name}

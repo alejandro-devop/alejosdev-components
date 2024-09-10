@@ -3,7 +3,11 @@ import styles from './color-field.module.scss'
 import PickerRenderer from './PickerRenderer'
 import { InputBaseProps } from '../../types/input.types'
 import getContrastColor from '../../utils/getContrastColor'
-import { IconButton } from '../../buttons'
+// import { IconButton } from '../../buttons'
+import cs from 'classnames'
+// import Label from 'form/label'
+import TextField from 'form/text-field'
+
 interface ColorFieldProps extends InputBaseProps<HTMLInputElement> {}
 
 const ColorField: React.FC<ColorFieldProps> = ({ onChange, value = '#ffffff', ...props }) => {
@@ -31,8 +35,21 @@ const ColorField: React.FC<ColorFieldProps> = ({ onChange, value = '#ffffff', ..
     )
 
     return (
-        <div className={styles.root}>
-            <div className={styles.inputWrapper}>
+        <div className={cs(styles.root, props?.className)}>
+            {/* <Label>Color picker</Label> */}
+            <TextField
+                {...props}
+                className={styles.input}
+                action={() => setOpened(!opened)}
+                hideMax
+                actionIcon="palette"
+                onClick={() => setOpened(true)}
+                onFocus={() => setOpened(true)}
+                style={inlineStyles}
+                value={colorToApply}
+                readOnly
+            />
+            {/* <div className={styles.inputWrapper}>
                 <input
                     className={styles.input}
                     style={inlineStyles}
@@ -42,7 +59,7 @@ const ColorField: React.FC<ColorFieldProps> = ({ onChange, value = '#ffffff', ..
                     readOnly
                 />
                 <IconButton icon="palette" onClick={() => setOpened(!opened)} />
-            </div>
+            </div> */}
             {opened && (
                 <PickerRenderer
                     currentColor={colorToApply}

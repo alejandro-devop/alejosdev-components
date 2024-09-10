@@ -7,6 +7,7 @@ import FormControl from 'form/form-control'
 interface CheckBoxFieldProps extends InputBaseProps<HTMLInputElement> {
     className?: string
     checked?: boolean
+    inline?: boolean
 }
 
 const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
@@ -17,7 +18,8 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
     checked,
     label,
     classes,
-    disabled
+    disabled,
+    inline
 }) => {
     const isChecked = useMemo(() => Boolean(value) || checked, [checked, value])
     const handleChange = useCallback(
@@ -28,7 +30,8 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
                     target: {
                         name: name || '',
                         checked: !Boolean(isChecked),
-                        type: 'checkbox'
+                        type: 'checkbox',
+                        value: !Boolean(isChecked)
                     }
                 } as any)
             }
@@ -43,7 +46,8 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
                     target: {
                         name: name || '',
                         checked: !Boolean(isChecked),
-                        type: 'checkbox'
+                        type: 'checkbox',
+                        value: !Boolean(isChecked)
                     }
                 } as any)
             }
@@ -67,7 +71,11 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
     if (!label) return inputRenderer
 
     return (
-        <FormControl className={cs('flex items-center mb-2', classes?.wrapper)}>
+        <FormControl
+            className={cs('flex items-center mb-2', classes?.wrapper, {
+                [styles.inputInline]: inline
+            })}
+        >
             {inputRenderer}
             <span
                 className="textWithMode block pl-2 ml-2 cursor-pointer z-1"

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import React__default, { useMemo as useMemo$1, createContext, useContext, useState as useState$1, forwardRef, useRef, useCallback as useCallback$1, useEffect } from 'react';
-import classNames from 'classnames';
+import cs from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import _ from 'lodash';
 import Select from 'react-select';
@@ -193,7 +193,7 @@ styleInject(css_248z$p);
  * @returns
  */
 const Icon = ({ className = '', icon = 'tag', style }) => {
-    return (React.createElement(FontAwesomeIcon, { icon: icon || '', className: classNames(styles$p.root, className), style: style }));
+    return (React.createElement(FontAwesomeIcon, { icon: icon || '', className: cs(styles$p.root, className), style: style }));
 };
 
 const defaultVariantMaps = {
@@ -233,12 +233,12 @@ const applyButtonVariantStyles = (config) => {
  * @returns
  */
 const Button = ({ children, className, icon, rounded = true, block, variant = 'default', loading, size = 'md', flat, iconPosition = 'lead', tabIndex = 0, loadingLabel, ...props }) => {
-    const iconRenderer = useMemo$1(() => (React__default.createElement("i", { className: classNames(styles$q.iconWrapper, {
+    const iconRenderer = useMemo$1(() => (React__default.createElement("i", { className: cs(styles$q.iconWrapper, {
             [styles$q.iconEnd]: iconPosition === 'end',
             [styles$q.iconLead]: iconPosition === 'lead'
         }) },
-        React__default.createElement(Icon, { icon: icon, className: classNames(styles$q.icon) }))), [icon, iconPosition]);
-    return (React__default.createElement(ButtonBase, { className: classNames(styles$q.button, {
+        React__default.createElement(Icon, { icon: icon, className: cs(styles$q.icon) }))), [icon, iconPosition]);
+    return (React__default.createElement(ButtonBase, { className: cs(styles$q.button, {
             ...applyButtonVariantStyles({
                 styles: styles$q,
                 variant
@@ -267,7 +267,7 @@ var styles$n = {"root":"alert-module_root__DQW41","primary":"alert-module_primar
 styleInject(css_248z$n);
 
 const Alert = ({ action, actionIcon, actionLabel, actionVariant = 'primary', message, icon, variant = 'default' }) => {
-    return (React__default.createElement("div", { className: classNames(styles$n.root, {
+    return (React__default.createElement("div", { className: cs(styles$n.root, {
             [styles$n.primary]: variant === 'primary',
             [styles$n.secondary]: variant === 'secondary',
             [styles$n.success]: variant === 'success',
@@ -291,7 +291,7 @@ styleInject(css_248z$m);
  * @returns React.FC
  */
 const Pill = ({ label, variant = 'default', icon, value, className, size = 'md' }) => {
-    return (React__default.createElement("div", { className: classNames(styles$m.root, className, {
+    return (React__default.createElement("div", { className: cs(styles$m.root, className, {
             [styles$m.default]: variant === 'default',
             [styles$m.primary]: variant === 'primary',
             [styles$m.secondary]: variant === 'secondary',
@@ -315,7 +315,7 @@ var styles$l = {"step":"step-module_step__AmOI8","description":"step-module_desc
 styleInject(css_248z$l);
 
 const Step = ({ children, className, description, title }) => {
-    return (React__default.createElement("div", { className: classNames(styles$l.step, className) },
+    return (React__default.createElement("div", { className: cs(styles$l.step, className) },
         React__default.createElement("h3", null, title),
         React__default.createElement("p", { className: styles$l.description }, description),
         children));
@@ -418,10 +418,10 @@ const Stepper = ({ children, onCompleted, stepsValidation, initialStep = 0 }) =>
             stepsValidation,
             isValidStep
         } },
-        React__default.createElement("div", { className: styles$k.stepperRoot }, _.range(0, totalSteps).map((item, key) => (React__default.createElement("div", { className: classNames(styles$k.stepperStep, {
+        React__default.createElement("div", { className: styles$k.stepperRoot }, _.range(0, totalSteps).map((item, key) => (React__default.createElement("div", { className: cs(styles$k.stepperStep, {
                 [styles$k.active]: key < currentStep
             }), key: `step-${key}` },
-            React__default.createElement("div", { className: classNames(styles$k.stepperStepWrapper, {
+            React__default.createElement("div", { className: cs(styles$k.stepperStepWrapper, {
                     [styles$k.active]: key <= currentStep
                 }) },
                 React__default.createElement("span", null, item + 1)))))),
@@ -434,7 +434,7 @@ var styles$j = {"loader":"spinner-loader-module_loader__L1Fq1","spin":"spinner-l
 styleInject(css_248z$j);
 
 const SpinnerLoader = ({ dark, size = 'md' }) => {
-    return (React__default.createElement("div", { className: classNames(styles$j.loader, {
+    return (React__default.createElement("div", { className: cs(styles$j.loader, {
             [styles$j.dark]: dark,
             [styles$j.lg]: size === 'lg',
             [styles$j.md]: size === 'md'
@@ -446,7 +446,7 @@ const IconButton = forwardRef(({ icon, children, label, variant, onClick, classe
         e.stopPropagation();
         onClick?.(e);
     };
-    const buttonRenderer = (React__default.createElement("button", { ...props, ref: ref, type: "button", className: classNames(styles$o.root, classes?.root, props?.className, {
+    const buttonRenderer = (React__default.createElement("button", { ...props, ref: ref, type: "button", className: cs(styles$o.root, classes?.root, props?.className, {
             [styles$o.primary]: variant === 'primary',
             [styles$o.secondary]: variant === 'secondary',
             [styles$o.danger]: variant === 'danger',
@@ -464,7 +464,7 @@ const IconButton = forwardRef(({ icon, children, label, variant, onClick, classe
     if (label) {
         return (React__default.createElement("div", { className: styles$o.withLabelWrapper },
             buttonRenderer,
-            React__default.createElement("span", { className: classNames(styles$o.label, classes?.label) }, label)));
+            React__default.createElement("span", { className: cs(styles$o.label, classes?.label) }, label)));
     }
     return buttonRenderer;
 });
@@ -866,7 +866,7 @@ var styles$g = {"root":"form-control-module_root__DeA9S","error":"form-control-m
 styleInject(css_248z$g);
 
 const FormControl = ({ children, className, error, hideRequired, ...props }) => {
-    return (React__default.createElement("div", { className: classNames(styles$g.root, className), ...props },
+    return (React__default.createElement("div", { className: cs(styles$g.root, className), ...props },
         children,
         !hideRequired && React__default.createElement(React__default.Fragment, null, Boolean(error) && React__default.createElement("p", { className: styles$g.error }, error))));
 };
@@ -881,7 +881,7 @@ styleInject(css_248z$f);
  * @returns React.FC
  */
 const Label = ({ children, className, ...props }) => {
-    return (React__default.createElement("label", { className: classNames(styles$f.root, className), ...props }, children));
+    return (React__default.createElement("label", { className: cs(styles$f.root, className), ...props }, children));
 };
 
 const trimeSpacesEvent = (evt, config) => {
@@ -908,22 +908,22 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
     }, [onChange]);
     const hasValue = useMemo$1(() => value?.length > 0, [value]);
     const inputRender = useMemo$1(() => {
-        return (React__default.createElement("input", { className: classNames(styles$h.input, className, {
+        return (React__default.createElement("input", { className: cs(styles$h.input, {
                 [styles$h.withValue]: hasValue,
                 [styles$h.withLabel]: Boolean(label) && floatingLabel,
                 [styles$h.withLeadingIcon]: Boolean(leadingIcon),
                 [styles$h.withTrailingIcon]: Boolean(trailingIcon)
-            }), id: htmlId, maxLength: max, name: name, onChange: handleChangeProxy, ref: ref, value: value || '', ...props }));
+            }, className), id: htmlId, maxLength: max, name: name, onChange: handleChangeProxy, ref: ref, value: value || '', ...props }));
     }, [props, htmlId, max, name, className]);
     const length = useMemo$1(() => value?.length || 0, [value]);
-    const renderLabel = useMemo$1(() => (React__default.createElement(Label, { htmlFor: htmlId, className: classNames(styles$h.label, {
+    const renderLabel = useMemo$1(() => (React__default.createElement(Label, { htmlFor: htmlId, className: cs(styles$h.label, {
             [styles$h.labelWithLeadingIcon]: Boolean(leadingIcon),
             [styles$h.floatingLabel]: floatingLabel
         }) }, label)), [floatingLabel]);
     if (onlyInput) {
         return inputRender;
     }
-    return (React__default.createElement(FormControl, { error: error, hideRequired: hideRequired, className: classNames(styles$h.root, classes?.wrapper, {
+    return (React__default.createElement(FormControl, { error: error, hideRequired: hideRequired, className: cs(styles$h.root, classes?.wrapper, {
             [styles$h.isRequiredField]: Boolean(props.required)
         }) },
         leadingComponent,
@@ -932,7 +932,7 @@ const InputBase = forwardRef(({ action, actionIcon, actionRef, actionVariant, cl
             Boolean(label) && !floatingLabel && renderLabel,
             inputRender,
             Boolean(label) && floatingLabel && renderLabel,
-            trailingIcon && (React__default.createElement(Icon, { icon: trailingIcon, className: classNames(styles$h.icon, styles$h.trailingIcon) })),
+            trailingIcon && (React__default.createElement(Icon, { icon: trailingIcon, className: cs(styles$h.icon, styles$h.trailingIcon) })),
             !hideMax && hasValue && (React__default.createElement("span", { className: styles$h.maxDisplay }, `${length}/${max}`))),
         trailingComponent,
         Boolean(action) && (React__default.createElement(IconButton, { ref: actionRef, icon: actionIcon, className: styles$h.actionIcon, onClick: action, variant: actionVariant, disabled: disableAction }))));
@@ -1004,11 +1004,11 @@ const SelectField = ({ label: inputLabel, placeholder = '', error, id, onChange,
             }, value: defaultSelected }))));
 };
 
-var css_248z$d = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_disabled__B8wBD {\n  opacity: 0.25;\n  cursor: not-allowed; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
-var styles$d = {"root":"check-box-field-module_root__Owe-O","check":"check-box-field-module_check__TWIEp","disabled":"check-box-field-module_disabled__B8wBD","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
+var css_248z$d = "@use \"sass:math\";\n.check-box-field-module_root__Owe-O {\n  width: 25px;\n  height: 25px;\n  position: relative;\n  display: flex;\n  justify-content: center; }\n  .check-box-field-module_root__Owe-O input {\n    display: none; }\n\n.check-box-field-module_inputInline__8cY9H {\n  display: inline-flex; }\n\n.check-box-field-module_check__TWIEp {\n  width: 25%;\n  height: 50%;\n  display: block;\n  border-color: #06d6a0;\n  border-bottom-width: 3px;\n  border-right-width: 3px;\n  position: absolute;\n  transform-origin: center;\n  transform: rotate(45deg) translate(0.2rem, 0.2rem); }\n  .check-box-field-module_check__TWIEp ::before,\n  .check-box-field-module_check__TWIEp ::after {\n    content: ''; }\n\n.check-box-field-module_disabled__B8wBD {\n  opacity: 0.25;\n  cursor: not-allowed; }\n\n.check-box-field-module_control__MXB8J {\n  position: relative;\n  z-index: 1;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  display: inline-block;\n  border-radius: 50%;\n  width: 25px;\n  height: 25px;\n  border: 1px solid black;\n  cursor: pointer; }\n  @media (prefers-color-scheme: dark) {\n    .check-box-field-module_control__MXB8J {\n      border: 2px solid white; } }\n\n@keyframes check-box-field-module_mark-check__j-h7X {\n  0% {\n    width: 0;\n    height: 3px; }\n  50% {\n    width: 25%; }\n  100% {\n    height: 50%; } }\n";
+var styles$d = {"root":"check-box-field-module_root__Owe-O","inputInline":"check-box-field-module_inputInline__8cY9H","check":"check-box-field-module_check__TWIEp","disabled":"check-box-field-module_disabled__B8wBD","control":"check-box-field-module_control__MXB8J","mark-check":"check-box-field-module_mark-check__j-h7X"};
 styleInject(css_248z$d);
 
-const CheckBoxField = ({ className, onChange, name, value, checked, label, classes, disabled }) => {
+const CheckBoxField = ({ className, onChange, name, value, checked, label, classes, disabled, inline }) => {
     const isChecked = useMemo$1(() => Boolean(value) || checked, [checked, value]);
     const handleChange = useCallback$1((e) => {
         e.stopPropagation();
@@ -1017,7 +1017,8 @@ const CheckBoxField = ({ className, onChange, name, value, checked, label, class
                 target: {
                     name: name || '',
                     checked: !Boolean(isChecked),
-                    type: 'checkbox'
+                    type: 'checkbox',
+                    value: !Boolean(isChecked)
                 }
             });
         }
@@ -1030,13 +1031,14 @@ const CheckBoxField = ({ className, onChange, name, value, checked, label, class
                     target: {
                         name: name || '',
                         checked: !Boolean(isChecked),
-                        type: 'checkbox'
+                        type: 'checkbox',
+                        value: !Boolean(isChecked)
                     }
                 });
             }
         }
     };
-    const inputRenderer = (React__default.createElement("div", { className: classNames(styles$d.root, {
+    const inputRenderer = (React__default.createElement("div", { className: cs(styles$d.root, {
             [styles$d.disabled]: Boolean(disabled)
         }, className) },
         isChecked && React__default.createElement("span", { className: styles$d.check }),
@@ -1044,7 +1046,9 @@ const CheckBoxField = ({ className, onChange, name, value, checked, label, class
         React__default.createElement("label", { htmlFor: "", onClick: handleChange, className: styles$d.control })));
     if (!label)
         return inputRenderer;
-    return (React__default.createElement(FormControl, { className: classNames('flex items-center mb-2', classes?.wrapper) },
+    return (React__default.createElement(FormControl, { className: cs('flex items-center mb-2', classes?.wrapper, {
+            [styles$d.inputInline]: inline
+        }) },
         inputRenderer,
         React__default.createElement("span", { className: "textWithMode block pl-2 ml-2 cursor-pointer z-1", tabIndex: 0, onClick: handleChange, onKeyDown: handleKeyDown }, label)));
 };
@@ -1079,11 +1083,11 @@ const TextAreaField = forwardRef(({ label, error, value = '', max = 255, onChang
     //         )}px`
     //     }
     // }, [value])
-    return (React__default.createElement(FormControl, { className: classNames(styles$c.textAreaRoot, classes?.root) },
+    return (React__default.createElement(FormControl, { className: cs(styles$c.textAreaRoot, classes?.root) },
         label && (React__default.createElement(Label, { className: styles$c.inputLabel, htmlFor: props?.id },
             label,
             error && React__default.createElement("span", { className: styles$c.formErrorMsg }, error))),
-        React__default.createElement("textarea", { ref: textAreaRef, onChange: handleChangeProxy, maxLength: max, className: classNames(styles$c.textArea, className), value: value || '', ...props }),
+        React__default.createElement("textarea", { ref: textAreaRef, onChange: handleChangeProxy, maxLength: max, className: cs(styles$c.textArea, className), value: value || '', ...props }),
         max && !hideMax && (React__default.createElement("span", { className: styles$c.charCount },
             `${value || ''}`?.length,
             "/",
@@ -1325,9 +1329,9 @@ const OptionsButton = ({ name, label, options = [], value, onChange, horizontal,
     };
     return (React__default.createElement("div", { className: styles$8.buttonsRoot },
         label && React__default.createElement(Label, { className: styles$8.mainLabel }, label),
-        React__default.createElement("div", { className: classNames({
+        React__default.createElement("div", { className: cs({
                 [styles$8.horizontal]: horizontal
-            }) }, options.map((item, key) => (React__default.createElement(Label, { key: `option-${key}`, className: classNames(styles$8.label, {
+            }) }, options.map((item, key) => (React__default.createElement(Label, { key: `option-${key}`, className: cs(styles$8.label, {
                 [styles$8.primary]: variant === 'primary',
                 [styles$8.secondary]: variant === 'secondary',
                 [styles$8.danger]: variant === 'danger',
@@ -1342,12 +1346,12 @@ const OptionsButton = ({ name, label, options = [], value, onChange, horizontal,
             React__default.createElement("span", { className: styles$8.label, onClick: () => changeValue(item.value) }, item.label)))))));
 };
 
-var css_248z$7 = "@use \"sass:math\";\n.color-field-module_root__UGqmn {\n  position: relative; }\n\n.color-field-module_input__mny-u {\n  width: 100%;\n  max-width: 100%;\n  min-height: 1.5rem;\n  padding: 0.2rem 1rem;\n  border: 1px solid #b3b3b3;\n  border-radius: 20px;\n  color: #000;\n  background-color: var(--color-to-apply); }\n\n.color-field-module_inputWrapper__RQGtx {\n  flex: 1;\n  display: flex; }\n\n.color-field-module_controlWrapper__XQWKa {\n  position: absolute;\n  z-index: 1000;\n  background-color: #fff;\n  padding: 0.5rem 1rem;\n  left: 50%;\n  transform: translateX(-50%);\n  box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.4);\n  border-radius: 0 0 20px 20px; }\n  .color-field-module_controlWrapper__XQWKa:focus {\n    outline: 2px solid #8d6b94; }\n\n.color-field-module_actionsWrapper__FsVib {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  margin-left: 0.5rem;\n  margin-top: 1rem; }\n\n.color-field-module_dialogFrame__ic6cc.color-field-module_dialogFrame__ic6cc {\n  width: 230px;\n  height: auto;\n  border-radius: 14px; }\n\n.color-field-module_dialogFrame__ic6cc .color-field-module_dialogFooter__7riqz.color-field-module_dialogFooter__7riqz {\n  justify-content: center; }\n\n.color-field-module_dialogBody__IZRzN.color-field-module_dialogBody__IZRzN {\n  display: flex;\n  justify-content: center; }\n\n.color-field-module_dialogOverLay__HRGau.color-field-module_dialogOverLay__HRGau {\n  align-items: center;\n  display: flex;\n  justify-content: center; }\n";
-var styles$7 = {"root":"color-field-module_root__UGqmn","input":"color-field-module_input__mny-u","inputWrapper":"color-field-module_inputWrapper__RQGtx","controlWrapper":"color-field-module_controlWrapper__XQWKa","actionsWrapper":"color-field-module_actionsWrapper__FsVib","dialogFrame":"color-field-module_dialogFrame__ic6cc","dialogFooter":"color-field-module_dialogFooter__7riqz","dialogBody":"color-field-module_dialogBody__IZRzN","dialogOverLay":"color-field-module_dialogOverLay__HRGau"};
+var css_248z$7 = "@use \"sass:math\";\n.color-field-module_input__mny-u.color-field-module_input__mny-u {\n  background-color: var(--color-to-apply); }\n\n.color-field-module_dialogFrame__ic6cc.color-field-module_dialogFrame__ic6cc {\n  width: 230px;\n  height: auto;\n  border-radius: 14px; }\n\n.color-field-module_dialogFrame__ic6cc .color-field-module_dialogFooter__7riqz.color-field-module_dialogFooter__7riqz {\n  justify-content: center; }\n\n.color-field-module_dialogBody__IZRzN.color-field-module_dialogBody__IZRzN {\n  display: flex;\n  justify-content: center; }\n\n.color-field-module_dialogOverLay__HRGau.color-field-module_dialogOverLay__HRGau {\n  align-items: center;\n  display: flex;\n  justify-content: center; }\n";
+var styles$7 = {"input":"color-field-module_input__mny-u","dialogFrame":"color-field-module_dialogFrame__ic6cc","dialogFooter":"color-field-module_dialogFooter__7riqz","dialogBody":"color-field-module_dialogBody__IZRzN","dialogOverLay":"color-field-module_dialogOverLay__HRGau"};
 styleInject(css_248z$7);
 
 const Grid = ({ children, className }) => {
-    return React__default.createElement("div", { className: classNames('grid-container', className) }, children);
+    return React__default.createElement("div", { className: cs('grid-container', className) }, children);
 };
 
 const colSizes = ['xs', 'sm', 'md', 'lg', 'xl'];
@@ -1391,7 +1395,7 @@ const Col = ({ all, applyFor, applyFrom, ascendingApply = true, children, xs = 1
 };
 
 const Row = ({ children, className }) => {
-    return React__default.createElement("div", { className: classNames('row', className) }, children);
+    return React__default.createElement("div", { className: cs('row', className) }, children);
 };
 
 var css_248z$6 = "@use \"sass:math\";\n.detail-view-module_root__DfdLG {\n  max-width: 100%;\n  border-radius: 10px;\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 0.5rem;\n  margin: 0.4rem 0rem; }\n\n.detail-view-module_header__-rQvG {\n  padding: 0.5rem 1rem; }\n  .detail-view-module_header__-rQvG h3 {\n    font-size: 1.2rem;\n    font-weight: 500;\n    color: #8d6b94; }\n\n.detail-view-module_body__21s5h {\n  background-color: #ffffff;\n  border-radius: 10px;\n  padding: 0.5rem; }\n  @media (prefers-color-scheme: dark) {\n    .detail-view-module_body__21s5h {\n      background-color: #292929; } }\n  .detail-view-module_body__21s5h .detail-view-module_detailsWrapper__E88MM {\n    display: flex;\n    flex-direction: column; }\n  .detail-view-module_body__21s5h .detail-view-module_icon__nrFKn {\n    margin-right: 0.5rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_icon__nrFKn {\n        color: #fff; } }\n  .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n    font-size: 1rem;\n    color: #000; }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n        color: #fff; } }\n    @media (min-width: 720px) {\n      .detail-view-module_body__21s5h .detail-view-module_infoTitle__-YYMg {\n        flex: 2; } }\n  .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n    font-size: 0.9rem;\n    color: rgba(0, 0, 0, 0.5); }\n    @media (prefers-color-scheme: dark) {\n      .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n        color: rgba(255, 255, 255, 0.5); } }\n    @media (min-width: 720px) {\n      .detail-view-module_body__21s5h .detail-view-module_infoDescription__2yjTG {\n        flex: 3; } }\n\n.detail-view-module_infoCol__RiYFk {\n  flex: 1;\n  margin: 0.5rem;\n  min-width: 200px;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1); }\n  @media (prefers-color-scheme: dark) {\n    .detail-view-module_infoCol__RiYFk {\n      border-bottom: 1px solid rgba(255, 255, 255, 0.1); } }\n  @media (min-width: 720px) {\n    .detail-view-module_infoCol__RiYFk {\n      display: flex; } }\n";
@@ -1462,7 +1466,7 @@ const TableEmpty = ({ colsNumber }) => {
 const RenderRow = ({ actions, cols, colLabels, data, rowId, handleAction, columnResolvers, columnClasses }) => {
     return (React__default.createElement("tr", null,
         cols.map((key, index) => (React__default.createElement("td", { className: columnClasses?.[key], "data-label": colLabels ? colLabels[key] || key : key, key: `${rowId}-${index}` }, columnResolvers?.[key] ? columnResolvers?.[key]?.(data) : data[key]))),
-        actions && actions?.length > 0 && (React__default.createElement("td", { "data-label": 'Actions', className: classNames(styles$5.actionsCell, styles$5.hasActions) }, actions.map((item, index) => (React__default.createElement(IconButton, { className: "mr-2", icon: item.icon, onClick: () => handleAction(item.action, data), key: `${index}-${item.action}`, size: "sm", ...item?.buttonProps })))))));
+        actions && actions?.length > 0 && (React__default.createElement("td", { "data-label": 'Actions', className: cs(styles$5.actionsCell, styles$5.hasActions) }, actions.map((item, index) => (React__default.createElement(IconButton, { className: "mr-2", icon: item.icon, onClick: () => handleAction(item.action, data), key: `${index}-${item.action}`, size: "sm", ...item?.buttonProps })))))));
 };
 const Table = ({ actions, data, colLabels = {}, columns: receivedCols, onActionCalled, onTableActionCalled, tableActions, columnResolvers, columnClasses, disablePagination }) => {
     const { isIn } = useMediaQuery();
@@ -1472,16 +1476,16 @@ const Table = ({ actions, data, colLabels = {}, columns: receivedCols, onActionC
     }, [onActionCalled]);
     const isMobile = isIn(['xs', 'sm', 'md']);
     const hasData = data?.length || 0 > 0;
-    return (React__default.createElement("div", { className: classNames(styles$5.table) },
+    return (React__default.createElement("div", { className: cs(styles$5.table) },
         tableActions && tableActions?.length > 0 && (React__default.createElement("div", { className: styles$5.tableToolbar },
             React__default.createElement("div", { className: styles$5.tableToolbarRight },
                 React__default.createElement(TableActions, { actions: tableActions, onActionCalled: onTableActionCalled })))),
-        React__default.createElement("table", { className: classNames({ [styles$5.isMobile]: isMobile }) },
+        React__default.createElement("table", { className: cs({ [styles$5.isMobile]: isMobile }) },
             React__default.createElement("thead", null,
                 React__default.createElement("tr", null,
                     columns.map((col, index) => (React__default.createElement("th", { key: `title-${index}` },
                         React__default.createElement("span", null, colLabels[col] || col)))),
-                    actions && actions?.length > 0 && (React__default.createElement("th", { className: classNames(styles$5.actionsCell, styles$5.hasActions) },
+                    actions && actions?.length > 0 && (React__default.createElement("th", { className: cs(styles$5.actionsCell, styles$5.hasActions) },
                         React__default.createElement("span", null, "Actions"))))),
             React__default.createElement("tbody", null,
                 !hasData && (React__default.createElement(TableEmpty, { colsNumber: columns?.length + (Boolean(actions) ? 1 : 0) })),
@@ -1545,18 +1549,18 @@ const DialogBase = ({ disableClose, dialogBodyProps, footerProps, children, clas
     }
     return (React__default.createElement(DialogRenderer, null,
         React__default.createElement("div", { className: `${styles$1.dialogOverlay} ${flags?.closed ? styles$1.dialogClosed : ''} ${classes?.overlay}` },
-            React__default.createElement("div", { className: classNames(styles$1.dialogFrame, {
+            React__default.createElement("div", { className: cs(styles$1.dialogFrame, {
                     [styles$1.dialogFrameSmall]: size === 'sm',
                     [styles$1.dialogFrameMedium]: size === 'md',
                     [styles$1.dialogFrameLarge]: size === 'lg',
                     [styles$1.dialogFrameFull]: size === 'full',
                     [styles$1.dialogFrameXS]: size === 'xs'
                 }, classes?.frame) },
-                !disableHeader && (React__default.createElement("div", { className: classNames(styles$1.dialogHeader, classes?.header) },
+                !disableHeader && (React__default.createElement("div", { className: cs(styles$1.dialogHeader, classes?.header) },
                     title && React__default.createElement("h3", { className: "textWithMode" }, title),
                     !disableClose && (React__default.createElement(IconButton, { className: styles$1.closeButton, icon: "times", onClick: handleClose })))),
-                React__default.createElement("div", { ...dialogBodyProps, className: classNames(styles$1.dialogBody, dialogBodyProps?.className) }, children),
-                !disableFooter && (React__default.createElement("div", { className: classNames(styles$1.dialogFooter, footerProps?.className) },
+                React__default.createElement("div", { ...dialogBodyProps, className: cs(styles$1.dialogBody, dialogBodyProps?.className) }, children),
+                !disableFooter && (React__default.createElement("div", { className: cs(styles$1.dialogFooter, footerProps?.className) },
                     !hideCancel && (React__default.createElement(Button, { disabled: flags?.closed, variant: "light", rounded: true, onClick: handleClose }, cancel)),
                     !hideAccept && (React__default.createElement(Button, { rounded: true, disabled: flags?.closed || disableAccept, variant: "primary", onClick: onAccept }, accept)))),
                 lock && React__default.createElement("div", { className: styles$1.lockCurtain })))));
@@ -1625,10 +1629,8 @@ const ColorField = ({ onChange, value = '#ffffff', ...props }) => {
             }
         });
     }, [onChange, props.name]);
-    return (React__default.createElement("div", { className: styles$7.root },
-        React__default.createElement("div", { className: styles$7.inputWrapper },
-            React__default.createElement("input", { className: styles$7.input, style: inlineStyles, value: colorToApply, onFocus: () => setOpened(true), onClick: () => setOpened(true), readOnly: true }),
-            React__default.createElement(IconButton, { icon: "palette", onClick: () => setOpened(!opened) })),
+    return (React__default.createElement("div", { className: cs(styles$7.root, props?.className) },
+        React__default.createElement(TextField, { ...props, className: styles$7.input, action: () => setOpened(!opened), hideMax: true, actionIcon: "palette", onClick: () => setOpened(true), onFocus: () => setOpened(true), style: inlineStyles, value: colorToApply, readOnly: true }),
         opened && (React__default.createElement(PickerRenderer, { currentColor: colorToApply, handleChange: handleChange, placeholder: props?.placeholder, onClose: () => {
                 setOpened(false);
             } }))));
