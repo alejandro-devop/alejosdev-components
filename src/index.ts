@@ -5,6 +5,8 @@ import { UseFormHookConfigType } from 'hooks/use-form/types'
 import { TableProps } from './core/table/Table'
 import { ActionType as TableActionType } from './core/table/types'
 import { FormRenderersType } from './hooks/use-form/types'
+import getContrastColor from 'utils/getContrastColor'
+
 export * from './buttons'
 export * from './hooks'
 export * from './form'
@@ -18,6 +20,7 @@ export {
     InputBaseProps,
     ActionItemVariantsType,
     icons,
+    getContrastColor,
     UseFormHookConfigType,
     TableProps,
     TableActionType,

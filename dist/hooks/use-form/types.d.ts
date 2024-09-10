@@ -52,7 +52,7 @@ export type FieldConfigType = {
  * Type to define the configuration of the hook
  */
 export type UseFormHookConfigType<FT> = {
-    defaultValues?: FT;
+    defaultValues?: Partial<Record<keyof FT, any>>;
     rules?: Partial<Record<keyof FT, RuleType>>;
     fields?: Partial<Record<keyof FT, FieldConfigType>>;
     required?: Array<keyof FT>;

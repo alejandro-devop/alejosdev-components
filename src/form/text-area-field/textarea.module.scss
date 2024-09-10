@@ -23,9 +23,12 @@
     border-radius: 20px;
     padding: 0.5rem 1rem;
     margin: 0px 0px 10px 0px;
-    min-height: $input-height * 2;
+    // min-height: $input-height * 2;
+    field-sizing: content;
+    min-height: 1lh;
     width: 100%;
     border: 1px solid darken($default-bg, 30%);
+    resize: none;
     &:focus {
         outline: none;
     }
@@ -33,7 +36,7 @@
     @media (prefers-color-scheme: dark) {
         color: $text-color-dark;
         background-color: $default-bg-dark;
-        border-color: darken($default-bg-dark, 30%);
+        border-color: lighten($default-bg-dark, 50%);
     }
 }
 
@@ -45,6 +48,11 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: rgba(0, 0, 0, 0.5);
+
+    @media (prefers-color-scheme: dark) {
+        color: $text-color-dark;
+        opacity: 0.8;
+    }
 }

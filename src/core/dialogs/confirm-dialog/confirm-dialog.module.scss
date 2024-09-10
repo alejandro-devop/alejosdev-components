@@ -1,0 +1,23 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    h3 {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.frame {
+    border-radius: 14px;
+    height: auto;
+    min-height: 150px;
+    width: auto;
+    min-width: 300px;
+    max-width: 95%;
+}

@@ -36,6 +36,7 @@ export default {
         '@fortawesome/react-fontawesome',
         'react-select',
         'react-datepicker',
-        'react-datepicker/dist/react-datepicker.css'
+        'react-datepicker/dist/react-datepicker.css',
+        'react-colorful'
     ]
 }

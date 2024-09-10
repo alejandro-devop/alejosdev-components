@@ -8,6 +8,7 @@ interface PillProps extends PillConfigType {
     path?: string
     url?: string
     className?: string
+    size?: 'sm' | 'md' | 'lg'
 }
 
 /**
@@ -15,7 +16,14 @@ interface PillProps extends PillConfigType {
  * which is a small rounded rectangle with a text inside or icon
  * @returns React.FC
  */
-const Pill: React.FC<PillProps> = ({ label, variant = 'default', icon, value, className }) => {
+const Pill: React.FC<PillProps> = ({
+    label,
+    variant = 'default',
+    icon,
+    value,
+    className,
+    size = 'md'
+}) => {
     return (
         <div
             className={classNames(styles.root, className, {
@@ -27,7 +35,10 @@ const Pill: React.FC<PillProps> = ({ label, variant = 'default', icon, value, cl
                 [styles.danger]: variant === 'danger',
                 [styles.info]: variant === 'info',
                 [styles.light]: variant === 'light',
-                [styles.dark]: variant === 'dark'
+                [styles.dark]: variant === 'dark',
+                [styles.sizeSM]: size === 'sm',
+                [styles.sizeMD]: size === 'md',
+                [styles.sizeLG]: size === 'lg'
             })}
         >
             {Boolean(icon) && <Icon className={styles.icon} icon={icon} />}

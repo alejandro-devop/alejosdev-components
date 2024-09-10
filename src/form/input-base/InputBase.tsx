@@ -7,6 +7,7 @@ import FormControl from 'form/form-control'
 import Label from 'form/label'
 import Icon from 'misc/icon'
 import IconButton from 'buttons/icon-button'
+import { trimeSpacesEvent } from 'utils/events'
 
 const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>(
     (
@@ -44,10 +45,9 @@ const InputBase = forwardRef<HTMLInputElement, InputBaseProps<HTMLInputElement>>
         const handleChangeProxy = useCallback(
             (event: React.ChangeEvent<HTMLInputElement>) => {
                 /**
-                 * Todo: Implement trim spaces from the event
                  * Todo: Implement string, number, email validations.
                  */
-                onChange?.(event)
+                onChange?.(trimeSpacesEvent(event, { maxEndingSpaces }))
             },
             [onChange]
         )

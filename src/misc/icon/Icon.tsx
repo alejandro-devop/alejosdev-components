@@ -7,6 +7,7 @@ import { IconType } from '../../types/icons-types'
 interface IconProps {
     className?: string
     icon?: IconType
+    style?: React.CSSProperties
 }
 
 /**
@@ -17,8 +18,14 @@ interface IconProps {
  * @param param0
  * @returns
  */
-const Icon: React.FC<IconProps> = ({ className = '', icon = 'tag' }) => {
-    return <FontAwesomeIcon icon={icon || ''} className={classNames(styles.root, className)} />
+const Icon: React.FC<IconProps> = ({ className = '', icon = 'tag', style }) => {
+    return (
+        <FontAwesomeIcon
+            icon={icon || ''}
+            className={classNames(styles.root, className)}
+            style={style}
+        />
+    )
 }
 
 export default Icon

@@ -4,6 +4,7 @@ interface PillProps extends PillConfigType {
     path?: string;
     url?: string;
     className?: string;
+    size?: 'sm' | 'md' | 'lg';
 }
 /**
  * Generates a pill component,

@@ -35,6 +35,20 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
         },
         [onChange, name, isChecked, disabled]
     )
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        const { key, code } = e
+        if (['Enter'].includes(key) || ['Space'].includes(code)) {
+            if (!disabled) {
+                onChange?.({
+                    target: {
+                        name: name || '',
+                        checked: !Boolean(isChecked),
+                        type: 'checkbox'
+                    }
+                } as any)
+            }
+        }
+    }
     const inputRenderer = (
         <div
             className={cs(
@@ -59,6 +73,7 @@ const CheckBoxField: React.FC<CheckBoxFieldProps> = ({
                 className="textWithMode block pl-2 ml-2 cursor-pointer z-1"
                 tabIndex={0}
                 onClick={handleChange}
+                onKeyDown={handleKeyDown}
             >
                 {label}
             </span>

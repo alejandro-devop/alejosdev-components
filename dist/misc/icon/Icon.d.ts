@@ -3,6 +3,7 @@ import { IconType } from '../../types/icons-types';
 interface IconProps {
     className?: string;
     icon?: IconType;
+    style?: React.CSSProperties;
 }
 /**
  * Renders a FontAwesomeIcon with the given icon name.

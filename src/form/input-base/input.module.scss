@@ -33,6 +33,7 @@
         color: $text-color-dark;
         background-color: $default-bg-dark;
         border-color: lighten($color: $default-bg-dark, $amount: 40%);
+        border: 1px solid lighten($default-bg-dark, 30%);
 
         &::placeholder {
             color: lighten($color: $default-bg-dark, $amount: 20%);

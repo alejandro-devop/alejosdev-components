@@ -6,6 +6,9 @@ interface TextAreaFieldProps extends React.TextareaHTMLAttributes<HTMLTextAreaEl
     hideMax?: number | boolean;
     trimSpaces?: boolean;
     maxEndingSpaces?: number;
+    classes?: {
+        root?: string;
+    };
 }
-declare const TextAreaField: React.FC<TextAreaFieldProps>;
+declare const TextAreaField: React.ForwardRefExoticComponent<TextAreaFieldProps & React.RefAttributes<HTMLTextAreaElement>>;
 export default TextAreaField;

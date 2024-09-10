@@ -1,0 +1,231 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.dialogOverlay {
+    animation: blurAnimation 0.6s ease forwards;
+    backdrop-filter: blur(0);
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 10000;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @include md {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.closeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.dialogFrame {
+    opacity: 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin-top: 2rem;
+    min-height: 200px;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+
+    animation: slideAnimation 0.6s ease 0.6s forwards;
+    display: flex;
+    flex-direction: column;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: #333;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    & .dialogBody {
+        padding: 1rem;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        flex: 1;
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    & .dialogFooter {
+        display: flex;
+        justify-content: flex-end;
+        padding: 10px 20px;
+    }
+
+    & .dialogHeader {
+        border-bottom: 1px solid #eee;
+        display: flex;
+        min-height: 2.5rem;
+        justify-content: space-between;
+        padding: 10px 5px 10px 20px;
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+    }
+
+    @include md {
+        &.dialogFrameXS,
+        &.dialogFrameSmall,
+        &.dialogFrameMedium,
+        &.dialogFrameLarge,
+        &.dialogFrameFull {
+            border-radius: 14px;
+            max-width: 500px;
+            height: auto;
+            max-height: 80%;
+        }
+    }
+
+    &.dialogFrameSmall {
+        // width: 96%;
+        // min-height: 40%
+    }
+    &.dialogFrameMedium {
+        // min-height: 50%
+    }
+    &.dialogFrameLarge {
+        width: 80%;
+        max-width: 80%;
+        // min-height: 60%
+    }
+    &.dialogFrameFull {
+        width: 95%;
+        max-width: 95%;
+        // min-height: 90%
+    }
+
+    @include md {
+        &.dialogFrameSmall {
+            width: 60%;
+            // min-height: 40%
+        }
+        &.dialogFrameMedium {
+            width: 70%;
+            max-width: 70%;
+            // min-height: 50%
+        }
+        &.dialogFrameLarge {
+            width: 80%;
+            max-width: 80%;
+            // min-height: 60%
+        }
+        &.dialogFrameFull {
+            width: 95%;
+            max-width: 95%;
+            // min-height: 90%
+        }
+    }
+
+    @include lg {
+        &.dialogFrameMedium {
+            width: 60%;
+            max-width: 60%;
+            // min-height: 60%
+        }
+    }
+
+    @include xl {
+        &.dialogFrameSmall {
+            width: 40%;
+            max-width: 30%;
+            // min-height: 40%
+        }
+
+        &.dialogFrameMedium {
+            width: 40%;
+            max-width: 40%;
+            // min-height: 50%
+        }
+
+        &.dialogFrameLarge {
+            width: 60%;
+            max-width: 60%;
+            // min-height: 70%
+        }
+    }
+}
+
+.lockCurtain {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100000;
+    border-radius: 4px;
+}
+
+.dialogClosed {
+    animation: blurOutAnimation 0.6s ease forwards;
+}
+
+.dialogClosed {
+    .dialogFrame {
+        opacity: 1;
+        animation: slideOutAnimation 0.6s ease forwards;
+        animation-delay: 0.2s;
+    }
+}
+
+@keyframes blurAnimation {
+    from {
+        backdrop-filter: blur(0px);
+    }
+    to {
+        backdrop-filter: blur(3px);
+    }
+}
+
+@keyframes blurOutAnimation {
+    from {
+        backdrop-filter: blur(3px);
+    }
+    to {
+        backdrop-filter: blur(0px);
+        background-color: transparent;
+    }
+}
+
+@keyframes slideAnimation {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    50% {
+        // transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}

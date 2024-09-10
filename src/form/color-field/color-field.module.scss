@@ -1,0 +1,72 @@
+@import '~@alejosdev/theme-provider/dist/styles/shared.scss';
+
+.root {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    max-width: 100%;
+    min-height: 1.5rem;
+    padding: 0.2rem 1rem;
+    border: 1px solid darken($default-bg, 30%);
+    border-radius: 20px;
+    color: $text-color-light;
+
+    background-color: var(--color-to-apply);
+}
+
+.inputWrapper {
+    flex: 1;
+    display: flex;
+}
+
+.controlWrapper {
+    position: absolute;
+    z-index: 1000;
+    background-color: #fff;
+    padding: 0.5rem 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.4);
+    border-radius: 0 0 20px 20px;
+    &:focus {
+        outline: 2px solid $primary;
+    }
+}
+
+.actionsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    margin-top: 1rem;
+}
+
+.dialogFrame {
+    &.dialogFrame {
+        width: 230px;
+        height: auto;
+        border-radius: 14px;
+    }
+    .dialogFooter {
+        &.dialogFooter {
+            justify-content: center;
+        }
+    }
+}
+
+.dialogBody {
+    &.dialogBody {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.dialogOverLay {
+    &.dialogOverLay {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -2,15 +2,24 @@
 
 $pill-border-radius: 20px;
 .root {
-    border-radius: $pill-border-radius;
-    font-size: 0.8rem;
-    border-width: 2px;
-    border-style: solid;
-    margin: 0 0.1rem 0.2rem;
-    display: inline-flex;
     align-items: center;
+    border-radius: $pill-border-radius;
+    border-style: solid;
+    border-width: 2px;
+    display: inline-flex;
     flex-shrink: 0;
     flex-grow: 0;
+    font-size: 0.8rem;
+    margin: 0 0.1rem 0.2rem;
+
+    &.sizeSM {
+        font-size: 0.6rem;
+    }
+
+    &.sizeLG {
+        font-size: 1rem;
+        padding: 0.2rem;
+    }
 }
 
 .label,
@@ -49,7 +58,10 @@ $pill-border-radius: 20px;
 @mixin apply-color-to-pill($color) {
     background-color: $color;
     border-color: darken($color, 15%);
-    @include text-contrast($color);
+    .label,
+    .icon {
+        @include text-contrast($color);
+    }
     .value {
         background-color: darken($color, 20%);
         @include text-contrast(darken($color, 20%));
